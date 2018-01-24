@@ -1,0 +1,11 @@
+#paraheight {
+  min-height: 500px;
+}
+
+#tile {
+  background-color: #42a5f5;
+  color: aliceblue;
+  padding: 5px;
+  height: 350px;
+  border-radius: 5px;
+}
