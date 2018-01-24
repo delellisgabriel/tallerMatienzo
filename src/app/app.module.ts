@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 import { Rutas } from '../rutas';
 
@@ -21,10 +22,10 @@ import { ContactoComponent } from './contacto/contacto.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    
     LoginComponent,
     EquipoComponent,
-    ContactoComponent
+    ContactoComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
