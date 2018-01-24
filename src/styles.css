@@ -72,3 +72,9 @@ footer.page-footer {
 li>a:hover {
   color: #1e88e5;
 }
+
+/*Texto justificado*/
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
