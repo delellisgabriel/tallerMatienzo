@@ -3,11 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\about-us",
     "\\src\\app\\footer",
     "\\src\\app\\home",
     "\\src\\app\\navbar",
     "\\src\\app\\sign-up"
   ],
-  "SelectedNode": "\\src\\app\\footer\\footer.component.html",
+  "SelectedNode": "\\src\\rutas.ts",
   "PreviewInSolutionExplorer": false
 }
