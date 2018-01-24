@@ -9,6 +9,6 @@
     "\\src\\app\\navbar",
     "\\src\\app\\sign-up"
   ],
-  "SelectedNode": "\\src\\rutas.ts",
+  "SelectedNode": "\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }
