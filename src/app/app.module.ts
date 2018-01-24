@@ -16,6 +16,8 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { DashclientComponent } from './dashclient/dashclient.component';
 import { MycarsComponent } from './mycars/mycars.component';
+import { CarregisterComponent } from './carregister/carregister.component';
+import { AutoselectedComponent } from './autoselected/autoselected.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { MycarsComponent } from './mycars/mycars.component';
     SignUpComponent,
     DashclientComponent,
     MycarsComponent,
+    CarregisterComponent,
+    AutoselectedComponent,
   ],
   imports: [
     BrowserModule,
