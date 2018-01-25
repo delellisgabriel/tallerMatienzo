@@ -23,6 +23,8 @@ import { GenRepComponent } from './gen-rep/gen-rep.component';
 
 import { SolicitudcitaComponent } from './solicitudcita/solicitudcita.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UserManagerComponent } from './user-manager/user-manager.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 
@@ -43,6 +45,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     GenRepComponent,
     SolicitudcitaComponent,
     PerfilComponent,
+    UserManagerComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,

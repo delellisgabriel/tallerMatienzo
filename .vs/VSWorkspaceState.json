@@ -5,10 +5,12 @@
     "\\src\\app",
     "\\src\\app\\about-us",
     "\\src\\app\\footer",
+    "\\src\\app\\gen-rep",
     "\\src\\app\\home",
+    "\\src\\app\\login",
     "\\src\\app\\navbar",
     "\\src\\app\\sign-up"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\app.component.html",
   "PreviewInSolutionExplorer": false
 }
