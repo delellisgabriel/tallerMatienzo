@@ -2,15 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\about-us",
-    "\\src\\app\\footer",
-    "\\src\\app\\gen-rep",
-    "\\src\\app\\home",
-    "\\src\\app\\login",
-    "\\src\\app\\navbar",
-    "\\src\\app\\sign-up"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\app.component.html",
+  "SelectedNode": "\\src\\app\\user-detail",
   "PreviewInSolutionExplorer": false
 }
