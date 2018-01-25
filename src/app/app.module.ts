@@ -13,13 +13,17 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { Rutas } from '../rutas';
 
 import { LoginComponent } from './login/login.component';
-import { EquipoComponent } from './equipo/equipo.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { DashclientComponent } from './dashclient/dashclient.component';
 import { MycarsComponent } from './mycars/mycars.component';
 import { CarregisterComponent } from './carregister/carregister.component';
 import { AutoselectedComponent } from './autoselected/autoselected.component';
+
 import { GenRepComponent } from './gen-rep/gen-rep.component';
+
+import { SolicitudcitaComponent } from './solicitudcita/solicitudcita.component';
+import { PerfilComponent } from './perfil/perfil.component';
+
 
 
 @NgModule({
@@ -30,7 +34,6 @@ import { GenRepComponent } from './gen-rep/gen-rep.component';
     HomeComponent,
     AboutUsComponent,
     LoginComponent,
-    EquipoComponent,
     ContactoComponent,
     SignUpComponent,
     DashclientComponent,
@@ -38,6 +41,8 @@ import { GenRepComponent } from './gen-rep/gen-rep.component';
     CarregisterComponent,
     AutoselectedComponent,
     GenRepComponent,
+    SolicitudcitaComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
