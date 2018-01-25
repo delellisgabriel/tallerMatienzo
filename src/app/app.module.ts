@@ -18,8 +18,15 @@ import { DashclientComponent } from './dashclient/dashclient.component';
 import { MycarsComponent } from './mycars/mycars.component';
 import { CarregisterComponent } from './carregister/carregister.component';
 import { AutoselectedComponent } from './autoselected/autoselected.component';
+
+import { GenRepComponent } from './gen-rep/gen-rep.component';
+
 import { SolicitudcitaComponent } from './solicitudcita/solicitudcita.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { ColacitasComponent } from './colacitas/colacitas.component';
+import { RecibirvehiculoComponent } from './recibirvehiculo/recibirvehiculo.component';
+import { ModificararchivoComponent } from './modificararchivo/modificararchivo.component';
+
 
 
 @NgModule({
@@ -36,8 +43,12 @@ import { PerfilComponent } from './perfil/perfil.component';
     MycarsComponent,
     CarregisterComponent,
     AutoselectedComponent,
+    GenRepComponent,
     SolicitudcitaComponent,
     PerfilComponent,
+    ColacitasComponent,
+    RecibirvehiculoComponent,
+    ModificararchivoComponent,
   ],
   imports: [
     BrowserModule,
