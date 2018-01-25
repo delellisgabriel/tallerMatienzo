@@ -26,6 +26,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ColacitasComponent } from './colacitas/colacitas.component';
 import { RecibirvehiculoComponent } from './recibirvehiculo/recibirvehiculo.component';
 import { ModificararchivoComponent } from './modificararchivo/modificararchivo.component';
+import { UserManagerComponent } from './user-manager/user-manager.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 
@@ -49,6 +51,8 @@ import { ModificararchivoComponent } from './modificararchivo/modificararchivo.c
     ColacitasComponent,
     RecibirvehiculoComponent,
     ModificararchivoComponent,
+    UserManagerComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,8 @@ import { GenRepComponent } from './app/gen-rep/gen-rep.component';
 import { RecibirvehiculoComponent } from './app/recibirvehiculo/recibirvehiculo.component';
 import { ModificararchivoComponent } from './app/modificararchivo/modificararchivo.component';
 import { ColacitasComponent } from './app/colacitas/colacitas.component';
+import { UserManagerComponent } from './app/user-manager/user-manager.component';
+import { UserDetailComponent } from './app/user-detail/user-detail.component';
 
 
 export const Rutas: Routes = [
@@ -32,4 +34,6 @@ export const Rutas: Routes = [
   { path: 'recibirvehiculo', component: RecibirvehiculoComponent },
   { path: 'modificararchivo', component: ModificararchivoComponent },
   { path: 'colacitas', component: ColacitasComponent },
+  { path: 'manageuser', component: UserManagerComponent },
+  { path: 'userdetail', component: UserDetailComponent },
 ];
