@@ -28,6 +28,7 @@ import { RecibirvehiculoComponent } from './recibirvehiculo/recibirvehiculo.comp
 import { ModificararchivoComponent } from './modificararchivo/modificararchivo.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
 
 
 
@@ -53,6 +54,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     ModificararchivoComponent,
     UserManagerComponent,
     UserDetailComponent,
+    SideBarFavComponent,
   ],
   imports: [
     BrowserModule,

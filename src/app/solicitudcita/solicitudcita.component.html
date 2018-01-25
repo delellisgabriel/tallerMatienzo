@@ -1,21 +1,5 @@
 <div class="row right">
-  <ul id="dashmenu" class="side-nav">
-    <li><label>Cliente</label></li>
-    <li><a href="/mycars">Mis Autos</a></li>
-    <li><a href="/solicitudcita">Solicitar Citas</a></li>
-    <li><a href="/perfil">Mi Perfil</a></li>
-    <li><label>Gerencia</label></li>
-    <li><a href="/colacitas">Gestion de Citas</a></li>
-    <li><a href="/reportes">Reportes</a></li>
-    <li><a href="/recibirvehiculo">Recibir Vehiculo</a></li>
-    <li><label>Administrador</label></li>
-    <li><a href="/manageuser">Gestion de Usuarios</a></li>
-    <li><a href="#">Gestion de Repuestos</a></li>
-    <li><label>Mecanico</label></li>
-    <li><a href="/modificararchivo">Modificar Archivo</a></li>
-    <li><a href="#">Repuestos</a></li>
-  </ul>
-  <a href="#" data-activates="dashmenu" id="download-button" class="button-collapse btn waves-effect waves-light  grey darken-3">Menu</a>
+  <app-side-bar-fav></app-side-bar-fav>
 </div>
 
 <div class="container">
@@ -47,7 +31,7 @@
         <div class="row">
           <div class="col s12 m12 l12 center-align ">
             <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit" name="action">
-              <a href="/mycars" style="color:aliceblue">Solicitar</a>
+              <a routerLink="/mycars" style="color:aliceblue">Solicitar</a>
             </button>
           </div>
         </div>

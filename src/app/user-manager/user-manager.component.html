@@ -14,23 +14,7 @@
 <div class="container">
   <div class="section">
     <div class="row center">
-      <ul id="dashmenu" class="side-nav">
-        <li><label>Cliente</label></li>
-        <li><a href="/mycars">Mis Autos</a></li>
-        <li><a href="/solicitudcita">Solicitar Citas</a></li>
-        <li><a href="/perfil">Mi Perfil</a></li>
-        <li><label>Gerencia</label></li>
-        <li><a href="/colacitas">Gestion de Citas</a></li>
-        <li><a href="/reportes">Reportes</a></li>
-        <li><a href="/recibirvehiculo">Recibir Vehiculo</a></li>
-        <li><label>Administrador</label></li>
-        <li><a href="/manageuser">Gestion de Usuarios</a></li>
-        <li><a href="#">Gestion de Repuestos</a></li>
-        <li><label>Mecanico</label></li>
-        <li><a href="/modificararchivo">Modificar Archivo</a></li>
-        <li><a href="#">Repuestos</a></li>
-      </ul>
-      <a href="#" data-activates="dashmenu" id="download-button" class="button-collapse btn waves-effect waves-light  grey darken-3">Menu</a>
+      <app-side-bar-fav></app-side-bar-fav>
     </div>
     <br>
 
@@ -57,73 +41,73 @@
               <td>4.357.102</td>
               <td>Rafael Matienzo</td>
               <td>Administrador</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>5.421.798</td>
               <td>Pedro Pérez</td>
               <td>Administrador</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>25.241.129</td>
               <td>Maximiliano Casale</td>
               <td>Mecánico</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>23.651.435</td>
               <td>Gabriele Troncone</td>
               <td>Mecánico</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>21.222.696</td>
               <td>Sara Macayo</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>25.472.156</td>
               <td>Luciano Pineda</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>24.206.969</td>
               <td>John Doe</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>24.073.386</td>
               <td>Gabriel De Lellis</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>6.241.753</td>
               <td>Carl Marx</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
             <tr>
               <td>15.531.724</td>
               <td>Fulanito Perez</td>
               <td>Cliente</td>
-              <td><a href="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
+              <td><a routerLink="/userdetail"><i class="material-icons blue-text darken-1">person</i></a></td>
             </tr>
           </tbody>
         </table>
 
         <ul class="pagination center-align">
-          <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-          <li class="active"><a href="#!">1</a></li>
-          <li class="waves-effect"><a href="#!">2</a></li>
-          <li class="waves-effect"><a href="#!">3</a></li>
-          <li class="waves-effect"><a href="#!">4</a></li>
-          <li class="waves-effect"><a href="#!">5</a></li>
-          <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          <li class="disabled"><a routerLink="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="active"><a routerLink="#!">1</a></li>
+          <li class="waves-effect"><a routerLink="#!">2</a></li>
+          <li class="waves-effect"><a routerLink="#!">3</a></li>
+          <li class="waves-effect"><a routerLink="#!">4</a></li>
+          <li class="waves-effect"><a routerLink="#!">5</a></li>
+          <li class="waves-effect"><a routerLink="#!"><i class="material-icons">chevron_right</i></a></li>
         </ul>
 
       </div>
