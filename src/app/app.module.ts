@@ -19,6 +19,7 @@ import { DashclientComponent } from './dashclient/dashclient.component';
 import { MycarsComponent } from './mycars/mycars.component';
 import { CarregisterComponent } from './carregister/carregister.component';
 import { AutoselectedComponent } from './autoselected/autoselected.component';
+import { GenRepComponent } from './gen-rep/gen-rep.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AutoselectedComponent } from './autoselected/autoselected.component';
     MycarsComponent,
     CarregisterComponent,
     AutoselectedComponent,
+    GenRepComponent,
   ],
   imports: [
     BrowserModule,
