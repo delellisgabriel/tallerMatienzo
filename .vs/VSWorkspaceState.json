@@ -8,8 +8,8 @@
     "\\src\\app\\gen-rep",
     "\\src\\app\\home",
     "\\src\\app\\login",
-    "\\src\\app\\navbar",
-    "\\src\\app\\sign-up"
+    "\\src\\app\\user-detail",
+    "\\src\\app\\user-manager"
   ],
   "SelectedNode": "\\src\\app\\app.component.html",
   "PreviewInSolutionExplorer": false
