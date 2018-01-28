@@ -29,7 +29,12 @@ import { ModificararchivoComponent } from './modificararchivo/modificararchivo.c
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
+import { JavascriptComponent } from './javascript/javascript.component';
 
+
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+
+declare var $: any;
 
 
 @NgModule({
@@ -55,6 +60,7 @@ import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
     UserManagerComponent,
     UserDetailComponent,
     SideBarFavComponent,
+    JavascriptComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,4 +70,34 @@ import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements OnInit, AfterViewInit {
+
+  ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
+    $('.button-collapse').sideNav({
+      menuWidth: 300, // Default is 300
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+      draggable: true, // Choose whether you can drag to open on touch screens,
+    });
+    $('.parallax').parallax();
+
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Hoy',
+      clear: 'Limpiar',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
+
+    $('.modal').modal();
+    $('select').material_select();
+
+
+  }
+
+}
