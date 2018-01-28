@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -30,6 +31,7 @@ import { UserManagerComponent } from './user-manager/user-manager.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
 
+import { DatabaseService } from './database/database.service';
 
 
 @NgModule({
@@ -60,8 +62,9 @@ import { SideBarFavComponent } from './side-bar-fav/side-bar-fav.component';
     BrowserModule,
     RouterModule.forRoot(Rutas),
     FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
