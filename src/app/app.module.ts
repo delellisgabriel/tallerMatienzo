@@ -96,8 +96,6 @@ export class AppModule implements OnInit, AfterViewInit {
 
     $('.modal').modal();
     $('select').material_select();
-
-
   }
 
 }
