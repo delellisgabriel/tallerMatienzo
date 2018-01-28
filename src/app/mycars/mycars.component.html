@@ -1,10 +1,5 @@
 <div class="row right">
-  <ul id="dashmenu" class="side-nav">
-    <li><a href="/mycars">Mis Autos</a></li>
-    <li><a href="/solicitudcita">Solicitar Citas</a></li>
-    <li><a href="/perfil">Mi Perfil</a></li>
-  </ul>
-  <a href="#" data-activates="dashmenu" id="download-button" class="btn button-collapse waves-effect waves-light  grey darken-4">Menu</a>
+  <app-side-bar-fav></app-side-bar-fav>
 </div>
 
 
@@ -12,7 +7,7 @@
   <div style="padding-top: 40px" class="section">
     <div class="row">
       <div class="col s12 m4">
-        <a href="/autoselected">
+        <a routerLink="/autoselected">
           <div class="icon-block waiting" id="tile">
             <h4 class="center">Volkswagen Tuareg</h4>
             <h5 class="light center">Placa: IBM8006</h5>
@@ -24,7 +19,7 @@
 </div>
 
       <div class="col s12 m4">
-        <a href="/autoselected">
+        <a routerLink="/autoselected">
           <div class="icon-block ready" id="tile">
             <h4 class="center">Audi R8</h4>
             <h5 class="light center">Placa: IBM8004</h5>
@@ -36,7 +31,7 @@
       </div>
 
       <div class="col s12 m4">
-        <a href="/autoselected">
+        <a routerLink="/autoselected">
           <div class="icon-block reparando" id="tile">
 
             <h4 class="center">Toyota Corolla</h4>
@@ -49,7 +44,7 @@
       </div>
 
       <div class="col s12 m4">
-        <a href="/carregister">
+        <a routerLink="/carregister">
           <div class="icon-block" id="tile">
             <p class="center blue-text darken-1" id="plus"><i class="material-icons">add</i></p>
             <h5 class="light center" style="color:#1e88e5;">Vehiculo nuevo</h5>

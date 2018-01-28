@@ -1,10 +1,5 @@
 <div class="row right">
-  <ul id="dashmenu" class="side-nav">
-    <li><a href="/mycars">Mis Autos</a></li>
-    <li><a href="/solicitudcita">Solicitar Citas</a></li>
-    <li><a href="/perfil">Mi Perfil</a></li>
-  </ul>
-  <a href="#" data-activates="dashmenu" id="download-button" class="btn button-collapse waves-effect waves-light  grey darken-4">Menu</a>
+  <app-side-bar-fav></app-side-bar-fav>
 </div>
 
 <div class="container">
@@ -36,7 +31,7 @@
         <div class="row">
           <div class="col s12 m12 l12 center-align ">
             <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit" name="action">
-              <a href="/mycars" style="color:aliceblue">Solicitar</a>
+              <a routerLink="/mycars" style="color:aliceblue">Solicitar</a>
             </button>
           </div>
         </div>

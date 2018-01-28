@@ -10,6 +10,13 @@ import { AutoselectedComponent } from './app/autoselected/autoselected.component
 import { CarregisterComponent } from './app/carregister/carregister.component';
 import { SolicitudcitaComponent } from './app/solicitudcita/solicitudcita.component';
 import { PerfilComponent } from './app/perfil/perfil.component';
+import { GenRepComponent } from './app/gen-rep/gen-rep.component';
+import { RecibirvehiculoComponent } from './app/recibirvehiculo/recibirvehiculo.component';
+import { ModificararchivoComponent } from './app/modificararchivo/modificararchivo.component';
+import { ColacitasComponent } from './app/colacitas/colacitas.component';
+import { UserManagerComponent } from './app/user-manager/user-manager.component';
+import { UserDetailComponent } from './app/user-detail/user-detail.component';
+
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -23,4 +30,10 @@ export const Rutas: Routes = [
   { path: 'carregister', component: CarregisterComponent },
   { path: 'solicitudcita', component: SolicitudcitaComponent },
   { path: 'perfil', component: PerfilComponent },
+  { path: 'reportes', component: GenRepComponent },
+  { path: 'recibirvehiculo', component: RecibirvehiculoComponent },
+  { path: 'modificararchivo', component: ModificararchivoComponent },
+  { path: 'colacitas', component: ColacitasComponent },
+  { path: 'manageuser', component: UserManagerComponent },
+  { path: 'userdetail', component: UserDetailComponent },
 ];
