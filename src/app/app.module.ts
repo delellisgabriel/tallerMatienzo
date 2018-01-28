@@ -33,6 +33,8 @@ import { JavascriptComponent } from './javascript/javascript.component';
 
 
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { PartsManageComponent } from './parts-manage/parts-manage.component';
+import { PartsSearchComponent } from './parts-search/parts-search.component';
 
 declare var $: any;
 
@@ -61,6 +63,8 @@ declare var $: any;
     UserDetailComponent,
     SideBarFavComponent,
     JavascriptComponent,
+    PartsManageComponent,
+    PartsSearchComponent,
   ],
   imports: [
     BrowserModule,

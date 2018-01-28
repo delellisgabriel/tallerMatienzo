@@ -16,7 +16,8 @@ import { ModificararchivoComponent } from './app/modificararchivo/modificararchi
 import { ColacitasComponent } from './app/colacitas/colacitas.component';
 import { UserManagerComponent } from './app/user-manager/user-manager.component';
 import { UserDetailComponent } from './app/user-detail/user-detail.component';
-
+import { PartsManageComponent } from './app/parts-manage/parts-manage.component';
+import { PartsSearchComponent } from './app/parts-search/parts-search.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -36,4 +37,6 @@ export const Rutas: Routes = [
   { path: 'colacitas', component: ColacitasComponent },
   { path: 'manageuser', component: UserManagerComponent },
   { path: 'userdetail', component: UserDetailComponent },
+  { path: 'parts-manage', component: PartsManageComponent },
+  { path: 'parts-search', component: PartsSearchComponent },
 ];
