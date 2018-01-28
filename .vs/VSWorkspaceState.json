@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\about-us",
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\user-detail",
+  "SelectedNode": "\\src\\assets\\about-us.png",
   "PreviewInSolutionExplorer": false
 }
