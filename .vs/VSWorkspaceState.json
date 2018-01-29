@@ -1,18 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-<<<<<<< HEAD
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\about-us",
-    "\\src\\assets"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\assets\\about-us.png",
-=======
-    "\\e2e",
-    "\\src"
-  ],
-  "SelectedNode": "\\src",
->>>>>>> origin/migrandoCSS
+  "SelectedNode": "\\src\\app\\parts-manage",
   "PreviewInSolutionExplorer": false
 }
