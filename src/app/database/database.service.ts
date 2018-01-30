@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  ModeloCitas,
+  ModeloFotos,
+  ModeloOrdenReparacion,
+  ModeloRepuestos,
+  ModeloUsuarios,
+  ModeloUtilizo,
+  ModeloVehiculos
+} from './models/';
 import 'rxjs/add/operator/toPromise';
 
 const httpOptions = {
@@ -14,8 +23,28 @@ const base = 'http://localhost:3000/';
 export class DatabaseService {
 
   private clave = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
+  private modelos: object;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.modelos = {
+      ModeloCitas,
+      ModeloFotos,
+      ModeloOrdenReparacion,
+      ModeloRepuestos,
+      ModeloUsuarios,
+      ModeloUtilizo,
+      ModeloVehiculos
+    };
+  }
+
+  tieneModelos(modelo: object): boolean {
+    for (const llave of Object.keys(modelo)) {
+      if (typeof modelo[llave] === 'object') {
+        return true;
+      }
+    }
+    return false;
+  }
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
    * y como segundo argumento un objeto que indica atributos secundarios de búsqueda.
@@ -26,8 +55,37 @@ export class DatabaseService {
     * pero estos no podrán ser usados como atributos de búsqueda ). Tal vez dicho objecto venga
      * con funciones auxiliares para refinamiento de datos, como métodos para hacer order, limit, etc */
 
-  getMe() {
+  getMe(modelo: string, atributos?: object): Promise<Object> {
+    const nombre = 'Modelo' + modelo;
+    let query: string;
+    if (this.modelos[nombre]) {
+      if (atributos) {
 
+      } else {
+        if (this.modelos[nombre].tienePK) {
+          if (this.tieneModelos(this.modelos[nombre])) {
+
+          } else {
+            query = 'select * from ' + this.modelos[nombre].tabla;
+            return this.http.post(base + 'queries', {
+              query,
+              modelo,
+              clave: this.clave
+            }).toPromise();
+          }
+        } else {
+          return new Promise((resolve, reject) => {
+            console.error('Intentó realizar una búsqueda sobre un modelo sin PK y sin atributos');
+            throw new Error('Intentó realizar una búsqueda sobre un modelo sin PK y sin atributos');
+          });
+        }
+      }
+    } else {
+      return new Promise((resolve, reject) => {
+        console.error('No existe el modelo solicitado');
+        throw new Error('No existe el modelo solicitado');
+      });
+    }
   }
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
@@ -77,9 +135,12 @@ export class DatabaseService {
   }
 
   getPrueba(): Promise<Object> {
+    return this.getMe('Citas');
+  }
+  /*getPrueba(): Promise<Object> {
     return this.http.post(base + 'queries', {
       query: 'SELECT * FROM ul79atmbxbqwg0en.alergias;',
       password: this.clave
     }).toPromise();
-  }
+  }*/
 }
