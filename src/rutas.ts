@@ -18,6 +18,8 @@ import { UserManagerComponent } from './app/user-manager/user-manager.component'
 import { UserDetailComponent } from './app/user-detail/user-detail.component';
 import { PartsManageComponent } from './app/parts-manage/parts-manage.component';
 import { PartsSearchComponent } from './app/parts-search/parts-search.component';
+import { PartDetailComponent } from './app/part-detail/part-detail.component';
+import { PartNewComponent } from './app/part-new/part-new.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -39,4 +41,6 @@ export const Rutas: Routes = [
   { path: 'userdetail', component: UserDetailComponent },
   { path: 'parts-manage', component: PartsManageComponent },
   { path: 'parts-search', component: PartsSearchComponent },
+  { path: 'part-detail', component: PartDetailComponent },
+  { path: 'part-new', component: PartNewComponent },
 ];
