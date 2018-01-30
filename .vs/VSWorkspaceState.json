@@ -3,17 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\autoselected",
+    "\\src\\app\\carregister",
+    "\\src\\app\\colacitas",
     "\\src\\app\\contacto",
-    "\\src\\app\\dashclient",
-    "\\src\\app\\gen-rep",
-    "\\src\\app\\mycars",
-    "\\src\\app\\navbar",
-    "\\src\\app\\perfil",
-    "\\src\\app\\recibirvehiculo",
-    "\\src\\app\\solicitudcita",
-    "\\src\\app\\user-detail",
-    "\\src\\app\\user-manager"
+    "\\src\\app\\footer",
+    "\\src\\app\\home",
+    "\\src\\app\\sign-up"
   ],
-  "SelectedNode": "\\src\\app\\navbar\\navbar.component.ts",
+  "SelectedNode": "\\src\\styles.css",
   "PreviewInSolutionExplorer": false
 }
