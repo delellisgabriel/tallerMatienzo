@@ -2,8 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\contacto",
+    "\\src\\app\\mycars",
+    "\\src\\app\\parts-manage",
+    "\\src\\app\\parts-search"
   ],
-  "SelectedNode": "\\src\\app\\parts-manage",
+  "SelectedNode": "\\src\\app\\contacto\\contacto.component.ts",
   "PreviewInSolutionExplorer": false
 }
