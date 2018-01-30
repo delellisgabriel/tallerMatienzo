@@ -1,3 +1,120 @@
-<div class="row center">
-  <app-side-bar-fav></app-side-bar-fav>
+<!-- Parallax -->
+<div id="paraheight" class="parallax-container valign-wrapper">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center white-text">INVENTARIO REPUESTOS</h1>
+      <!-- Menu button-->
+      <div class="row center">
+        <app-side-bar-fav></app-side-bar-fav>
+      </div>
+      <!-- fin-->
+      <div class="row">
+        <h5 class="header center col s12 light"></h5>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax parallaxOscuro"><img src="https://lh3.googleusercontent.com/UOQ1R_UqkwsQJoG8bo7Gcn5pKsro0gX7t8ieBPy8UeOsJzovWpNax4KsNtkE__jM5sbw=h900" alt="Unsplashed background img 1"></div>
+</div>
+
+
+
+<!-- Search Menu-->
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="input-field col s12 m6 l6">
+        <select>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="1">Toyota</option>
+          <option value="2">Volkswagen</option>
+          <option value="3">Audi</option>
+        </select>
+        <label>Marca</label>
+      </div>
+      <div class="input-field col s12 m6 l6">
+        <select>
+          <option value="" disabled selected>Seleccionar</option>
+          <option value="1">Corolla</option>
+          <option value="2">Meru</option>
+          <option value="3">Camry</option>
+        </select>
+        <label>Modelo</label>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="input-field col s12 m6 l6">
+        <i class="material-icons prefix">border_color</i>
+        <input id="icon_prefix" type="text" class="validate">
+        <label for="icon_prefix">NOMBRE</label>
+      </div>
+      <div class="col s12 m6 l6 center" id="bottonpadding">
+        <button class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+          Buscar
+        </button>
+        <button routerLink="/part-new" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+          Nuevo
+        </button>
+      </div>
+    </div>
+
+
+    <!-- table de resultados -->
+    <div class="row">
+      <div class="col s12 m12 l12">
+
+        <h3 class="center-align">Lista de Repuestos</h3>
+        <table class="bordered highlight centered responsive-table center-align">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>Cantidad</th>
+              <th>Modificar</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Kit de Clutch</td>
+              <td>Volkswagen</td>
+              <td>GOL</td>
+              <td>3</td>
+              <td><a routerLink="/part-modify"><i class="material-icons blue-text darken-1">settings_applications</i></a></td>
+            </tr>
+            <tr>
+              <td>Correa de Tiempos</td>
+              <td>Toyota</td>
+              <td>Corolla</td>
+              <td>1</td>
+              <td><a routerLink="/part-modify"><i class="material-icons blue-text darken-1">settings_applications</i></a></td>
+            </tr>
+            <tr>
+              <td>Radiador</td>
+              <td>Ford</td>
+              <td>Fiesta</td>
+              <td>1</td>
+              <td>
+                <a routerLink="/part-modify"><i class="material-icons blue-text darken-1">settings_applications</i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br /><br />
+
+        <ul class="pagination center-align">
+          <li class="disabled"><a routerLink="#!"><i class="material-icons">chevron_left</i></a></li>
+          <li class="active"><a routerLink="#!">1</a></li>
+          <li class="waves-effect"><a routerLink="#!">2</a></li>
+          <li class="waves-effect"><a routerLink="#!">3</a></li>
+          <li class="waves-effect"><a routerLink="#!">4</a></li>
+          <li class="waves-effect"><a routerLink="#!">5</a></li>
+          <li class="waves-effect"><a routerLink="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

@@ -20,6 +20,7 @@ import { PartsManageComponent } from './app/parts-manage/parts-manage.component'
 import { PartsSearchComponent } from './app/parts-search/parts-search.component';
 import { PartDetailComponent } from './app/part-detail/part-detail.component';
 import { PartNewComponent } from './app/part-new/part-new.component';
+import { PartModifyComponent } from './app/part-modify/part-modify.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -43,4 +44,5 @@ export const Rutas: Routes = [
   { path: 'parts-search', component: PartsSearchComponent },
   { path: 'part-detail', component: PartDetailComponent },
   { path: 'part-new', component: PartNewComponent },
+  { path: 'part-modify', component: PartModifyComponent },
 ];

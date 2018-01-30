@@ -3,11 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\carregister",
-    "\\src\\app\\part-detail",
-    "\\src\\app\\parts-manage",
-    "\\src\\app\\user-manager"
+    "\\src\\app\\side-bar-fav",
+    "\\src\\app\\solicitudcita"
   ],
-  "SelectedNode": "\\src\\app\\parts-search",
+  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
   "PreviewInSolutionExplorer": false
 }

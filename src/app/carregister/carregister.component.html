@@ -3,6 +3,9 @@
     <div class="container">
       <br><br>
       <h1 class="header center white-text">REGISTRO DE VEHICULO</h1>
+      <div class="row center">
+        <app-side-bar-fav></app-side-bar-fav>
+      </div>
       <div class="row">
         <h5 class="header center col s12 light"></h5>
       </div>
@@ -58,10 +61,9 @@
         </div>
 
         <div class="row">
-
           <div class="col s12 m12 l12 center-align ">
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
-              <a routerLink="/mycars" style="color:aliceblue">Registrar</a>
+            <button routerLink="/mycars" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+              Registrar
             </button>
           </div>
         </div>

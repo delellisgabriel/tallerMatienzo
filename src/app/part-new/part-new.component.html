@@ -39,28 +39,23 @@
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <label for="placa">PLACA</label>
-            <input id="placa" type="text" class="validate">
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">border_color</i>
-            <input id="descripcion" type="text" class="validate">
-            <label for="descripcion">DESCRIPCION</label>
-          </div>
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">border_color</i>
             <label for="cantidad">CANTIDAD</label>
             <input id="cantidad" type="number" class="validate">
           </div>
         </div>
         <div class="row">
-          <div class="col s12 m12 l12 center-align ">
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
-              <a routerLink="/mycars" style="color:aliceblue">Agregar</a>
-            </button>
+          <div class="row">
+            <div class="input-field col s12 m12 l12">
+              <i class="material-icons prefix">mode_edit</i>
+              <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+              <label for="icon_prefix2">Descripcion</label>
+            </div>
           </div>
+        </div>
+        <div class="row center">
+          <button routerLink="/parts-manage" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+            Agregar
+          </button>
         </div>
       </form>
     </div>
