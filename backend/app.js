@@ -22,17 +22,16 @@ const connection = mysql.createConnection({
 app.post('/queries', function(req, res) {
   const query = req.body.query;
   const password = req.body.password;
+  const funcion = req.body.funcion;
+  const subModelos = req.body.subModelos;
   if (password === private) {
     connection.query(query, function(err, rows, fields) {
-      res.send({ rows: rows, fields: fields});
+      console.log(rows);
+      res.send({ rows: rows });
     })
   } else {
     res.send({ error: 'Authentication failed' });
   }
-});
-
-app.get('/', function(req, res) {
-	res.send('Backend is on');
 });
 
 app.listen(port, function() {

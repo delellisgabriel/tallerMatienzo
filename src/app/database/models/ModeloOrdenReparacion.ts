@@ -25,7 +25,7 @@ const ModeloOrdenReparacion = {
   Repuestos: {
     tipo: 'through',
     modelo: 'ModeloRepuestos',
-    FK: 'Repuestos_idRepuestos',
+    FK: 'OrdenReparacion_idOrdenReparacion',
     modeloDebil: 'ModeloUtilizo',
     FKDebil: 'Repuestos_idRepuestos'
   }
