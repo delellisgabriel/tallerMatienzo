@@ -47,6 +47,20 @@ export class DatabaseService {
     return array;
   }
 
+  subModelosParaEnviar(modelo: object): Array<object> {
+    const array: Array<object> = [];
+    for (const llave of Object.keys(modelo)) {
+      if (typeof modelo[llave] === 'object') {
+        if (modelo['tipo'] === 'through') {
+          array.push({ [llave]: this.modelos[modelo[llave]['modeloDebil']] });
+        } else {
+          array.push({ [llave]: this.modelos[modelo[llave]['modelo']] });
+        }
+      }
+    }
+    return array;
+  }
+
   encuentraID(modelo: object): string {
     for (const llave of Object.keys(modelo)) {
       if (modelo[llave] === 'id') {
@@ -141,18 +155,14 @@ export class DatabaseService {
     });
   }
 
-  prueba() {
-    return this.getMe('ModeloOrdenReparacion');
-  }
-
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
    * y como segundo argumento un objeto que indica atributos secundarios de búsqueda.
-    * Por ejemplo, getMe('vehiculo', { marca: 'Chevrolet', color: 'azul' }).
-    * La función regresa una promesa que recibirá un objeto como respuesta del servidor,
-    * dicho objeto contendrá un array, y cada elemento del array será una instancia del modelo
-    * solicitado (si el modelo contiene otros modelos como atributos, se poblarán de ser posible,
-    * pero estos no podrán ser usados como atributos de búsqueda ). Tal vez dicho objecto venga
-     * con funciones auxiliares para refinamiento de datos, como métodos para hacer order, limit, etc */
+   * Por ejemplo, getMe('ModeloVehiculo', { marca: 'Chevrolet', color: 'azul' }).
+   * La función regresa una promesa que recibirá un objeto como respuesta del servidor,
+   * dicho objeto contendrá un array, y cada elemento del array será una instancia del modelo
+   * solicitado (si el modelo contiene otros modelos como atributos, se poblarán de ser posible,
+   * pero estos no podrán ser usados como atributos de búsqueda ). Podrían añadirse a dicho objeto
+   * funciones auxiliares para refinamiento de datos, como métodos para hacer order, limit, etc */
 
   getMe(modelo: string, atributos?: object, vieneDeOne?: boolean): Promise<Object> {
     const model = this.modelos[modelo];
@@ -176,7 +186,7 @@ export class DatabaseService {
           if (!this.subModeloEsValido(subModelo)) {
             return this.lanzarError('El formato de algún objeto anidado en el modelo es inválido');
           }
-          let modeloExterno = this.modelos[subModelo['modelo']];
+          const modeloExterno = this.modelos[subModelo['modelo']];
           if (!this.modeloEsValido(modeloExterno)) {
             return this.lanzarError('El formato de algún modelo anidado es inválido');
           }
@@ -195,13 +205,18 @@ export class DatabaseService {
               inner += model['tabla'] + '.' + this.encuentraID(model) + ' = ' + modeloExterno['tabla'] + '.' + subModelo['FK'];
               break;
             case 'through':
-              modeloExterno = this.modelos[subModelo['modeloDebil']];
-              const modeloATraves
-              inner += ' left join ' + modeloExterno['tabla'] + ' on ';
-              inner += model['tabla'] + '.' + this.encuentraID(model) + ' = ' + modeloExterno['tabla'] + '.' + subModelo['PK'];
-              modeloExterno = this.modelos[subModelo['modelo']];
-              inner += ' right join ' + subModelo['tabla'] + ' on ';
-              inner += modeloExterno['tabla'] + '.' + subModelo['FKDebil'] + ' = ' +
+              if (!this.encuentraID(model)) {
+                return this.lanzarError('El modelo solicitado no tiene PK, y por tanto no puede tener un submodelo de tipo through');
+              }
+              if (!this.encuentraID(modeloExterno)) {
+                return this.lanzarError('El modelo externo de un submodelo de tipo through debe tener PK');
+              }
+              const modeloDebil = this.modelos[subModelo['modeloDebil']];
+              inner += ' left join ' + modeloDebil['tabla'] + ' on ';
+              inner += modeloDebil['tabla'] + '.' + subModelo['FK'] + ' = ' + model['tabla'] + '.' + this.encuentraID(model);
+              inner += ' right join ' + modeloExterno['tabla'] + ' on ';
+              inner += modeloExterno['tabla'] + '.' + this.encuentraID(modeloExterno)
+                + ' = ' + modeloDebil['tabla'] + '.' + subModelo['FKDebil'];
               break;
             default:
               return this.lanzarError('Algún objeto anidado tiene un \'tipo\' inválido');
@@ -209,11 +224,11 @@ export class DatabaseService {
           joins += inner;
         }
         query += joins + where;
-        console.log(query);
         return this.http.post(base + 'queries', {
           query,
           password: this.clave,
-          subModelos,
+          subModelos: this.subModelosParaEnviar(model),
+          modelo: model,
           funcion: (vieneDeOne ? 'getMeOne' : 'getMe')
         }).toPromise();
       } else {
@@ -221,7 +236,8 @@ export class DatabaseService {
         return this.http.post(base + 'queries', {
           password: this.clave,
           query,
-          funcion: (vieneDeOne ? 'getMeOne' : 'getMe')
+          funcion: (vieneDeOne ? 'getMeOne' : 'getMe'),
+          modelo: model
           // No hay subModelos
         }).toPromise();
       }
@@ -232,11 +248,11 @@ export class DatabaseService {
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
    * y como segundo argumento un número que indica el valor de la PK correspondiente a la
-    * fila que se desea obtener. Si el modelo no tiene PKs arrojará un error.
-    * La función regresa una promesa que recibirá un objeto como respuesta del servidor,
-    * dicho objeto contendrá una única instancia del modelo solicitado (si el modelo contiene
-    * otros modelos como atributos, se poblarán de ser posible, pero estos no podrán ser usados
-    * como atributos de búsqueda). */
+   * fila que se desea obtener. Si el modelo no tiene PKs arrojará un error.
+   * La función regresa una promesa que recibirá un objeto como respuesta del servidor,
+   * dicho objeto contendrá una única instancia del modelo solicitado (si el modelo contiene
+   * otros modelos como atributos, se poblarán de ser posible, pero estos no podrán ser usados
+   * como atributos de búsqueda). */
 
   getMeOne(modelo: string, ID: number): Promise<Object> {
     const model = this.modelos[modelo];
@@ -255,10 +271,8 @@ export class DatabaseService {
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
    * y como segundo argumento un array de objetos. Cada objeto dentro tiene atributos que
    * serán usados como factores de búsqueda de las filas a ser eliminadas.
-   * Un tercer argumento es un booleano que indica si la fila debe ser borrada incluso si
-   * es referenciada por otra fila.
-   * La función regresa una promesa que contiene un array con los objetos eliminados exitosa-
-   * mente de la base de datos. */
+   * La función regresa una promesa que contiene un booleano que indica si la operación se
+   * completó satisfactoriamente. */
 
   killThese(modelo: string, lista: Array<object>): Promise<Object> {
     const model = this.modelos[modelo];
@@ -273,7 +287,6 @@ export class DatabaseService {
         for (const llave of llaves) {
           const ultimaLlave = (llave === llaves[llaves.length - 1]);
           if (!model[llave]) {
-            console.log(llave);
             return this.lanzarError('Alguno de los atributos usados para refinar la eliminación no existen en el modelo');
           }
           const comillas = (typeof atributo[llave] === 'string' ? '\'' : '');
@@ -300,27 +313,30 @@ export class DatabaseService {
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo y como
    * segundo argumento un objeto, cuyos atributos serán usados como factores de búsqueda
-   * de las filas a cambiar. El tercer argumento incluye un otro objeto cuyos atributos contienen
+   * de las filas a cambiar. El tercer argumento incluye otro objeto cuyos atributos contienen
    * los datos a sustituir, no se sustituirán aquellos atributos que no hayan sido incluidos en el
    * tercer argumento.
-   * La función regresa una promesa que contiene un array con los objetos eliminados exitosamente
-   * de la base de datos.*/
+   * La función regresa una promesa que contiene un booleano que indica si la operación se
+   * completó satisfactoriamente. */
 
-  changeThese(modelo: string, atributos: object, aInsertar: object): Promise<Object> {
+  changeThis(modelo: string, atributos: object, aInsertar: object): Promise<Object> {
     const model = this.modelos[modelo];
     let query = 'update ' + model['tabla'] + ' set ';
     if (model) {
-      for (const columna of Object.keys(aInsertar)) {
+      let i = 0;
+      const llaves = Object.keys(aInsertar);
+      for (const columna of llaves) {
+        i++;
         if (!model[columna]) {
-          return this.lanzarError('Alguna de las columnas a insertar no existe en el modelo solicitado.')
+          return this.lanzarError('Alguna de las columnas a insertar no existe en el modelo solicitado.');
         }
         const comillas = (typeof aInsertar[columna] === 'string' ? '\'' : '');
-        const coma = (columna === aInsertar[Object.keys(aInsertar).length - 1] ? ',' : '');
+        const coma = (i === llaves.length ? '' : ',');
         query += columna + ' = ' + comillas + aInsertar[columna] + comillas + coma + ' ';
       }
       for (const atributo of Object.keys(atributos)) {
         if (!model[atributo]) {
-          return this.lanzarError('Alguno de los atributos de refinamiento no existe en el modelo.')
+          return this.lanzarError('Alguno de los atributos de refinamiento no existe en el modelo.');
         }
       }
       const where = this.atributosBusqueda(atributos);
@@ -336,12 +352,12 @@ export class DatabaseService {
   }
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo y como
-   * segundo argumento un array de objetos. Todos los objetos del array (de ser compatibles con el
-   * modelo), se añadirán a la base de datos. De lo contrario arrojará un error.
-   * Esta función regresa una promesa con un array con los objetos que pudieron ser añadidos a la
-   * base de datos.*/
+   * segundo argumento un objeto. El objeto del segundo arugmento (de ser compatible con el
+   * modelo señalado), se añadirá a la base de datos. De lo contrario se arrojará un error.
+   * Esta función regresa una promesa con un booleano que indica si la operación se completó
+   * satisfactoriamente. */
 
-  addThese(modelo: string, aInsertar: object): Promise<object> {
+  addThis(modelo: string, aInsertar: object): Promise<object> {
     const model = this.modelos[modelo];
     let query = 'insert into ' + model['tabla'] + ' (';
     if (model) {

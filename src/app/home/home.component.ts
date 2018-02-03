@@ -9,7 +9,7 @@ import { DatabaseService } from '../database/database.service';
 export class HomeComponent implements OnInit {
 
   constructor(database: DatabaseService) {
-    database.prueba().then((algo) => console.log(algo)).catch((err) => console.log(err));
+
   }
 
   ngOnInit() {

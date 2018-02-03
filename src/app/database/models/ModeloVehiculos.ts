@@ -9,7 +9,7 @@ const ModeloVehiculos = {
   Placa: 'string',
   Activado: 'boolean',
   Ano: 'string',
-  Foto: 'foto',
+  FotoVehiculo: 'foto',
   Usuario: {
     tipo: 'model',
     modelo: 'ModeloUsuarios',
