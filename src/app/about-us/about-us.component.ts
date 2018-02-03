@@ -36,5 +36,6 @@ export class AboutUsComponent implements OnInit, AfterViewInit {
     $('.modal').modal();
     $('select').material_select();
 
+    $('.slider').slider();
   }
 }
