@@ -11,6 +11,7 @@ const ModeloUsuarios = {
   Foto: 'foto',
   Rol: 'number',
   Correo: 'string',
+  Fecha_Nacimiento: 'string',
   Vehiculos: {
     tipo: 'collection',
     modelo: 'ModeloVehiculos',

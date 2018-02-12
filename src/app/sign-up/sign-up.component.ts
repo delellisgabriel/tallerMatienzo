@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ModeloUsuarios } from '../database/models/ModeloUsuarios';
+import { NgModule } from '@angular/core';
+import { DatabaseService } from '../database/database.service';
 
 declare var $: any;
 
@@ -9,7 +12,27 @@ declare var $: any;
 })
 export class SignUpComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  user = {
+    PrimerNombre: '',
+    SegundoNombre: '',
+    PrimerApellido: '',
+    SegundoApellido: '',
+    Cedula: '',
+    Password: '',
+    Rol: 0,
+    Correo: '',
+    Fecha_Nacimiento: '',
+  }
+
+  submitted = false;
+
+  constructor(private databaseService: DatabaseService) { }
+
+  SignUp() {
+    console.log('enviando:' + this.user.Correo);
+    this.submitted = true;
+    this.databaseService.addThis('ModeloUsuarios', this.user);
+  }
 
   ngOnInit() {
   }
