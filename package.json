@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng serve\" \"npm start --prefix ./backend/\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "0.0.29",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
@@ -21,6 +22,8 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "@schematics/angular": "^0.1.17",
+    "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
     "materialize-social": "^1.0.3",
