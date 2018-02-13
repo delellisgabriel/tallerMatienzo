@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { AuthService } from '../authService/auth.service';
 
 declare var $: any;
 
@@ -10,9 +11,12 @@ declare var $: any;
 })
 export class DashclientComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  user = {};
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.user = this.authService.getUser();
   }
 
   ngAfterViewInit() {

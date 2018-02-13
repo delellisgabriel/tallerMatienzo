@@ -17,38 +17,54 @@
 
 <div class="container">
   <div class="section">
+
+    <div class="alert" id="popup">
+      <span  class="closebtn" onclick="this.parentElement.hidden=true;">&times;</span>
+      <strong>Usuario</strong> o <strong>contrasena</strong> incorrecta!
+    </div>
     <br><br><br>
     <div class="row">
-      <form class="col s12 m12 l12">
+
+      <form class="col s12 m12 l12" (ngSubmit)="Login()" #loginForm="ngForm">
         <div class="row">
           <div class="col hide-on-small-only m3 l3"></div>
+
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">email</i>
-            <input id="email" type="email" class="validate">
+            <input id="email" type="email" class="validate" required
+                   [(ngModel)]="user.Correo" name="correo">
             <label for="email">CORREO ELECTRÓNICO</label>
           </div>
+
           <div class="col hide-on-small-only m3 l3"></div>
         </div>
         <div class="row">
           <div class="col hide-on-small-only m3 l3"></div>
+
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">lock</i>
-            <input id="password" type="password" class="validate">
+            <input id="password" type="password" class="validate" required
+                  [(ngModel)]="user.Password" name="password">
             <label for="password">CONTRASEÑA</label>
           </div>
+
+
           <div class="col hide-on-small-only m3 l3"></div>
         </div>
+
         <div class="row">
           <div class="col hide-on-small-only m3 l3"></div>
+
           <div class="col m6 l6">
             <p class="flow-text center-align">¿No estas registrado? click <a routerLink="/signup">Aquí</a></p>
-            
           </div>
+
           <div class="col hide-on-small-only m3 l3"></div>
         </div>
+
         <div class="row">
           <div class="col s12 m12 l12 center-align ">
-            <button routerLink="/dashclient" class="btn btn-large waves-effect waves-light blue darken-1" type="submit" name="action">
+            <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit" [disabled]="!loginForm.form.valid">
               Entrar
             </button>
           </div>
