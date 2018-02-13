@@ -1,11 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\backend",
+    "\\backend\\etc",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\side-bar-fav",
-    "\\src\\app\\solicitudcita"
+    "\\src\\app\\sign-up",
+    "\\src\\app\\solicitudcita",
+    "\\src\\app\\user-detail",
+    "\\src\\assets",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
+  "SelectedNode": "\\backend\\app.js",
   "PreviewInSolutionExplorer": false
 }
