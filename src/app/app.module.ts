@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -39,6 +40,9 @@ import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
 
+import { DatabaseService } from './database/database.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 declare var $: any;
 
@@ -77,8 +81,9 @@ declare var $: any;
     BrowserModule,
     RouterModule.forRoot(Rutas),
     FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit, AfterViewInit {

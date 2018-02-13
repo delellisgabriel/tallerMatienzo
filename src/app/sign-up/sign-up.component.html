@@ -18,44 +18,63 @@
   <div class="section">
 
     <div class="row">
-      <form class="col s12 m12 l12">
+      <form class="col s12 m12 l12" (ngSubmit)="SignUp()" #signupForm="ngForm">
+        <div class="form-group">
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">NOMBRE</label>
+            <input id="nombre" type="text" class="validate" required name="nombre"
+                   [(ngModel)]="user.PrimerNombre">
+            <label for="nombre">NOMBRE</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="last_name" type="text" class="validate">
+            <input id="seg-nombre" type="text" class="validate" required name="seg-nombre"
+                   [(ngModel)]="user.SegundoNombre">
+            <label for="seg-nombre">SEGUNDO NOMBRE</label>
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">account_box</i>
+            <input id="last_name" type="text" class="validate" required name="apellido"
+                   [(ngModel)]="user.Apellido">
             <label for="lastName">APELLIDO</label>
           </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input id="seg-last_name" type="text" class="validate" required name="seg-apellido"
+                     [(ngModel)]="user.SegundoApellido">
+              <label for="seg-lastName">SEGUNDO APELLIDO</label>
+            </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
-            <input id="icon_prefix" type="number" class="validate">
-            <label for="icon_prefix">CÉDULA</label>
+            <input id="cedula" type="number" class="validate" required name="cedula"
+                   [(ngModel)]="user.Cedula">
+            <label for="cedula">CÉDULA</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">date_range</i>
-            <input id="datepicker" type="text" class="datepicker">
+          <i class="material-icons prefix">date_range</i>
+            <input id="datepicker" type="text" class="datepicker" name="datepicker"
+            [(ngModel)]="user.Fecha_Nacimiento"> <!--Esto va Required, al parecer tiene un bug que no esta colocando-->
             <label for="datepicker">FECHA DE NACIMIENTO</label>
-            
-
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">email</i>
-            <input id="email" type="email" class="validate">
+            <input id="email" type="email" class="validate" required name="email"
+                   [(ngModel)]="user.Correo">
             <label for="email">CORREO ELECTRÓNICO</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">lock</i>
-            <input id="password" type="password" class="validate">
+            <input id="password" type="password" class="validate" required name="password"
+                   [(ngModel)]="user.Password">
             <label for="password">CONTRASEÑA</label>
           </div>
         </div>
@@ -63,17 +82,20 @@
         <div class="row">
 
           <div class="col s12 m12 l12 center-align ">
-
             <p class="center-align">
-              <input type="checkbox" id="test5" />
+              <input type="checkbox" id="test5" required class="form-control" name="conditions" />
               <label for="test5">He leído y acepto los <a class="modal-trigger" href="#modal1">términos</a> y <a class="modal-trigger" href="#modal1">condiciones</a> de uso.</label>
             </p>
             <br>
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
-              <a routerLink="/login" style="color:aliceblue" >Registrar</a>
+          </div>
+          </div>
+          </div>
+
+          <div class="row center-align">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" [disabled]="!signupForm.form.valid">
+              Registrar
             </button>
           </div>
-        </div>
 
       </form>
     </div>

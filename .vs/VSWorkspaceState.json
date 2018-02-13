@@ -3,14 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\about-us",
-    "\\src\\app\\carregister",
-    "\\src\\app\\contacto",
-    "\\src\\app\\home",
-    "\\src\\app\\navbar",
-    "\\src\\app\\part-detail",
-    "\\src\\app\\parts-manage"
+    "\\src\\app\\side-bar-fav",
+    "\\src\\app\\solicitudcita"
   ],
-  "SelectedNode": "\\src\\styles.css",
+  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
   "PreviewInSolutionExplorer": false
 }

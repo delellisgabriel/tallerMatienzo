@@ -1,4 +1,6 @@
+
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { DatabaseService } from '../database/database.service';
 
 declare var $: any;
 
@@ -9,7 +11,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(database: DatabaseService) { }
 
   ngOnInit() {
   }
@@ -38,3 +40,4 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 }
+

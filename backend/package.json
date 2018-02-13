@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "TallerMatienzo backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "dependencies": {
+    "express": "*",
+    "mysql": "*",
+    "body-parser": "*",
+    "cors": "*"
+  },
+  "author": "GT",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}
