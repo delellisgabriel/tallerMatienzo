@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from '../authService/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare var $: any;
 
@@ -9,9 +11,33 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  user = {
+    Password: '',
+    Correo: '',
+  }
+
+  constructor(private authService: AuthService, private router: Router) {
+  }
+
+  Login() {
+    this.authService.login(this.user).then((result) => {
+      if (result.hasOwnProperty('resultado')) {
+        if (result.resultado[0]) {
+          var id = result.resultado[0].idUsuario;
+          if (id) {
+            this.router.navigate(['dashclient', id]);
+          } else {
+            document.getElementById("popup").hidden = false;
+          }
+        } else {
+          document.getElementById("popup").hidden = false;
+        }
+      }
+    });
+  }
 
   ngOnInit() {
+    document.getElementById("popup").hidden = true;
   }
 
   ngAfterViewInit() {

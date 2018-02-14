@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { AuthService } from '../authService/auth.service';
+import { DatabaseService } from '../database/database.service';
 
 declare var $: any;
 
@@ -10,9 +12,24 @@ declare var $: any;
 })
 export class MycarsComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  user = {
+    Usuario_idUsuario: '',
+  }
+
+  vehiculos = {}
+
+  constructor(private authService: AuthService, private database: DatabaseService) { }
+
 
   ngOnInit() {
+    this.user.Usuario_idUsuario = this.authService.getUser().idUsuario;
+
+    console.log(JSON.stringify(this.user));
+
+    this.database.getMe('ModeloUsuarios', this.user).then((result) => {
+      console.log(result);
+    });
+
   }
 
   ngAfterViewInit() {

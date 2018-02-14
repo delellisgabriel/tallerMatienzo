@@ -40,6 +40,7 @@ import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
 
+import { AuthService } from './authService/auth.service';
 import { DatabaseService } from './database/database.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -83,7 +84,8 @@ declare var $: any;
     FormsModule,
     HttpClientModule,
   ],
-  providers: [DatabaseService],
+  providers: [DatabaseService,
+              AuthService,],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit, AfterViewInit {

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ModeloUsuarios } from '../database/models/ModeloUsuarios';
 import { NgModule } from '@angular/core';
 import { DatabaseService } from '../database/database.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare var $: any;
 
@@ -26,12 +27,12 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   submitted = false;
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService, private router: Router) { }
 
   SignUp() {
-    console.log('enviando:' + this.user.Correo);
     this.submitted = true;
     this.databaseService.addThis('ModeloUsuarios', this.user);
+    this.router.navigate(['/login']);
   }
 
   ngOnInit() {

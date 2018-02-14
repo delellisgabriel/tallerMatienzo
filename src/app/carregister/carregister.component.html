@@ -21,54 +21,69 @@
   <div class="section">
 
     <div class="row">
-      <form class="col s12 m12 l12">
-        <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">border_color</i>
-            <input id="serial" type="text" class="validate">
-            <label for="serial">SERIAL</label>
-          </div>
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">account_box</i>
-            <input id="modelo" type="text" class="validate">
-            <label for="modelo">MODELO</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">date_range</i>
-            <input id="ano" type="number" class="validate">
-            <label for="ano">AÑO</label>
-          </div>
-
-          <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">branding_watermark</i>
-            <label for="placa">PLACA</label>
-            <input id="placa" type="text" class="validate">
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="file-field input-field col s12 m12 l12">
-            <div class="btn waves-effect waves-light blue darken-1">
-              <span>File</span>
-              <input type="file" accept=".png, .jpg, .jpeg" />
+      <form class="col s12 m12 l12" #carRegisterForm="ngForm" (ngSubmit)="carRegister()" >
+        <div class="form-group">
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">border_color</i>
+              <input id="marca" type="text" class="validate" required [(ngModel)]="vehiculo.Marca" name="Marca">
+              <label for="marca">MARCA</label>
             </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input id="modelo" type="text" class="validate" required [(ngModel)]="vehiculo.Modelo" name="Modelo">
+              <label for="modelo">MODELO</label>
             </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">date_range</i>
+              <input id="serial" type="text" class="validate" required [(ngModel)]="vehiculo.Serial" name="Serial">
+              <label for="serial">SERIAL</label>
+            </div>
 
-        <div class="row">
-          <div class="col s12 m12 l12 center-align ">
-            <button routerLink="/mycars" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
-              Registrar
-            </button>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">branding_watermark</i>
+              <label for="placa">PLACA</label>
+              <input id="placa" type="text" class="validate" required [(ngModel)]="vehiculo.Placa" name="Placa">
+
+            </div>
           </div>
-        </div>
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">date_range</i>
+              <input id="color" type="text" class="validate" required [(ngModel)]="vehiculo.Color" name="Color">
+              <label for="color">COLOR</label>
+            </div>
 
-      </form>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">branding_watermark</i>
+              <label for="ano">ANO</label>
+              <input id="ano" type="number" class="validate" required [(ngModel)]="vehiculo.Ano" name="Ano">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="file-field input-field col s12 m12 l12">
+              <div class="btn waves-effect waves-light blue darken-1">
+                <span>File</span>
+                <input type="file" accept=".png, .jpg, .jpeg" [(ngModel)]="vehiculo.FotoVehiculo" name="Foto"/>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m12 l12 center-align ">
+              <button class="btn waves-effect waves-light blue darken-1" type="submit" [disabled]="!carRegisterForm.form.valid">
+                Registrar
+              </button>
+            </div>
+          </div>
+          </div>
+</form>
     </div>
 
   </div>
