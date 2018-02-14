@@ -14,7 +14,9 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
 
   constructor(private authService: AuthService, private databaseService: DatabaseService, private router: Router) { }
 
-  user = {};
+  user = {
+    idUsuario: '',
+  };
 
   vehiculo = {
     Marca: '',
@@ -29,7 +31,7 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
+    this.user.idUsuario = this.authService.getUser()["idUsuario"];
   }
 
   carRegister() {

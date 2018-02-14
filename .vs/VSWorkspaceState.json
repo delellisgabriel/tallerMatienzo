@@ -4,9 +4,12 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\authService",
-    "\\src\\app\\database",
-    "\\src\\app\\database\\models"
+    "\\src\\app\\carregister",
+    "\\src\\app\\database\\models",
+    "\\src\\app\\login",
+    "\\src\\app\\perfil",
+    "\\src\\app\\sign-up"
   ],
-  "SelectedNode": "\\src\\app\\app.module.ts",
+  "SelectedNode": "\\src\\app\\sign-up\\sign-up.component.ts",
   "PreviewInSolutionExplorer": false
 }

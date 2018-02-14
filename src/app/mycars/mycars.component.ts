@@ -12,23 +12,19 @@ declare var $: any;
 })
 export class MycarsComponent implements OnInit, AfterViewInit {
 
-  user = {
-    Usuario_idUsuario: '',
-  }
-
   vehiculos = {}
 
   constructor(private authService: AuthService, private database: DatabaseService) { }
 
 
   ngOnInit() {
-    this.user.Usuario_idUsuario = this.authService.getUser().idUsuario;
+    this.vehiculos = this.authService.getUser()["Vehiculos"];
 
-    console.log(JSON.stringify(this.user));
+    console.log(JSON.stringify(this.vehiculos));
 
-    this.database.getMe('ModeloUsuarios', this.user).then((result) => {
+   /* this.database.getMe('ModeloUsuarios', this.vehiculos).then((result) => {
       console.log(result);
-    });
+    });*/
 
   }
 
