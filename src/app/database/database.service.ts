@@ -365,9 +365,12 @@ export class DatabaseService {
         return this.lanzarError('El objeto a ser añadido a la base datos está vacío.');
       }
       const llaves = Object.keys(aInsertar);
+      console.log(llaves);
       for (const llave of llaves) {
         if (!model[llave]) {
-          return this.lanzarError('Alguno de los atributos del objeto a insertar no está presente en el modelo.');
+          if (typeof model[llave] === 'string' && model[llave].length > 0) {
+            return this.lanzarError('Alguno de los atributos del objeto a insertar no está presente en el modelo.');
+          }
         }
         const esUltima = (llave === llaves[llaves.length - 1]);
         query += ' ' + llave;

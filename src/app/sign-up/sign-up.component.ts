@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
     Rol: 0,
     Correo: '',
     Fecha_Nacimiento: '',
-  }
+  };
 
   submitted = false;
 

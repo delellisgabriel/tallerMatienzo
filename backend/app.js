@@ -34,7 +34,7 @@ app.post('/queries', function(req, res) {
             const row = rows[i];
             const objetoBase = poblarObjetoBase(row, modelo, subModelos);
             var numeroObjeto;
-            if ((numeroObjeto = objetoBaseYaExiste(arrayAuxiliar, objetoBase))) {
+            if ((numeroObjeto = objetoBaseYaExiste(arrayAuxiliar, objetoBase)) >= 0) {
               arrayAuxiliar = insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto);
             } else {
               arrayAuxiliar.push(objetoBase);
@@ -70,19 +70,26 @@ function insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto) {
   for (var i = 0; i < llaves.length; i++) {
     const llave = llaves[i];
     if (Array.isArray(objetoAuxiliar[llave])) {
+      var aux = true;
       for (var j = 0; j < objetoAuxiliar[llave].length; j++) {
         const subObjeto = objetoAuxiliar[llave][j];
-        if (!(objetosSonIguales(objetoBase[llave][0], subObjeto))) {
-          objetoAuxiliar[llave].push(objetoBase[llave]);
+        if (objetosSonIguales(objetoBase[llave][0], subObjeto)) {
+          aux = false;
+          break;
         }
+      }
+      if (aux) {
+        objetoAuxiliar[llave].push(objetoBase[llave][0]);
+        arrayAuxiliar[numeroObjeto] = objetoAuxiliar;
       }
     }
   }
+  return arrayAuxiliar;
 }
 
 function objetoBaseYaExiste(arrayAuxiliar, objetoBase) {
   if (arrayAuxiliar.length === 0) {
-    return 0;
+    return -1;
   } else {
     for (var i = 0; i < arrayAuxiliar.length; i++) {
       const objetoAuxiliar = arrayAuxiliar[i];
@@ -90,7 +97,7 @@ function objetoBaseYaExiste(arrayAuxiliar, objetoBase) {
         return i;
       }
     }
-    return 0;
+    return -1;
   }
 }
 
@@ -151,18 +158,27 @@ function poblarSubModelos(row, subModelo, noEsModel) {
   const array = [];
   for (var i = 0; i < llaves.length; i++) {
     const llave = llaves[i];
-    if (row[llave] === null) {
-      return null;
-    }
     if (llave !== 'tabla' && llave !== 'tienePK' && typeof subModelo[llave] !== 'object') {
       objeto[llave] = row[llave];
     }
   }
+  estaLlenoDeNulls(objeto) ? objeto = null : objeto;
   if (noEsModel) {
     array.push(objeto);
     return array;
   }
   return objeto;
+}
+
+function estaLlenoDeNulls(objeto) {
+  const llaves = Object.keys(objeto);
+  for (var i = 0; i < llaves.length; i++) {
+    const llave = llaves[i];
+    if (objeto[llave] !== null) {
+      return false;
+    }
+  }
+  return true;
 }
 
 app.listen(port, function() {
