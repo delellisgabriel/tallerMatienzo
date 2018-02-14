@@ -21,31 +21,44 @@
   <div class="section no-pad-bot">
 
     <div class="row">
-      <form class="col s12 m12 l12">
+      <form class="col s12 m12 l12" #perfilForm="ngForm" (ngSubmit)="modificarPerfil()">
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">NOMBRE</label>
+            <input placeholder="Placeholder" id="nombre" type="text" class="validate" name="nombre" [(ngModel)]="user.PrimerNombre">
+            <label class="active" for="nombre">NOMBRE</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="last_name" type="text" class="validate">
-            <label for="lastName">APELLIDO</label>
+            <input placeholder="Placeholder" id="seg-nombre" type="text" class="validate" name="seg-nombre" [(ngModel)]="user.SegundoNombre">
+            <label class="active" for="seg-nombre">SEGUNDO NOMBRE</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">account_box</i>
+            <input placeholder="Placeholder" id="apellido" type="text" class="validate" name="apellido" required [(ngModel)]="user.PrimerApellido">
+            <label class="active" for="apellido">APELLIDO</label>
+          </div>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">account_box</i>
+            <input placeholder="Placeholder" id="seg-apellido" type="text" class="validate" name="seg-apellido" [(ngModel)]="user.SegundoApellido">
+            <label class="active"for="seg-apellido">SEGUNDO APELLIDO</label>
+
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
-            <input id="icon_prefix" type="number" class="validate">
-            <label for="icon_prefix">CÉDULA</label>
+            <input placeholder="Placeholder" id="cedula" type="number" class="validate" name="cedula" required [(ngModel)]="user.Cedula">
+            <label class="active" for="cedula">CÉDULA</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">date_range</i>
-            <label for="datepicker">FECHA DE NACIMIENTO</label>
-            <input id="datepicker" type="text" class="datepicker">
-
+            <input placeholder="Placeholder" id="datepicker" type="date" class="datepicker" name="Fecha_Nacimiento" [(ngModel)]="user.Fecha_Nacimiento">
+            <label class="active" for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>
 
@@ -54,7 +67,7 @@
 
           <div class="col s12 m12 l12 center-align ">
 
-            <button routerLink="/dashclient" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" [disabled]="!perfilForm.form.valid">
              Modificar
             </button>
           </div>

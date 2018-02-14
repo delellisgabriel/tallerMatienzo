@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { AuthService } from '../authService/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { DatabaseService } from '../database/database.service';
 
 declare var $: any;
 
@@ -10,9 +13,23 @@ declare var $: any;
 })
 export class PerfilComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  user = {};
+  userViejo = {};
+
+  constructor(private authService: AuthService, private database: DatabaseService, private router: Router) { }
+
+  modificarPerfil() {
+    this.database.changeThis('ModeloUsuarios', this.userViejo, this.user)
+      .then((result) => {
+        console.log(result);
+      });
+  }
 
   ngOnInit() {
+    this.user = this.authService.getUser();
+    delete this.user.Vehiculos;
+    this.userViejo.idUsuario = this.authService.getUser().idUsuario;
+    console.log(this.user, this.userViejo);
   }
 
   ngAfterViewInit() {
@@ -31,7 +48,8 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       today: 'Hoy',
       clear: 'Limpiar',
       close: 'Ok',
-      closeOnSelect: false // Close upon selecting a date,
+      closeOnSelect: false, // Close upon selecting a date,
+      format: 'yyyy-mm-dd',
     });
 
     $('.modal').modal();

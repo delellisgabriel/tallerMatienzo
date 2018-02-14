@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from '../authService/auth.service';
+import { DatabaseService } from '../database/database.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare var $: any;
 
@@ -9,9 +12,30 @@ declare var $: any;
 })
 export class CarregisterComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private databaseService: DatabaseService, private router: Router) { }
+
+  user = {};
+
+  vehiculo = {
+    Marca: '',
+    Modelo: '',
+    Color: '',
+    SerialMotor: '',
+    Placa: '',
+    Activado: 1,
+    Ano: '',
+    FotoVehiculo: '',
+    Usuario: this.user.idUsuario,
+  }
 
   ngOnInit() {
+    this.user = this.authService.getUser();
+  }
+
+  carRegister() {
+    this.databaseService.addThis('ModeloVehiculos', this.vehiculo);
+    console.log('FRAGOUT');
+    this.router.navigate(['/mycars', this.user.idUsuario]);
   }
 
   ngAfterViewInit() {

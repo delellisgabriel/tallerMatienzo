@@ -29,7 +29,7 @@
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="seg-nombre" type="text" class="validate" required name="seg-nombre"
+            <input id="seg-nombre" type="text" class="validate" name="seg-nombre"
                    [(ngModel)]="user.SegundoNombre">
             <label for="seg-nombre">SEGUNDO NOMBRE</label>
           </div>
@@ -43,7 +43,7 @@
           </div>
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">account_box</i>
-              <input id="seg-last_name" type="text" class="validate" required name="seg-apellido"
+              <input id="seg-last_name" type="text" class="validate" name="seg-apellido"
                      [(ngModel)]="user.SegundoApellido">
               <label for="seg-lastName">SEGUNDO APELLIDO</label>
             </div>
@@ -58,8 +58,8 @@
 
           <div class="input-field col s12 m6 l6">
           <i class="material-icons prefix">date_range</i>
-            <input id="datepicker" type="text" class="datepicker" name="datepicker"
-            [(ngModel)]="user.Fecha_Nacimiento"> <!--Esto va Required, al parecer tiene un bug que no esta colocando-->
+            <input id="datepicker" type="date" class="datepicker" name="datepicker"
+            [(ngModel)]="user.Fecha_Nacimiento" required>
             <label for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>
