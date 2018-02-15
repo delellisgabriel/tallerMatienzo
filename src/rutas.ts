@@ -30,7 +30,7 @@ export const Rutas: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'dashclient/:id', component: DashclientComponent },
   { path: 'mycars/:id', component: MycarsComponent },
-  { path: 'autoselected', component: AutoselectedComponent },
+  { path: 'autoselected/:id', component: AutoselectedComponent },
   { path: 'carregister', component: CarregisterComponent },
   { path: 'solicitudcita/:id', component: SolicitudcitaComponent },
   { path: 'perfil/:id', component: PerfilComponent },

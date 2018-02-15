@@ -12,7 +12,7 @@ export class AuthService {
 
   login(user: object): Promise<Object> {
     this.database.getMe('ModeloUsuarios', user).then((result) => {
-      this.currentUser = result.resultado[0];
+      this.currentUser = result["resultado"][0];
     });
     return this.database.getMe('ModeloUsuarios', user);
   }

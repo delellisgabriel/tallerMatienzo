@@ -13,14 +13,20 @@
   border-radius: 5px;
 }
 
-.reparando {
-  background-color: #ffd600;
+.notAsigned {
+  background-color: #1e88e5;
 }
 
 .waiting {
   background-color: #ff6d00;
 }
 
+.repairing {
+  background-color: #ffd600;
+}
+
 .ready {
   background-color: #00e676;
 }
+
+

@@ -14,7 +14,9 @@ declare var $: any;
 export class PerfilComponent implements OnInit, AfterViewInit {
 
   user = {};
-  userViejo = {};
+  userViejo = {
+    idUsuario: '',
+  };
 
   constructor(private authService: AuthService, private database: DatabaseService, private router: Router) { }
 
@@ -27,8 +29,8 @@ export class PerfilComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.user = this.authService.getUser();
-    delete this.user.Vehiculos;
-    this.userViejo.idUsuario = this.authService.getUser().idUsuario;
+    delete this.user["Vehiculos"];
+    this.userViejo.idUsuario = this.authService.getUser()["idUsuario"];
     console.log(this.user, this.userViejo);
   }
 

@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   Login() {
     this.authService.login(this.user).then((result) => {
       if (result.hasOwnProperty('resultado')) {
-        if (result.resultado[0]) {
-          var id = result.resultado[0].idUsuario;
+        if (result["resultado"][0]) {
+          var id = result["resultado"][0].idUsuario;
           if (id) {
             this.router.navigate(['dashclient', id]);
           } else {
