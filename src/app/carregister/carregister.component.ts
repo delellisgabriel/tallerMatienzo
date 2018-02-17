@@ -38,10 +38,12 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
   carRegister() {
     this.vehiculo.Usuario_idUsuario = this.user.idUsuario;
     this.databaseService.addThis('ModeloVehiculos', this.vehiculo).then((result) => {
-      console.log(result);
       this.router.navigate(['/mycars', this.user.idUsuario]);
     }).catch((err) => { console.log(err);});
-    
+  }
+
+  getVehiculo() {
+    return this.vehiculo;
   }
 
   ngAfterViewInit() {

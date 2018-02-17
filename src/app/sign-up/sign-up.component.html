@@ -53,13 +53,13 @@
             <i class="material-icons prefix">branding_watermark</i>
             <input id="cedula" type="number" class="validate" required name="cedula"
                    [(ngModel)]="user.Cedula">
-            <label for="cedula">CÉDULA</label>
+            <label class="active" for="cedula">CÉDULA</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
           <i class="material-icons prefix">date_range</i>
-            <input id="datepicker" type="date" class="datepicker" name="datepicker"
-            [(ngModel)]="user.Fecha_Nacimiento" required>
+            <input id="datepicker" type="text" class="datepicker" name="datepicker"
+            [(ngModel)]="user.Fecha_Nacimiento" > <!-- Esto va Required una vez que arreglemos el datepicker-->
             <label for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>

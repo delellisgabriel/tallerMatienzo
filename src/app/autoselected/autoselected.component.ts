@@ -10,7 +10,10 @@ declare var $: any;
 })
 export class AutoselectedComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  vehiculo = {};
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

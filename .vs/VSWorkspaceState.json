@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\backend",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\authService",
-    "\\src\\app\\carregister",
     "\\src\\app\\database\\models",
-    "\\src\\app\\login",
-    "\\src\\app\\perfil",
+    "\\src\\app\\side-bar-fav",
     "\\src\\app\\sign-up"
   ],
   "SelectedNode": "\\src\\app\\sign-up\\sign-up.component.ts",
