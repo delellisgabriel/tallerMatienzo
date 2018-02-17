@@ -11,7 +11,8 @@
     "express": "*",
     "mysql": "*",
     "body-parser": "*",
-    "cors": "*"
+    "cors": "*",
+    "concurrently": "*"
   },
   "author": "GT",
   "license": "ISC",
