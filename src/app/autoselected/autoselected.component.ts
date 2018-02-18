@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { CarSelectService } from "../car-select/car-select.service";
+import { OrdenSelectService } from "../orden-select/orden-select.service";
 
 declare var $: any;
 
@@ -10,12 +12,15 @@ declare var $: any;
 })
 export class AutoselectedComponent implements OnInit, AfterViewInit {
 
+  orden = {};
+
   vehiculo = {};
 
-  constructor() {
-  }
+  constructor(private ordenSelected: OrdenSelectService, private carSelected: CarSelectService) {}
 
   ngOnInit() {
+    this.orden = this.ordenSelected.getOrden();
+    this.vehiculo = this.carSelected.getCar();
   }
 
   ngAfterViewInit() {

@@ -31,11 +31,18 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   SignUp() {
     this.submitted = true;
-    this.databaseService.addThis('ModeloUsuarios', this.user);
-    this.router.navigate(['/login']);
+    this.databaseService.addThis('ModeloUsuarios', this.user).then((result) => {
+      console.log(result);
+      if (result['resultado'] == false) {
+        document.getElementById("popup").hidden = false;
+      } else if (result['resultado'] == true) {
+        this.router.navigate(['/login']);
+      }
+    }).catch((err) => { console.log(err); });
   }
 
   ngOnInit() {
+    document.getElementById("popup").hidden = true;
   }
 
   ngAfterViewInit() {

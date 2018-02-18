@@ -6,41 +6,57 @@
   <div class="section">
     <br><br><br>
     <div class="row">
-      <form class="col s12 m12 l12" (ngSubmit)="solicitarCita(citaForm)" #citaForm="ngForm">
-        <div class="form-group">
+
+      
+      <form (submit)="solicitarCita()" >
+        <div class="form-group col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12 m6 l6">
-              <select name="idVehiculo" ngModel #idVehiculo="ngModel">
-                <option value="None" disabled selected>Selecciona tu vehiculo</option>
-                <option *ngFor="let vehiculo of userVehiculos" [ngValue]="vehiculo">{{vehiculo.Marca}} {{vehiculo.Modelo}}</option>
+
+              <select [(ngModel)]="solicitud.idVehiculo" name="idVehiculo" (change)="asignarID()">
+                <option value="" disabled>Selecciona un vehiculo</option>
+                <option value="1">ho</option>
+                <option *ngFor="let carro of userVehiculos" [value]="carro.idVehiculo">
+                  {{ carro.Marca }} {{ carro.Modelo }}
+                </option>
               </select>
               <label>Vehiculo</label>
             </div>
+            
             <div class=" input-fueld col s12 m6 l6">
               <input id="motivo" class="validate" type="text" name="motivo" [(ngModel)]="solicitud.motivo" required />
               <label for="motivo">MOTIVO</label>
             </div>
           </div>
+          
           <div class="row">
             <div class="input-field col s12 m6 l6">
-              <input id="fecha_inicial" type="text" class="datepicker" name="fecha_inicial" [(ngModel)]="solicitud.fecha_inicial">
+              <input id="datepicker" type="date" class="datepicker" name="fecha_inicial"
+                     [(ngModel)]="solicitud.fecha_inicial" />
               <label for="fecha_inicial">A PARTIR DE</label>
             </div>
             <div class="input-field col s12 m6 l6">
-              <input id="fecha_final" type="text" class="datepicker" name="fecha_final" [(ngModel)]="solicitud.fecha_final">
+              <input id="datepicker" type="date" class="datepicker" name="fecha_final"
+                     [(ngModel)]="solicitud.fecha_final" />
               <label for="fecha_final">HASTA</label>
             </div>
           </div>
+       
         </div>
+
+    
         <div class="row">
           <div class="col s12 m12 l12 center-align ">
-            <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit" [disabled]="!citaForm.form.valid">
+            <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit">
               Solicitar
             </button>
           </div>
         </div>
-
+       
       </form>
+
+     
+
     </div>
 
   </div>

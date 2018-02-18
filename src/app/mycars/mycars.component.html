@@ -8,7 +8,7 @@
     <div class="row">
 <!-- Lista de Carros-->
       <div class="col s12 m4" *ngFor="let carro of vehiculos">
-        <a routerLink="/autoselected/{{carro.idVehiculo}}">
+        <div (click)="selectCar(carro)">
           <div class="icon-block notAsigned" id="tile">
             <h4 class="center">{{carro.Marca}} {{carro.Modelo}}</h4>
             <h5 class="light center">Color: {{carro.Color}}</h5>
@@ -17,7 +17,7 @@
             <br><br><br>
             <h5 class="light center">Estatus: <!--TODO--></h5>
           </div>
-          </a>
+        </div>
         </div>
 
 

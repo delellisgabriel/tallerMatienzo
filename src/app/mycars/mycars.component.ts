@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { AuthService } from '../authService/auth.service';
 import { DatabaseService } from '../database/database.service';
+import { CarSelectService } from "../car-select/car-select.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -18,7 +20,7 @@ export class MycarsComponent implements OnInit, AfterViewInit {
 
   vehiculos = [];
 
-  constructor(private authService: AuthService, private database: DatabaseService) {
+  constructor(private authService: AuthService, private database: DatabaseService, private carService: CarSelectService, private router: Router) {
     this.user.idUsuario = this.authService.getUser()['idUsuario'];
 
     this.database.getMe('ModeloUsuarios', this.user).then((result) => {
@@ -29,6 +31,11 @@ export class MycarsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  selectCar(car: object) {
+    console.log(car);
+    this.carService.selectCar(car);
+    this.router.navigate(['car-historial', car['idVehiculo']]);
+  }
 
   ngOnInit() {
 

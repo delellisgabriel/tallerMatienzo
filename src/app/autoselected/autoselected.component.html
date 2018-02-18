@@ -2,7 +2,7 @@
   <div class="section no-pad-bot">
     <div class="container">
       <br><br>
-      <h1 class="header center white-text">AUDI R8</h1>
+      <h1 class="header center white-text">{{vehiculo.Marca}} {{vehiculo.Modelo}}</h1>
       <div class="row center">
         <app-side-bar-fav></app-side-bar-fav>
       </div>
@@ -25,82 +25,113 @@
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <input id="serial" type="text" class="validate">
-            <label for="serial">SERIAL</label>
+            <input id="serial" type="text" class="validate" [(ngModel)]="vehiculo.SerialMotor" name="serial" disabled>
+            <label for="serial" class="active" >SERIAL</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="modelo" type="text" class="validate">
-            <label for="modelo">MODELO</label>
+            <input id="modelo" type="text" class="validate" [(ngModel)]="vehiculo.Modelo" name="modelo" disabled>
+            <label for="modelo" class="active">MODELO</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">date_range</i>
-            <input id="ano" type="number" class="validate">
-            <label for="ano">AÑO</label>
+            <input id="ano" type="number" class="validate" [(ngModel)]="vehiculo.Ano" name="ano" disabled>
+            <label for="ano" class="active">AÑO</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
-            <label for="placa">PLACA</label>
-            <input id="placa" type="text" class="validate">
+            <label for="placa" class="active">PLACA</label>
+            <input id="placa" type="text" class="validate" [(ngModel)]="vehiculo.Placa" name="placa" disabled>
+          </div>
 
-          </div>
         </div>
-        <!-- 3era fila -->
+        <!-- Cuarta Fila-->
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">DIAGNOSTICO</label>
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="cauchos" class="active">CAUCHOS</label>
+            <input id="cauchos" type="text" class="validate" [(ngModel)]="orden.Cauchos" name="cauchos" disabled>
           </div>
+
           <div class="input-field col s12 m6 l6">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">REPUESTOS</label>
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="llaves" class="active">LLAVES</label>
+            <input id="llaves" type="text" class="validate" [(ngModel)]="orden.Llaves" name="llaves" disabled>
           </div>
+
         </div>
-        <!-- 4ta fila -->
+
         <div class="row">
-          <div class="col s12 m6 l6">
-          <p>
-            <input type="checkbox" id="test1" />
-            <label for="test1">Caucho de Repuesto</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test2" />
-            <label for="test2">Llaves</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test3" />
-            <label for="test3">Gato</label>
-          </p>
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="gato" class="active">GATO</label>
+            <input id="gato" type="text" class="validate" [(ngModel)]="orden.Gato" name="gato" disabled>
           </div>
-        <div class="col s12 m6 l6">
-          <p>
-            <input type="checkbox" id="test4" />
-            <label for="test4">Herramientas</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test5" />
-            <label for="test5">Equipo de Sonido</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test6" />
-            <label for="test6">Otros</label>
-          </p>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="herramientas" class="active">HERRAMIENTAS</label>
+            <input id="herramientas" type="text" class="validate" [(ngModel)]="orden.Herramientas" name="herramientas" disabled>
+          </div>
+
         </div>
+
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="sonido" class="active">SONIDO</label>
+            <input id="sonido" type="text" class="validate" [(ngModel)]="orden.EquipoSonido" name="sonido" disabled>
+          </div>
+
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix">branding_watermark</i>
+            <label for="carroceria" class="active">CARROCERIA</label>
+            <input id="carroceria" type="text" class="validate" [(ngModel)]="orden.Carroceria" name="carroceria" disabled>
+          </div>
+
         </div>
         <!-- 5ta fila -->
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">MECANICO</label>
+            <input id="mecanico" type="text" class="validate" disabled name="mecanico"> <!--TODO NGMODEL, falta en el modelo y la BD-->
+            <label for="mecanico">MECANICO</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">content_paste</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">OTROS</label>
+            <input id="otrso" type="text" class="validate" disabled  [(ngModel)]="orden.Otros" name="otros">
+            <label for="otros" class="active">OTROS</label>
+          </div>
+        </div>
+        <!-- 3era fila -->
+        <div class="row">
+          <div class="input-field col s12 m12 l12">
+            <textarea id="diagnostico" class="materialize-textarea" disabled [(ngModel)]="orden.Diagnostico" name="diagnostico"></textarea>
+            <label for="diagnostico" class="active">DIAGNOSTICO</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m12 l12">
+            <h5 class="center-align">Lista de Repuestos</h5>
+            <table class="bordered highlight centered responsive-table center-align">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Marca</th>
+                  <th>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let repuesto of orden.Repuestos">
+                  <td>{{repuesto.Nombre}}</td>
+                  <td>{{repuesto.Marca}}</td>
+                  <td>{{repuesto.Cantidad}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <!-- 6ta fila -->

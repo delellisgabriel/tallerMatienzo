@@ -11,22 +11,39 @@
   padding: 5px;
   height: 350px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .notAsigned {
   background-color: #1e88e5;
 }
 
+  .notAsigned:hover {
+    background-color: #42a5f5;
+  }
+
 .waiting {
   background-color: #ff6d00;
 }
+
+  .waiting:hover {
+    background-color: #ffab40;
+  }
 
 .repairing {
   background-color: #ffd600;
 }
 
+  .repairing:hover {
+    background-color: #ffea00;
+  }
+
 .ready {
   background-color: #00e676;
 }
+
+  .ready:hover {
+    background-color: #69f0ae;
+  }
 
 

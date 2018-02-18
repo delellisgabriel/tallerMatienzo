@@ -23,11 +23,12 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   modificarPerfil() {
     this.database.changeThis('ModeloUsuarios', this.userViejo, this.user)
       .then((result) => {
-        console.log(result);
+        document.getElementById("popup").hidden = false;
       });
   }
 
   ngOnInit() {
+    document.getElementById("popup").hidden = true;
     this.user = this.authService.getUser();
     delete this.user["Vehiculos"];
     this.userViejo.idUsuario = this.authService.getUser()["idUsuario"];

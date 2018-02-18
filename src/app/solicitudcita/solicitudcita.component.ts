@@ -4,6 +4,10 @@ import { AuthService } from '../authService/auth.service';
 import { DatabaseService } from '../database/database.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgForm } from "@angular/forms/src/forms";
+import { FormBuilder, Validators } from '@angular/forms';
+import { SelectControlValueAccessor } from '@angular/forms';
+
+import { FormControl, FormGroup } from '@angular/forms';
 declare var $: any;
 
 @Component({
@@ -23,15 +27,19 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
     fecha_final: '',
   };
 
-  constructor(private authService: AuthService, private database: DatabaseService, private router: Router) {
+  constructor(private authService: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder) {
     this.userVehiculos = this.authService.getUser()["Vehiculos"];
   }
 
-  solicitarCita(citaForm: NgForm) {
+  solicitarCita() {
+    this.solicitud.idUsuario = this.authService.getUser()["idUsuario"];
+    console.log(this.solicitud);
+
+    /*
     this.solicitud.idUsuario = this.authService.getUser()['idUsuario'];
     console.log(this.solicitud); //Cuando esta vaina bote el objeto que es. Podemos descomentar
     
-    /*
+    
     this.database.addThis('ModeloCitas', this.vehiculoSelected).then((result) => {
       console.log(result); //Esto deberia botar True
       this.router.navigate(['/mycars', this.authService.getUser()["idUsuario"]];
@@ -42,6 +50,7 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
+
 
   ngAfterViewInit() {
 

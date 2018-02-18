@@ -1,0 +1,59 @@
+<!-- Parallax -->
+<div id="paraheight" class="parallax-container valign-wrapper">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br><br>
+      <h1 class="header center white-text">Historial</h1>
+      <!-- Menu button-->
+      <div class="row center">
+        <app-side-bar-fav></app-side-bar-fav>
+      </div>
+      <!-- fin-->
+      <div class="row">
+        <h5 class="header center col s12 light"></h5>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+  <div class="parallax parallaxOscuro"><img src="https://lh3.googleusercontent.com/UOQ1R_UqkwsQJoG8bo7Gcn5pKsro0gX7t8ieBPy8UeOsJzovWpNax4KsNtkE__jM5sbw=h900" alt="Unsplashed background img 1"></div>
+</div>
+
+
+    <!-- table de resultados -->
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col hide-on-small-only m3 l3"></div>
+      <div class="col s12 m6 l6 center-align">
+        <button class="btn" (click)="deshabilitar()">Deshabilitar Vehiculo</button>
+      </div>
+      <div class="col hide-on-small-only m3 l3"></div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m12 l12">
+        <h3 class="center-align">Lista de Ordenes</h3>
+        <table class="bordered highlight centered responsive-table center-align">
+          <thead>
+            <tr>
+              <th>Estado</th>
+              <th>Fecha Culminacion</th>
+              <th>Detalles</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let orden of ordenes">
+              <td>{{orden.Completada}}</td>
+              <td>{{orden.FechaCulminacion}}</td>
+              <td><button class="btn" (click)="detallesOrden(orden)"><i class="material-icons blue-text darken-1">add</i></button></td>
+            </tr>
+          </tbody>
+        </table>
+        <br /><br />
+
+      </div>
+    </div>
+  </div>
+</div>

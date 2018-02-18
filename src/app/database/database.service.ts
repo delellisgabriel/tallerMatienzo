@@ -166,8 +166,8 @@ export class DatabaseService {
 
   getMe(modelo: string, atributos?: object, vieneDeOne?: boolean): Promise<Object> {
     const model = this.modelos[modelo];
-    let query: string = 'select * from ' + model.tabla;
     if (model) {
+      let query: string = 'select * from ' + model.tabla;
       if (!this.modeloEsValido(model)) {
         return this.lanzarError('El modelo solicitado tiene un formato inválido.');
       }

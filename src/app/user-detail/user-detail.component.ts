@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { UserSelectService } from '../user-select/user-select.service';
+import { DatabaseService } from '../database/database.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare var $: any;
 
@@ -10,10 +13,45 @@ declare var $: any;
 })
 export class UserDetailComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  private userViejo = {
+    idUsuario: '',
+  }
+
+  private userSelected = {};
+
+  constructor(private userSelect: UserSelectService, private database: DatabaseService,) { }
 
   ngOnInit() {
+    document.getElementById("popup").hidden = true;
+    this.userSelected = this.userSelect.getUser();
+    this.userViejo.idUsuario = this.userSelected['idUsuario'];
+    if (this.userSelected["Rol"] === 0) {
+      this.userSelected["Rol"] = 'Cliente';
+    } else if (this.userSelected["Rol"] === 1) {
+      this.userSelected["Rol"] = 'Gerente';
+    } else if (this.userSelected["Rol"]=== 2) {
+      this.userSelected["Rol"] = 'Administrador';
+    } else if (this.userSelected["Rol"] === 3) {
+      this.userSelected["Rol"] = 'Mecanico';
+    }
+
+    this.userSelected["CantVehiculos"] = this.userSelected["Vehiculos"].length;
+    
+
+    console.log(this.userViejo);
+    console.log(this.userSelected);
   }
+
+  modificarPerfil() {
+    delete this.userSelected["CantVehiculos"];
+    delete this.userSelected["Vehiculos"];
+    console.log(this.userSelected);
+    /*   //Esto se descomenta cuando se arreglen los datepickers y los Select!!!!
+    this.database.changeThis('ModeloUsuarios', this.userViejo, this.userSelected).then((result) => {
+        document.getElementById("popup").hidden = false;
+    }); */
+  }
+
 
   ngAfterViewInit() {
 

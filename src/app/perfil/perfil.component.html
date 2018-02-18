@@ -20,6 +20,11 @@
 <div class="container">
   <div class="section no-pad-bot">
 
+    <div class="alert" id="popup">
+      <span class="closebtn" onclick="this.parentElement.hidden=true;">&times;</span>
+      <strong>Usuario modificado con exito!</strong>
+    </div>
+
     <div class="row">
       <form class="col s12 m12 l12" #perfilForm="ngForm" (ngSubmit)="modificarPerfil()">
         <div class="row">

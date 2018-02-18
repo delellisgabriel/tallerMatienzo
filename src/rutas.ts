@@ -21,6 +21,7 @@ import { PartsSearchComponent } from './app/parts-search/parts-search.component'
 import { PartDetailComponent } from './app/part-detail/part-detail.component';
 import { PartNewComponent } from './app/part-new/part-new.component';
 import { PartModifyComponent } from './app/part-modify/part-modify.component';
+import { CarHistorialComponent } from './app/car-historial/car-historial.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -39,10 +40,11 @@ export const Rutas: Routes = [
   { path: 'modificararchivo', component: ModificararchivoComponent },
   { path: 'colacitas', component: ColacitasComponent },
   { path: 'manageuser', component: UserManagerComponent },
-  { path: 'userdetail', component: UserDetailComponent },
+  { path: 'userdetail/:id', component: UserDetailComponent },
   { path: 'parts-manage', component: PartsManageComponent },
   { path: 'parts-search', component: PartsSearchComponent },
   { path: 'part-detail', component: PartDetailComponent },
   { path: 'part-new', component: PartNewComponent },
   { path: 'part-modify', component: PartModifyComponent },
+  { path: 'car-historial/:id', component: CarHistorialComponent },
 ];

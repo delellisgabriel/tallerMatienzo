@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -43,6 +43,13 @@ import { PartModifyComponent } from './part-modify/part-modify.component';
 import { AuthService } from './authService/auth.service';
 import { DatabaseService } from './database/database.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserSelectService } from './user-select/user-select.service';
+import { CarSelectService } from "./car-select/car-select.service";
+import { CarHistorialComponent } from './car-historial/car-historial.component';
+import { OrdenSelectService } from "./orden-select/orden-select.service";
+
+
+
 
 
 declare var $: any;
@@ -77,15 +84,22 @@ declare var $: any;
     PartsSearchComponent,
     PartNewComponent,
     PartModifyComponent,
+    CarHistorialComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(Rutas),
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [DatabaseService,
-              AuthService,],
+  providers: [
+    DatabaseService,
+    AuthService,
+    UserSelectService,
+    CarSelectService,
+    OrdenSelectService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit, AfterViewInit {

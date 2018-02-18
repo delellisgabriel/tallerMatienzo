@@ -17,6 +17,11 @@
 <div class="container">
   <div class="section">
 
+    <div class="alert" id="popup">
+      <span class="closebtn" onclick="this.parentElement.hidden=true;">&times;</span>
+      <strong>El correo suministrado </strong>ya esta registrado!
+    </div>
+    <br /><br />
     <div class="row">
       <form class="col s12 m12 l12" (ngSubmit)="SignUp()" #signupForm="ngForm">
         <div class="form-group">

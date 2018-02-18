@@ -18,10 +18,15 @@
     </div>
     <br>
 
+    <div class="alert" id="popup">
+      <span class="closebtn" onclick="this.parentElement.hidden=true;">&times;</span>
+      <strong>Usuario modificado con exito!</strong>
+    </div>
+
     <div class="row">
       <div class="col s12 m12 l12">
 
-        <h3 class="center-align">Nombre: Gabriel De Lellis</h3>
+        <h3 class="center-align">Nombre: {{userSelected.PrimerNombre}} {{userSelected.SegundoNombre }} {{userSelected.PrimerApellido }} {{userSelected.SegundoApellido}}</h3>
         <br><br>
         <table class="bordered highlight centered responsive-table center-align">
           <thead>
@@ -30,15 +35,17 @@
               <th>Fecha de Nacimiento</th>
               <th>Correo Electrónico</th>
               <th>Vehículo(s) Registrado(s)</th>
+              <th>Rol</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
-              <td>24.073.386</td>
-              <td>11/08/1994</td>
-              <td>gabrieldelellis@correo.unimet.edu.ve</td>
-              <td>4</td>
+              <td>{{userSelected.Cedula}}</td>
+              <td>{{userSelected.Fecha_Nacimiento}}</td>
+              <td>{{userSelected.Correo}}</td>
+              <td>{{userSelected.CantVehiculos}}</td>
+              <td>{{userSelected.Rol}}</td>
             </tr>
 
           </tbody>
@@ -47,46 +54,71 @@
         <br><br>
 
 
-        <div class="row">
-          <form class="col s12 m12 l12">
-            <div class="row">
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">account_box</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">NOMBRE COMPLETO</label>
-              </div>
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">date_range</i>
-                <label for="datepicker">FECHA DE NACIMIENTO</label>
-                <input id="datepicker" type="text" class="datepicker">
-
-              </div>
-
+        <form class="col s12 m12 l12" #perfilForm="ngForm" (ngSubmit)="modificarPerfil()">
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input placeholder="Placeholder" id="nombre" type="text" class="validate" name="nombre" [(ngModel)]="userSelected.PrimerNombre" required>
+              <label class="active" for="nombre">NOMBRE</label>
             </div>
-            <div class="row">
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">branding_watermark</i>
-                <input id="icon_prefix" type="number" class="validate">
-                <label for="icon_prefix">CÉDULA</label>
-              </div>
-
-              <div class="input-field col s12 m6 l6">
-                <i class="material-icons prefix">email</i>
-                <input id="email" type="email" class="validate">
-                <label for="email">CORREO ELECTRÓNICO</label>
-              </div>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input placeholder="Placeholder" id="seg-nombre" type="text" class="validate" name="seg-nombre" [(ngModel)]="userSelected.SegundoNombre" required>
+              <label class="active" for="seg-nombre">SEGUNDO NOMBRE</label>
             </div>
-            <div class="row">
-
-              <div class="col s12 m12 l12 center-align ">
-
-                <button routerLink="/manageuser" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
-                Actualizar
-                </button>
-              </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input placeholder="Placeholder" id="apellido" type="text" class="validate" name="apellido" required [(ngModel)]="userSelected.PrimerApellido" required>
+              <label class="active" for="apellido">APELLIDO</label>
             </div>
 
-          </form>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">account_box</i>
+              <input placeholder="Placeholder" id="seg-apellido" type="text" class="validate" name="seg-apellido" [(ngModel)]="userSelected.SegundoApellido" required>
+              <label class="active" for="seg-apellido">SEGUNDO APELLIDO</label>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">branding_watermark</i>
+              <input placeholder="Placeholder" id="cedula" type="number" class="validate" name="cedula" required [(ngModel)]="userSelected.Cedula" >
+              <label class="active" for="cedula">CÉDULA</label>
+            </div>
+
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">date_range</i>
+              <input placeholder="Placeholder" id="datepicker" type="date" class="datepicker" name="Fecha_Nacimiento" [(ngModel)]="userSelected.Fecha_Nacimiento" required>
+              <label class="active" for="datepicker">FECHA DE NACIMIENTO</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col hide-on-small-only m3 l3"></div>
+            <div class="col s12 m6 l6">
+              <select name="rol" [(ngModel)]="userSelected.Rol" required>
+                <option value="0">Cliente</option>
+                <option value="1">Gerente</option>
+                <option value="2">Administrador</option>
+                <option value="3">Mecanico</option>
+              </select>
+              <label>Rol</label>
+            </div>
+            <div class="col hide-on-small-only m3 l3"></div>
+          </div>
+
+          <div class="row">
+
+            <div class="col s12 m12 l12 center-align ">
+
+              <button class="btn waves-effect waves-light blue darken-1" type="submit" [disabled]="!perfilForm.form.valid">
+                Modificar
+              </button>
+            </div>
+          </div>
+
+        </form>
         </div>
 
 
@@ -94,6 +126,5 @@
       </div>
     </div>
   </div>
-    </div>
 
 <br><br>
