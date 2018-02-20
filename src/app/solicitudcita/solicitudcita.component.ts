@@ -21,6 +21,7 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
 
   solicitud = {
     idVehiculo: '',
+    idAux: '',
     idUsuario: '',
     motivo: '',
     fecha_inicial: '',
