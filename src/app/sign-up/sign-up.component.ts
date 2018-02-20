@@ -31,6 +31,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   SignUp() {
     this.submitted = true;
+    this.user.Fecha_Nacimiento = this.databaseService.dateFormatter(this.user.Fecha_Nacimiento);
     this.databaseService.addThis('ModeloUsuarios', this.user).then((result) => {
       console.log(result);
       if (result['resultado'] == false) {
