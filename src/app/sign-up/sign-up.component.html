@@ -23,7 +23,7 @@
     </div>
     <br /><br />
     <div class="row">
-      <form class="col s12 m12 l12" (ngSubmit)="SignUp()" #signupForm="ngForm">
+      <form materialize class="col s12 m12 l12" (ngSubmit)="SignUp()" #signupForm="ngForm">
         <div class="form-group">
         <div class="row">
           <div class="input-field col s12 m6 l6">
@@ -44,13 +44,13 @@
             <i class="material-icons prefix">account_box</i>
             <input id="last_name" type="text" class="validate" required name="apellido"
                    [(ngModel)]="user.PrimerApellido">
-            <label for="lastName">APELLIDO</label>
+            <label for="last_Name">APELLIDO</label>
           </div>
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">account_box</i>
               <input id="seg-last_name" type="text" class="validate" name="seg-apellido"
                      [(ngModel)]="user.SegundoApellido">
-              <label for="seg-lastName">SEGUNDO APELLIDO</label>
+              <label for="seg-last_Name">SEGUNDO APELLIDO</label>
             </div>
         </div>
         <div class="row">
@@ -63,8 +63,8 @@
 
           <div class="input-field col s12 m6 l6">
           <i class="material-icons prefix">date_range</i>
-            <input id="datepicker" type="text" class="datepicker" name="datepicker"
-            [(ngModel)]="user.Fecha_Nacimiento" > <!-- Esto va Required una vez que arreglemos el datepicker-->
+            <input materialize="pickadate" type="text" id="datepicker" name="datepicker"
+            [(ngModel)]="user.Fecha_Nacimiento"> <!-- Esto va Required una vez que arreglemos el datepicker-->
             <label for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>
@@ -104,7 +104,7 @@
 
       </form>
     </div>
-      
+
   </div>
 </div>
 
