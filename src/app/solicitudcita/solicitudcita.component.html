@@ -8,14 +8,13 @@
     <div class="row">
 
       
-      <form (submit)="solicitarCita()" >
+      <form materialize (submit)="solicitarCita()" >
         <div class="form-group col s12 m12 l12">
           <div class="row">
             <div class="input-field col s12 m6 l6">
 
-              <select [(ngModel)]="solicitud.idVehiculo" name="idVehiculo" (change)="asignarID()">
+              <select [(ngModel)]="solicitud.idAux" name="idVehiculo">
                 <option value="" disabled>Selecciona un vehiculo</option>
-                <option value="1">ho</option>
                 <option *ngFor="let carro of userVehiculos" [value]="carro.idVehiculo">
                   {{ carro.Marca }} {{ carro.Modelo }}
                 </option>
@@ -31,12 +30,12 @@
           
           <div class="row">
             <div class="input-field col s12 m6 l6">
-              <input id="datepicker" type="date" class="datepicker" name="fecha_inicial"
+              <input id="datepicker" materialize="pickadate" name="fecha_inicial"
                      [(ngModel)]="solicitud.fecha_inicial" />
               <label for="fecha_inicial">A PARTIR DE</label>
             </div>
             <div class="input-field col s12 m6 l6">
-              <input id="datepicker" type="date" class="datepicker" name="fecha_final"
+              <input id="datepicker" materialize="pickadate" name="fecha_final"
                      [(ngModel)]="solicitud.fecha_final" />
               <label for="fecha_final">HASTA</label>
             </div>
