@@ -37,7 +37,7 @@ export class DatabaseService {
     };
   }
 
-  dameSubModelos(modelo: object): Array<object> {
+  private dameSubModelos(modelo: object): Array<object> {
     const array: Array<object> = [];
     for (const llave of Object.keys(modelo)) {
       if (typeof modelo[llave] === 'object') {
@@ -47,7 +47,7 @@ export class DatabaseService {
     return array;
   }
 
-  subModelosParaEnviar(modelo: object): Array<object> {
+  private subModelosParaEnviar(modelo: object): Array<object> {
     const array: Array<object> = [];
     for (const llave of Object.keys(modelo)) {
       if (typeof modelo[llave] === 'object') {
@@ -61,7 +61,7 @@ export class DatabaseService {
     return array;
   }
 
-  encuentraID(modelo: object): string {
+  private encuentraID(modelo: object): string {
     for (const llave of Object.keys(modelo)) {
       if (modelo[llave] === 'id') {
         return llave;
@@ -70,7 +70,7 @@ export class DatabaseService {
     return undefined;
   }
 
-  atributosBusqueda(atributos: object): string {
+  private atributosBusqueda(atributos: object): string {
     const llaves = Object.keys(atributos);
     let cadena = ' where ';
     for (const llave of llaves) {
@@ -84,7 +84,7 @@ export class DatabaseService {
     return cadena;
   }
 
-  atributosEstanBien(atributos: object, modelo: object): boolean {
+  private atributosEstanBien(atributos: object, modelo: object): boolean {
     for (const atributo of Object.keys(atributos)) {
       if (!modelo[atributo]) {
         return false;
@@ -121,7 +121,7 @@ export class DatabaseService {
     return true;
   }
 
-  modeloEsValido(modelo: object): boolean {
+  private modeloEsValido(modelo: object): boolean {
     let buleano = false;
     if (modelo['tienePK']) {
       for (const llave of Object.keys(modelo)) {
@@ -135,7 +135,7 @@ export class DatabaseService {
     }
   }
 
-  subModeloEsValido(subModelo: object): boolean {
+  private subModeloEsValido(subModelo: object): boolean {
     if (subModelo['tipo'] === 'model' || subModelo['tipo'] === 'collection' || subModelo['tipo'] === 'through') {
       if (subModelo['tipo'] === 'through') {
         if (!(subModelo['modeloDebil'] && subModelo['FKDebil'])) {
@@ -148,11 +148,61 @@ export class DatabaseService {
     }
   }
 
-  lanzarError(mensaje: string): Promise<Object> {
+  private lanzarError(mensaje: string): Promise<Object> {
     return new Promise((req, res) => {
       console.error(mensaje);
       throw new Error(mensaje);
     });
+  }
+
+  private encuentraMes(fecha: string): string {
+    let inicio, final;
+    for (let i = 0; i < fecha.length; i++) {
+      if (fecha.charAt(i) === ' ') {
+        for (let j = i + 1; j < fecha.length; j++) {
+          if (fecha.charAt(j) === ',') {
+            inicio = i + 1;
+            final = j - 1;
+          }
+        }
+      }
+    }
+    const mes = fecha.substring(inicio, final + 1);
+    switch (mes) {
+      case 'January':
+        return '01';
+      case 'February':
+        return '02';
+      case 'March':
+        return '03';
+      case 'April':
+        return '04';
+      case 'May':
+        return '05';
+      case 'June':
+        return '06';
+      case 'July':
+        return '07';
+      case 'August':
+        return '08';
+      case 'September':
+        return '09';
+      case 'October':
+        return '10';
+      case 'November':
+        return '11';
+      case 'December':
+        return '12';
+      default:
+        return '-1';
+    }
+  }
+
+  dateFormatter(fecha: string): string {
+    const dia = (fecha.charAt(1) === ' ' ? '0' + fecha.charAt(0) : fecha.substring(0, 2));
+    const mes = this.encuentraMes(fecha);
+    const ano = fecha.substring(fecha.length - 4, fecha.length);
+    return ano + '-' + mes + '-' + dia;
   }
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
@@ -167,10 +217,10 @@ export class DatabaseService {
   getMe(modelo: string, atributos?: object, vieneDeOne?: boolean): Promise<Object> {
     const model = this.modelos[modelo];
     if (model) {
-      let query: string = 'select * from ' + model.tabla;
       if (!this.modeloEsValido(model)) {
         return this.lanzarError('El modelo solicitado tiene un formato inválido.');
       }
+      let query: string = 'select * from ' + model.tabla;
       let where = '';
       if (atributos) {
         if (this.atributosEstanBien(atributos, model)) {
