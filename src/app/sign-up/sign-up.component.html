@@ -63,8 +63,7 @@
 
           <div class="input-field col s12 m6 l6">
           <i class="material-icons prefix">date_range</i>
-            <input materialize="pickadate" type="text" id="datepicker" name="datepicker" (click)="SignUp()"
-            [(ngModel)]="user.Fecha_Nacimiento"> <!-- Esto va Required una vez que arreglemos el datepicker-->
+            <input materialize="pickadate" type="text" id="datepicker" name="datepicker" [(ngModel)]="user.Fecha_Nacimiento" required> 
             <label for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>

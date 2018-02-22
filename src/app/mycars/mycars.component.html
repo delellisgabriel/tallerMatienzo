@@ -5,9 +5,13 @@
 
 <div class="container">
   <div style="padding-top: 40px" class="section">
-    <div class="row">
+    <div *ngIf="loading">
+      <h1 class="center-align">Cargando :P!</h1>
+    </div>
+
+    <div class="row" *ngIf="!loading">
 <!-- Lista de Carros-->
-      <div class="col s12 m4" *ngFor="let carro of vehiculos">
+      <div class="col s12 m4" *ngFor="let carro of vehiculos" >
         <div (click)="selectCar(carro)">
           <div class="icon-block notAsigned" id="tile">
             <h4 class="center">{{carro.Marca}} {{carro.Modelo}}</h4>

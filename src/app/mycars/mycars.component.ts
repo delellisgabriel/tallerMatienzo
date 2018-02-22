@@ -20,6 +20,8 @@ export class MycarsComponent implements OnInit, AfterViewInit {
 
   vehiculos = [];
 
+  loading = true;
+
   constructor(private authService: AuthService, private database: DatabaseService, private carService: CarSelectService, private router: Router) {
     this.user.idUsuario = this.authService.getUser()['idUsuario'];
 
@@ -28,6 +30,7 @@ export class MycarsComponent implements OnInit, AfterViewInit {
         return value;
       });
       this.vehiculos = array;
+      this.loading = false;
     });
   }
 

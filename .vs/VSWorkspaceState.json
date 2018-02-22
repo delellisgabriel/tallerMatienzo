@@ -4,9 +4,10 @@
     "\\backend",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\login",
-    "\\src\\app\\sign-up"
+    "\\src\\app\\database\\models",
+    "\\src\\app\\sign-up",
+    "\\src\\app\\user-detail"
   ],
-  "SelectedNode": "\\src\\app\\sign-up\\sign-up.component.html",
+  "SelectedNode": "\\src\\app\\user-detail\\user-detail.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -3,6 +3,7 @@ import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { UserSelectService } from '../user-select/user-select.service';
 import { DatabaseService } from '../database/database.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -17,12 +18,15 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
     idUsuario: '',
   }
 
+  private userRol: any;
+
   private userSelected = {};
 
-  constructor(private userSelect: UserSelectService, private database: DatabaseService,) { }
+  constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService) { }
 
   ngOnInit() {
     document.getElementById("popup").hidden = true;
+    this.userRol = this.auth.getUser()['Rol'];
     this.userSelected = this.userSelect.getUser();
     this.userViejo.idUsuario = this.userSelected['idUsuario'];
     if (this.userSelected["Rol"] === 0) {
@@ -62,16 +66,6 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
       draggable: true, // Choose whether you can drag to open on touch screens,
     });
     $('.parallax').parallax();
-
-    $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year,
-      today: 'Hoy',
-      clear: 'Limpiar',
-      close: 'Ok',
-      closeOnSelect: false // Close upon selecting a date,
-    });
-
     $('.modal').modal();
     $('select').material_select();
 

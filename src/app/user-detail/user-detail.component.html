@@ -90,13 +90,13 @@
 
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">date_range</i>
-              <input placeholder="Placeholder" id="datepicker" type="date" class="datepicker" name="Fecha_Nacimiento" [(ngModel)]="userSelected.Fecha_Nacimiento" required>
-              <label class="active" for="datepicker">FECHA DE NACIMIENTO</label>
+              <input materialize="pickadate" type="text" id="datepicker" name="datepicker" [(ngModel)]="userSelected.Fecha_Nacimiento" required>
+              <label for="datepicker" class="active">FECHA DE NACIMIENTO</label>
             </div>
           </div>
           <div class="row">
             <div class="col hide-on-small-only m3 l3"></div>
-            <div class="col s12 m6 l6">
+            <div *ngIf="(userRol == 2)" class="col s12 m6 l6">
               <select name="rol" [(ngModel)]="userSelected.Rol" required>
                 <option value="0">Cliente</option>
                 <option value="1">Gerente</option>

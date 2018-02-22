@@ -27,20 +27,23 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
         return value;
       });
       this.users = array;
-      for (var i = 0; i < this.users.length; i++) {
-        if (this.users[i].Rol === 0) {
-          this.users[i].Rol = 'Cliente';
-        } else if (this.users[i].Rol === 1) {
-          this.users[i].Rol = 'Gerente';
-        }else if (this.users[i].Rol === 2) {
-          this.users[i].Rol = 'Administrador';
-        } else if (this.users[i].Rol === 3) {
-          this.users[i].Rol = 'Mecanico';
-        }
-      }
+      this.formatearRol();
       console.log(this.users);
     });
+  }
 
+  private formatearRol() {
+    for (var i = 0; i < this.users.length; i++) {
+      if (this.users[i].Rol === 0) {
+        this.users[i].Rol = 'Cliente';
+      } else if (this.users[i].Rol === 1) {
+        this.users[i].Rol = 'Gerente';
+      } else if (this.users[i].Rol === 2) {
+        this.users[i].Rol = 'Administrador';
+      } else if (this.users[i].Rol === 3) {
+        this.users[i].Rol = 'Mecanico';
+      }
+    }
   }
 
   selectUser(user: object) {
@@ -51,6 +54,14 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.database.getMe('ModeloUsuarios')
+      .then((result) => {
+        this.users = result['resultado'];
+        this.formatearRol();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   ngAfterViewInit() {

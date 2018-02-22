@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { DatabaseService } from "../database/database.service";
 
 declare var $: any;
 
@@ -10,9 +11,22 @@ declare var $: any;
 })
 export class ColacitasComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  colaCitas = [];
+
+  loading = true;
+
+  constructor(private database: DatabaseService) { }
 
   ngOnInit() {
+    this.database.getMe('ModeloCitas')
+      .then((result) => {
+        this.colaCitas = result['resultado'];
+        this.loading = false;
+        console.log(this.colaCitas);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   ngAfterViewInit() {
@@ -24,16 +38,6 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
       draggable: true, // Choose whether you can drag to open on touch screens,
     });
     $('.parallax').parallax();
-
-    $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year,
-      today: 'Hoy',
-      clear: 'Limpiar',
-      close: 'Ok',
-      closeOnSelect: false // Close upon selecting a date,
-    });
-
     $('.modal').modal();
     $('select').material_select();
 

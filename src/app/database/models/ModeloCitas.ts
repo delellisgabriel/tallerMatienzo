@@ -1,6 +1,7 @@
 const ModeloCitas = {
   tabla: 'Citas',
   tienePK: true,
+  idCitas: 'id',
   FechaTentativaInicial: 'fecha',
   FechaTentativaFinal: 'fecha',
   FechaAsignada: 'fecha',

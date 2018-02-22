@@ -3,115 +3,43 @@
 </div>
 <div class="container">
   <div class="section">
-<div class="row">
-  <div class="col s12 m12 l12">
+    <div *ngIf="loading">
+      <h1 class="center-align">Cargando! :P</h1>
+    </div>
+<div class="row" *ngIf="!loading">
+  <div class="col s12 m12 l12" >
 
     <h3 class="center-align">Lista de Usuarios</h3>
+    <br />
     <table class="bordered highlight centered responsive-table center-align">
       <thead>
         <tr>
           <th>Nombre</th>
           <th>Carro</th>
-          <th>Fecha solicitada</th>
+          <th>Fecha Desde</th>
+          <th>Hasta</th>
           <th>Fecha de Cita</th>
           <th>Asignar</th>
+          <th>Indicar Incapacidad</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr>
-          <td>Rafael Matienzo</td>
-          <td>Toyota Corolla</td>
-          <td>12 February, 2018</td>
+        <tr *ngFor="let cita of colaCitas">
+          <td>{{cita.Usuario.PrimerNombre}} {{cita.Usuario.PrimerApellido}}</td>
+          <td>{{cita.Vehiculo.Marca}} {{cita.Vehiculo.Modelo}}</td>
+          <td>{{cita.FechaTentativaInicial}}</td>
+          <td>{{cita.FechaTentativaFinal}}</td>
           <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
+            <input materialize="pickadate" type="text" id="datepicker" name="datepicker" required>
+            <label for="datepicker">FECHA TENTATIVA</label>
           </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Pedro Pérez</td>
-          <td>VW Gol</td>
-          <td>15 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Maximiliano Casale</td>
-          <td>Ferrari Scuderia</td>
-          <td>18 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Gabriele Troncone</td>
-          <td>Lamborghini Huracan</td>
-          <td>5 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Sara Macayo</td>
-          <td>Dodge Caliber</td>
-          <td>19 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Luciano Pineda</td>
-          <td>Dodge Patas</td>
-          <td>1 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>John Doe</td>
-          <td>VW Tuareg</td>
-          <td>12 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Gabriel De Lellis</td>
-          <td>Lykan Hypersport</td>
-          <td>31 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
-        </tr>
-        <tr>
-          <td>Carl Marx</td>
-          <td>Mainframe IBM</td>
-          <td>30 February, 2018</td>
-          <td>
-            <input type="text" class="datepicker">
-            <label>Fecha tentativa</label>
-          </td>
-          <td><a routerLink="#"><i class="material-icons blue-text darken-1">assignment</i></a></td>
+          <td><button class="btn white"><i class="material-icons blue-text darken-1">assignment</i></button></td>
+          <td><button class="btn white"><i class="material-icons blue-text darken-1">close</i></button></td>
         </tr>
       </tbody>
     </table>
-
+    <br /><br /><br />
 
 
   </div>

@@ -20,34 +20,46 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
   userVehiculos = {};
 
   solicitud = {
-    idVehiculo: 0,
+    Vehiculos_idVehiculo: 0,
     idAux: '',
-    idUsuario: '',
-    motivo: '',
-    fecha_inicial: '',
-    fecha_final: '',
+    Usuarios_idUsuario: '',
+    Motivo: '',
+    FechaTentativaInicial: '',
+    FechaTentativaFinal: '',
   };
+  
+  cars: any;
 
   constructor(private authService: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder) {
     this.userVehiculos = this.authService.getUser()["Vehiculos"];
+    if(this.userVehiculos){
+    if (this.userVehiculos[0] == null) {
+      this.cars = false;
+    } else {
+      this.cars = true;
+    }
+    }
   }
 
   solicitarCita() {
     if (this.solicitud.idAux) {
-      this.solicitud.idVehiculo = Number.parseInt(this.solicitud.idAux);
+      this.solicitud.Vehiculos_idVehiculo = Number.parseInt(this.solicitud.idAux);
       delete this.solicitud.idAux;
     }
-    this.solicitud.idUsuario = this.authService.getUser()['idUsuario'];
-    this.solicitud.fecha_inicial = this.database.dateFormatter(this.solicitud.fecha_final);
-    this.solicitud.fecha_final = this.database.dateFormatter(this.solicitud.fecha_final);
+    this.solicitud.Usuarios_idUsuario = this.authService.getUser()['idUsuario'];
+    this.solicitud.FechaTentativaInicial = this.database.dateFormatter(this.solicitud.FechaTentativaInicial);
+    this.solicitud.FechaTentativaFinal = this.database.dateFormatter(this.solicitud.FechaTentativaFinal);
 
-    console.log(this.solicitud); // Cuando esta vaina bote el objeto que es. Podemos descomentar
-
-    /* this.database.addThis('ModeloCitas', this.vehiculoSelected).then((result) => {
+    this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
       console.log(result); //Esto deberia botar True
-      this.router.navigate(['/mycars', this.authService.getUser()["idUsuario"]];
+      if (result['resultado'] == true) {
+        this.router.navigate(['/mycars', this.authService.getUser()["idUsuario"]]);
+      } else {
+        console.log('Algo Salio Mal');
+      }
+    }).catch((err) => {
+      console.log(err)
     });
-    */
 
   }
 
