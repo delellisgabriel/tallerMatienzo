@@ -14,6 +14,8 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
 
   constructor(private authService: AuthService, private databaseService: DatabaseService, private router: Router) { }
 
+  file: File;
+
   user = {
     idUsuario: '',
   };
@@ -26,20 +28,50 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
     Placa: '',
     Activado: 1,
     Ano: '',
-    FotoVehiculo: '',
+    FotoVehiculo: null,
     Usuario_idUsuario: '',
-  }
+  };
 
   ngOnInit() {
     this.user.idUsuario = this.authService.getUser()["idUsuario"];
-    console.log(this.user);
   }
 
   carRegister() {
     this.vehiculo.Usuario_idUsuario = this.user.idUsuario;
     this.databaseService.addThis('ModeloVehiculos', this.vehiculo).then((result) => {
       this.router.navigate(['/mycars', this.user.idUsuario]);
-    }).catch((err) => { console.log(err);});
+    }).catch((err) => { console.log(err); });
+  }
+
+  onChange(evt: EventTarget) {
+      const files = (evt as any).target.files;
+      const file = files[0];
+
+      if (files && file) {
+        switch(file.type) {
+          case 'image/gif':
+            break;
+          case 'image/jpeg':
+            break;
+          case 'image/png':
+            break;
+          case 'image/svg+xml':
+            break;
+          default:
+            return;
+        }
+        const reader = new FileReader();
+
+        reader.onload = this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(file);
+      }
+    }
+
+  _handleReaderLoaded(readerEvt) {
+    const binaryString = readerEvt.target.result;
+    const base64textString = btoa(binaryString);
+    this.vehiculo.FotoVehiculo = base64textString;
   }
 
   getVehiculo() {
