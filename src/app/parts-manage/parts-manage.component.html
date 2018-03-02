@@ -25,24 +25,25 @@
 <div class="container">
   <div class="section">
 
-    <form materialize>
+    <form materialize (submit)="buscar()">
       <div class="form-group col s12 m12 l12">
 
         <div class="row">
 
           <div class="input-field col s12 m6 l6">
-            <select  materialize="material_select" name="marca">
+            <select  [(ngModel)]="buscar.Marca" materialize="material_select" name="Marca">
               <option value="" disabled selected>Seleccionar</option>
               <option *ngFor="let marca of select.Marcas" [value]="marca">
                 {{ marca }}
               </option>
             </select>
             <label>Marca</label>
+            <p>{{select.Marcas[0]}}</p>
           </div>
 
-<!--
+
           <div class="input-field col s12 m6 l6">
-            <select  materialize="material_select" name="modelo">
+            <select [(ngModel)]="buscar.Modelo" materialize="material_select" name="Modelo">
               <option value="" disabled selected>Seleccionar</option>
               <option *ngFor="let modelo of select.Modelos" [value]="modelo">
                 {{ modelo }}
@@ -50,22 +51,22 @@
             </select>
             <label>Modelo</label>
           </div>
-    -->
+          <p>{{select.Modelos[0]}}</p>
         </div>
 
 
         <div class="row ">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">NOMBRE</label>
+            <input [(ngModel)]="buscar.Nombre" id="nombre" type="text" class="validate" name="Nombre">
+            <label for="nombre">NOMBRE</label>
           </div>
 
           <div class="col s12 m6 l6 center" id="bottonpadding">
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="buscar">
               Buscar
             </button>
-            <button *ngIf="user.Rol==2" routerLink="/part-new" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+            <button *ngIf="user.Rol==2" routerLink="/part-new" class="btn waves-effect waves-light blue darken-1" name="nuevo">
               Nuevo
             </button>
           </div>

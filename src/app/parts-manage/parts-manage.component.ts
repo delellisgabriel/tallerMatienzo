@@ -24,6 +24,7 @@ export class PartsManageComponent implements OnInit {
   buscar = {
     Marca: "",
     Modelo: "",
+    Nombre: "",
   }
 
   constructor(private auth: AuthService, private database: DatabaseService) { }
