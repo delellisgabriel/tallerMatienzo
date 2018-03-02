@@ -36,7 +36,6 @@ import { JavascriptComponent } from './javascript/javascript.component';
 
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { PartsManageComponent } from './parts-manage/parts-manage.component';
-import { PartsSearchComponent } from './parts-search/parts-search.component';
 import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
@@ -82,7 +81,6 @@ declare var $: any;
     JavascriptComponent,
     PartDetailComponent,
     PartsManageComponent,
-    PartsSearchComponent,
     PartNewComponent,
     PartModifyComponent,
     CarHistorialComponent,

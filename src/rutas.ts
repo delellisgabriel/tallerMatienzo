@@ -17,7 +17,6 @@ import { ColacitasComponent } from './app/colacitas/colacitas.component';
 import { UserManagerComponent } from './app/user-manager/user-manager.component';
 import { UserDetailComponent } from './app/user-detail/user-detail.component';
 import { PartsManageComponent } from './app/parts-manage/parts-manage.component';
-import { PartsSearchComponent } from './app/parts-search/parts-search.component';
 import { PartDetailComponent } from './app/part-detail/part-detail.component';
 import { PartNewComponent } from './app/part-new/part-new.component';
 import { PartModifyComponent } from './app/part-modify/part-modify.component';
@@ -42,7 +41,7 @@ export const Rutas: Routes = [
   { path: 'manageuser', component: UserManagerComponent },
   { path: 'userdetail/:id', component: UserDetailComponent },
   { path: 'parts-manage', component: PartsManageComponent },
-  { path: 'parts-search', component: PartsSearchComponent },
+  { path: 'parts-search', component: PartsManageComponent },
   { path: 'part-detail', component: PartDetailComponent },
   { path: 'part-new', component: PartNewComponent },
   { path: 'part-modify', component: PartModifyComponent },
