@@ -33,12 +33,12 @@
           <div class="input-field col s12 m6 l6">
             <select  [(ngModel)]="buscar.Marca" materialize="material_select" name="Marca">
               <option value="" disabled selected>Seleccionar</option>
-              <option *ngFor="let marca of select.Marcas" [value]="marca">
+              <option *ngFor="let marca of select.Marcas" [ngValue]="marca">
                 {{ marca }}
               </option>
             </select>
             <label>Marca</label>
-            <p>{{select.Marcas[0]}}</p>
+            <p>{{buscar.Marca}}</p>
           </div>
 
 
@@ -51,7 +51,6 @@
             </select>
             <label>Modelo</label>
           </div>
-          <p>{{select.Modelos[0]}}</p>
         </div>
 
 
