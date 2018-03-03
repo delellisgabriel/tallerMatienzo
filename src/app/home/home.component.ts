@@ -1,6 +1,6 @@
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DatabaseService } from '../database/database.service';
+import {EmailService} from '../email/email-service.service';
 
 declare var $: any;
 
@@ -11,9 +11,19 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(database: DatabaseService) { }
+  email: EmailService;
+
+  constructor(email: EmailService) {
+    this.email = email;
+  }
+
 
   ngOnInit() {
+    this.email.enviarEmail().then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   ngAfterViewInit() {

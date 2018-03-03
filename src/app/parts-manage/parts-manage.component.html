@@ -32,6 +32,7 @@
             <select id="marca_name" formControlName="Marca" materialize="material_select" >
               <option value="" selected>Seleccionar</option>
               <option *ngFor="let marca of select.Marcas" [value]="marca">
+
                 {{ marca }}
               </option>
             </select>

@@ -29,9 +29,18 @@ export class MycarsComponent implements OnInit, AfterViewInit {
       var array = $.map(result["resultado"][0]["Vehiculos"], function (value, index) {
         return value;
       });
+      for (const carro of array) {
+        if (carro.FotoVehiculo) {
+          carro.FotoVehiculo = this.database.formatImage(carro.FotoVehiculo.data);
+        }
+      }
       this.vehiculos = array;
       this.loading = false;
     });
+  }
+
+  prueba(carro: any) {
+    console.log(carro.FotoVehiculo);
   }
 
   selectCar(car: object) {

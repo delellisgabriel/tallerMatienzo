@@ -205,6 +205,14 @@ export class DatabaseService {
     return ano + '-' + mes + '-' + dia;
   }
 
+  formatImage(array) {
+    if (!array) {
+      console.error('Imagen inválida.');
+      return null;
+    }
+    return String.fromCharCode.apply(null, new Uint8Array(array));
+  }
+
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo
    * y como segundo argumento un objeto que indica atributos secundarios de búsqueda.
    * Por ejemplo, getMe('ModeloVehiculo', { marca: 'Chevrolet', color: 'azul' }).
