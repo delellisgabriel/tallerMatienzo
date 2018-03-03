@@ -13,7 +13,7 @@ declare var $: any;
 export class PartModifyComponent implements OnInit {
 
   repuestoOld = {
-    idRepuestos: 0;
+    idRepuestos: 0,
   };
 
   repuesto = {};

@@ -14,8 +14,8 @@ const base = 'http://localhost:3000/';
 @Injectable()
 export class EmailService {
 
-  private remitente = '';
-  private password = '';
+  private remitente = 'tallermatienzo@gmail.com';
+  private password = 'gabogabomax';
 
   constructor(private http: HttpClient) { }
 

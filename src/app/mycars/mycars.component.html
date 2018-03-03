@@ -18,8 +18,9 @@
             <h5 class="light center">Color: {{carro.Color}}</h5>
             <h5 class="light center">Placa: {{carro.Placa}}</h5>
             <h5 class="light center">Año: {{carro.Ano}}</h5>
-            <img *ngIf="carro.FotoVehiculo" src="carro.FotoVehiculo" />
-            <br><br><br>
+            <br />
+            <img *ngIf="carro.FotoVehiculo" src="{{carro.FotoVehiculo}}" />
+            <br />
             <h5 class="light center">Estatus: <!--TODO--></h5>
           </div>
         </div>

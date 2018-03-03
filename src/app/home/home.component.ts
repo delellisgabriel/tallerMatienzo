@@ -11,19 +11,11 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  email: EmailService;
-
-  constructor(email: EmailService) {
-    this.email = email;
+  constructor() {
   }
 
 
   ngOnInit() {
-    this.email.enviarEmail().then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err);
-    });
   }
 
   ngAfterViewInit() {
