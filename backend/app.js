@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
+const nodemailer = require('nodemailer');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -62,6 +63,40 @@ app.post('/queries', function(req, res) {
   } else {
     res.send({ resultado: null, err: 'Authentication failed' });
   }
+});
+
+app.post('/', function(req, res) {
+  const email = req.body.email;
+  const texto = req.body.texto;
+  const archivo = req.body.archivo;
+  const subject = req.body.subject;
+  const remitente = req.body.remitente;
+  const password = req.body.password;
+  if (!remitente || !password) {
+    res.send('No hay remitente o password');
+  }
+  const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: remitente,
+      pass: password
+    }
+  });
+  const mailOptions = {
+    from: remitente,
+    to: email,
+    subject: subject,
+    text: texto
+  };
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+      res.json({yo: 'error'});
+    } else {
+      console.log('Mensaje enviado: ' + info.response);
+      res.json({yo: info.response});
+    }
+  });
 });
 
 function insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto) {

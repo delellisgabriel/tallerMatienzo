@@ -8,11 +8,12 @@
     "start": "nodemon app"
   },
   "dependencies": {
+    "body-parser": "*",
+    "concurrently": "*",
+    "cors": "*",
     "express": "*",
     "mysql": "*",
-    "body-parser": "*",
-    "cors": "*",
-    "concurrently": "*"
+    "nodemailer": "^4.6.0"
   },
   "author": "GT",
   "license": "ISC",

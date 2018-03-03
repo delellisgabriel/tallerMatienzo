@@ -46,32 +46,37 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
   onChange(evt: EventTarget) {
       const files = (evt as any).target.files;
       const file = files[0];
+      let string;
 
       if (files && file) {
         switch(file.type) {
           case 'image/gif':
+            string = 'data:image/gif;base64,';
             break;
           case 'image/jpeg':
+            string = 'data:image/jpeg;base64,';
             break;
           case 'image/png':
+            string = 'data:image/png;base64,';
             break;
           case 'image/svg+xml':
+            string = 'data:image/svg+xml;base64,';
             break;
           default:
             return;
         }
         const reader = new FileReader();
 
-        reader.onload = this._handleReaderLoaded.bind(this);
+        reader.onload = this._handleReaderLoaded.bind(this, string);
 
         reader.readAsBinaryString(file);
       }
     }
 
-  _handleReaderLoaded(readerEvt) {
+  _handleReaderLoaded(readerEvt, tipo) {
     const binaryString = readerEvt.target.result;
     const base64textString = btoa(binaryString);
-    this.vehiculo.FotoVehiculo = base64textString;
+    this.vehiculo.FotoVehiculo = tipo + base64textString;
   }
 
   getVehiculo() {
