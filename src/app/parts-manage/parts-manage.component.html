@@ -25,39 +25,39 @@
 <div class="container">
   <div class="section">
 
-    <form materialize (submit)="buscar()">
+    <form [formGroup]="form" materialize (submit)="buscarRepuestos()">
       <div class="form-group col s12 m12 l12">
-
         <div class="row">
-
           <div class="input-field col s12 m6 l6">
-            <select  [(ngModel)]="buscar.Marca" materialize="material_select" name="Marca">
-              <option value="" disabled selected>Seleccionar</option>
-              <option *ngFor="let marca of select.Marcas" [ngValue]="marca">
+            <select id="marca_name" formControlName="Marca" materialize="material_select" >
+              <option value="" selected>Seleccionar</option>
+              <option *ngFor="let marca of select.Marcas" [value]="marca">
                 {{ marca }}
               </option>
             </select>
             <label>Marca</label>
-            <p>{{buscar.Marca}}</p>
           </div>
 
+          
+         
 
           <div class="input-field col s12 m6 l6">
-            <select [(ngModel)]="buscar.Modelo" materialize="material_select" name="Modelo">
-              <option value="" disabled selected>Seleccionar</option>
+            <select id="model_name" formControlName="Modelo" materialize="material_select">
+              <option value="" selected>Seleccionar</option>
               <option *ngFor="let modelo of select.Modelos" [value]="modelo">
                 {{ modelo }}
               </option>
             </select>
             <label>Modelo</label>
           </div>
+
         </div>
 
 
         <div class="row ">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <input [(ngModel)]="buscar.Nombre" id="nombre" type="text" class="validate" name="Nombre">
+            <input id="nombre" formControlName="Nombre" type="text" class="validate" name="Nombre">
             <label for="nombre">NOMBRE</label>
           </div>
 
@@ -85,7 +85,8 @@
                   <th>Marca</th>
                   <th>Modelo</th>
                   <th>Cantidad</th>
-                  <th>Modificar</th>
+                  <th *ngIf="user.Rol==2">Modificar</th>
+                  <th *ngIf="user.Rol==3">Ver</th>
                 </tr>
               </thead>
 
@@ -95,7 +96,8 @@
                   <td>{{repuesto.Marca}}</td>
                   <td>{{repuesto.Modelo}}</td>
                   <td>{{repuesto.Cantidad}}</td>
-                  <td><a routerLink="/part-modify"><i class="material-icons blue-text darken-1">settings_applications</i></a></td>
+                  <td *ngIf="user.Rol==2"><button class="btn" (click)="modificar(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
+                  <td *ngIf="user.Rol==3"><button class="btn" (click)="detalles(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
                 </tr>
               </tbody>
             </table>

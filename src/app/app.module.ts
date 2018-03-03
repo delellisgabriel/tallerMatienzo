@@ -47,6 +47,7 @@ import { UserSelectService } from './user-select/user-select.service';
 import { CarSelectService } from "./car-select/car-select.service";
 import { CarHistorialComponent } from './car-historial/car-historial.component';
 import { OrdenSelectService } from "./orden-select/orden-select.service";
+import { PartsService } from "./parts/parts.service";
 
 
 
@@ -99,6 +100,7 @@ declare var $: any;
     UserSelectService,
     CarSelectService,
     OrdenSelectService,
+    PartsService,
   ],
   bootstrap: [AppComponent]
 })

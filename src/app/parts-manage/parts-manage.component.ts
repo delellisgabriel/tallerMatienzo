@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from "../database/database.service";
 import { AuthService } from "../authService/auth.service";
-import { SelectControlValueAccessor } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PartsService } from "../parts/parts.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -12,53 +14,105 @@ declare var $: any;
 })
 export class PartsManageComponent implements OnInit {
 
-  user = {}
+  public user = {}; //esto es el usuario, se recibe bien! nada raro aqui!
 
-  repuestos = [];
+  public repuestos = []; // Mi lista de repuestos! todo bien aqui!
 
-  select = {
+  public select = {
     Modelos: [],
     Marcas: [],
   };
 
-  buscar = {
-    Marca: "",
-    Modelo: "",
-    Nombre: "",
-  }
+  public form: FormGroup;
 
-  constructor(private auth: AuthService, private database: DatabaseService) { }
+  // este es mi objeto que le voy a pasar a la database para que me busque ese repuesto en especifico.
+  public buscar = {
+  };
 
-  ngOnInit() {
+  public emergencia: any = [
+    {
+      name: 'Todas'
+    },
+    {
+      name: 'Toyota'
+    },
+    {
+      name: 'Ford'
+    }
+  ]
+
+   constructor(private auth: AuthService, private database: DatabaseService, public fb: FormBuilder, private parts:PartsService, private router: Router) {
     // identificar rol de usuario
     this.user = this.auth.getUser();
-   //recibir repuestos de la bd
+    // recibir repuestos de la bd
     this.database.getMe('ModeloRepuestos').then((res) => {
       this.repuestos = res['resultado'];
       this.filtrarDatos();
     }).catch((err) => {
       console.log(err);
+      });
+  }
+
+   ngOnInit() {
+     this.formCreate();
+  }
+
+  private formCreate() {
+    this.form = this.fb.group({
+      Marca: ['', Validators.compose([Validators.required])],
+      Modelo: ['', Validators.compose([Validators.required])],
+      Nombre: ['', Validators.compose([Validators.required])],
     });
   }
 
-  private filtrarDatos() {
-    for (var i = 0; i < this.repuestos.length; i++) {
-      if (this.repuestos[i]) {
-        //Agregar diferentes marcas al select
-        if (!this.existeMarca(this.repuestos[i]['Marca'])){
-          this.select.Marcas[this.select.Marcas.length] = this.repuestos[i]['Marca'];
+
+  //este es el metodo con el que lleno el objeto select que tiene las array de las marcas y los vehiculos
+
+ filtrarDatos() {
+    for (let i = 0; i < this.repuestos.length; i++) { //para cada uno de los repuestos
+      if (this.repuestos[i]) { //si el repuesto existe
+        // Agregar diferentes marcas al select
+        if (!this.existeMarca(this.repuestos[i]['Marca'])){ //veo que no este repetido
+          this.select.Marcas[this.select.Marcas.length] = this.repuestos[i]['Marca']; //y lo guardo
         }
-        //Agregar diferentes Modelos al select
-        if (!this.existeModelo(this.repuestos[i]['Modelo'])) {
-          this.select.Modelos[this.select.Modelos.length] = this.repuestos[i]['Modelo'];
+        // Agregar diferentes Modelos al select
+        if (!this.existeModelo(this.repuestos[i]['Modelo'])) { //veo que no este repetido
+          this.select.Modelos[this.select.Modelos.length] = this.repuestos[i]['Modelo']; //y lo guardo
         }
       }
-    }
-    console.log(this.select);
+   }
   }
 
+ buscarRepuestos() {
+   this.buscar = this.form.value;
+   if (this.buscar['Marca'] === "") {
+     delete this.buscar['Marca'];
+   }
+   if (this.buscar['Modelo'] === "") {
+     delete this.buscar['Modelo'];
+   }
+   if (this.buscar['Nombre'] === "") {
+     delete this.buscar['Nombre'];
+   }
+   if (JSON.stringify(this.buscar) === '{}') {
+     this.database.getMe('ModeloRepuestos').then((res) => {
+       this.repuestos = res['resultado'];
+     }).catch((err) => {
+       console.log(err);
+     });
+   } else
+   {
+     this.database.getMe('ModeloRepuestos', this.buscar).then((res) => {
+       this.repuestos = res['resultado'];
+     }).catch((err) => {
+       console.log(err);
+     });
+   }
+
+ }
+
     existeMarca(marca: string): boolean {
-    for (var i = 0; i < this.select.Marcas.length; i++) {
+    for (let i = 0; i < this.select.Marcas.length; i++) {
       if (marca === this.select.Marcas[i]) {
         return true;
       }
@@ -67,12 +121,22 @@ export class PartsManageComponent implements OnInit {
     }
 
     existeModelo(modelo: string): boolean {
-      for (var i = 0; i < this.select.Modelos.length; i++) {
+      for (let i = 0; i < this.select.Modelos.length; i++) {
         if (modelo === this.select.Modelos[i]) {
           return true;
         }
       }
       return false;
+    }
+
+    modificar(repuesto) {
+      this.parts.setPart(repuesto);
+      this.router.navigate(['/part-modify']);
+    }
+
+    detalles(repuesto) {
+      this.parts.setPart(repuesto);
+      this.router.navigate(['/part-detail']);
     }
 
   ngAfterViewInit() {

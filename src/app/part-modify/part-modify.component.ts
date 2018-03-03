@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PartsService } from "../parts/parts.service";
+import { DatabaseService } from "../database/database.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -9,9 +12,30 @@ declare var $: any;
 })
 export class PartModifyComponent implements OnInit {
 
-  constructor() { }
+  repuestoOld = {
+    idRepuestos: 0;
+  };
+
+  repuesto = {};
+
+  constructor(private parts:PartsService, private database: DatabaseService, private router: Router) { }
 
   ngOnInit() {
+    this.repuestoOld.idRepuestos = this.parts.getPart()['idRepuestos'];
+    this.repuesto = this.parts.getPart();
+  }
+
+  modificarRepuesto() {
+    console.log(this.repuestoOld);
+    console.log(this.repuesto);
+
+    this.database.changeThis('ModeloRepuestos', this.repuestoOld, this.repuesto)
+      .then((res) => {
+      console.log(res);
+      this.router.navigate(['/parts-manage'])
+    }).catch((err) => {
+      console.log(err);
+      });
   }
 
   ngAfterViewInit() {

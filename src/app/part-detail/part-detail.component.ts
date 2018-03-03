@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PartsService } from "../parts/parts.service";
 
 declare var $: any;
 
@@ -9,9 +10,12 @@ declare var $: any;
 })
 export class PartDetailComponent implements OnInit {
 
-  constructor() { }
+  repuesto = {};
+
+  constructor(private parts: PartsService) { }
 
   ngOnInit() {
+    this.repuesto = this.parts.getPart();
   }
 
   ngAfterViewInit() {

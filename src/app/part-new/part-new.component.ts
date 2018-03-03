@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from "../database/database.service";
+import { Router } from "@angular/router";
 declare var $: any;
 
 @Component({
@@ -8,10 +10,20 @@ declare var $: any;
 })
 export class PartNewComponent implements OnInit {
 
-  constructor() { }
+  repuesto = {};
+
+  constructor(private database: DatabaseService, private router: Router) { }
 
   ngOnInit() {
   }
+
+  agregarRepuesto() {
+    this.database.addThis('ModeloRepuestos', this.repuesto).then((res) => {
+      console.log(res);
+      this.router.navigate(['/parts-manage']);
+    }).catch((err) => { console.log(err)});
+  }
+
 
   ngAfterViewInit() {
 
