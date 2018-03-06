@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backend",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\database\\models",
-    "\\src\\app\\sign-up",
-    "\\src\\app\\user-detail"
+    "\\src\\app\\database",
+    "\\src\\app\\database\\models"
   ],
-  "SelectedNode": "\\src\\app\\user-detail\\user-detail.component.ts",
+  "SelectedNode": "\\src\\app\\database\\database.service.ts",
   "PreviewInSolutionExplorer": false
 }

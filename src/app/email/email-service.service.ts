@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
-import htmlString = JQuery.htmlString;
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +18,7 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  enviarEmail(email: String, subject: String, texto: htmlString, archivo?: File): Promise<Object> {
+  enviarEmail(email: String, subject: String, texto: String, archivo?: File): Promise<Object> {
     return this.http.post(base, {
       email,
       texto,

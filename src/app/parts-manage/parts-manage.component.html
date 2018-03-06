@@ -97,8 +97,8 @@
                   <td>{{repuesto.Marca}}</td>
                   <td>{{repuesto.Modelo}}</td>
                   <td>{{repuesto.Cantidad}}</td>
-                  <td *ngIf="user.Rol==2"><button class="btn" (click)="modificar(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
-                  <td *ngIf="user.Rol==3"><button class="btn" (click)="detalles(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
+                  <td *ngIf="user.Rol==2"><button class="btn waves-effect waves-light blue darken-1" (click)="modificar(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
+                  <td *ngIf="user.Rol==3"><button class="btn waves-effect waves-light blue darken-1" (click)="detalles(repuesto)" ><i class="material-icons white-text darken-1">settings_applications</i></button></td>
                 </tr>
               </tbody>
             </table>

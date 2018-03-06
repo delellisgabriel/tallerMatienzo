@@ -21,6 +21,7 @@ import { PartDetailComponent } from './app/part-detail/part-detail.component';
 import { PartNewComponent } from './app/part-new/part-new.component';
 import { PartModifyComponent } from './app/part-modify/part-modify.component';
 import { CarHistorialComponent } from './app/car-historial/car-historial.component';
+import { CamaraComponent } from './app/camara/camara.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -46,4 +47,5 @@ export const Rutas: Routes = [
   { path: 'part-new', component: PartNewComponent },
   { path: 'part-modify', component: PartModifyComponent },
   { path: 'car-historial/:id', component: CarHistorialComponent },
+  { path: 'camara', component: CamaraComponent },
 ];
