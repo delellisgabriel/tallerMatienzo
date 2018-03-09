@@ -8,6 +8,8 @@ const httpOptions = {
   })
 };
 
+const codigo = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
+
 const base = 'http://localhost:3000/';
 
 @Injectable()
@@ -25,7 +27,8 @@ export class EmailService {
       archivo,
       subject,
       remitente: this.remitente,
-      password: this.password
+      password: this.password,
+      seguridad: codigo
     }).toPromise();
   }
 

@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const request = require('request');
 
 const app = express();
 const nodemailer = require('nodemailer');
@@ -72,31 +73,53 @@ app.post('/', function(req, res) {
   const subject = req.body.subject;
   const remitente = req.body.remitente;
   const password = req.body.password;
-  if (!remitente || !password) {
-    res.send('No hay remitente o password');
+  const seguridad = req.body.seguridad;
+  if (seguridad === private) {
+    if (!remitente || !password) {
+      res.send('No hay remitente o password');
+    }
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: remitente,
+        pass: password
+      }
+    });
+    const mailOptions = {
+      from: remitente,
+      to: email,
+      subject: subject,
+      text: texto
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.json({yo: 'error'});
+      } else {
+        console.log('Mensaje enviado: ' + info.response);
+        res.json({yo: info.response});
+      }
+    });
+  } else {
+    res.json({ err: 'Authentication failed' });
   }
-  const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-      user: remitente,
-      pass: password
+});
+
+app.post('/qr', function(req, res) {
+  const password = req.body.password;
+  const string = req.body.base;
+  const operacion = req.body.operacion;
+  if (password === private) {
+    if (operacion === 'crear') {
+      request.get(string, function (error, response, body) {
+        res.send({resp: string});
+      });
+    } else if (operacion === 'leer') {
+
     }
-  });
-  const mailOptions = {
-    from: remitente,
-    to: email,
-    subject: subject,
-    text: texto
-  };
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-      res.json({yo: 'error'});
-    } else {
-      console.log('Mensaje enviado: ' + info.response);
-      res.json({yo: info.response});
-    }
-  });
+  } else {
+    res.json({ err: 'Authentication failed' });
+  }
 });
 
 function insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto) {

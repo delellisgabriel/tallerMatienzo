@@ -25,6 +25,7 @@ export class DatabaseService {
   private clave = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
   private modelos: object;
 
+
   constructor(private http: HttpClient) {
     this.modelos = {
       ModeloCitas,
@@ -205,12 +206,53 @@ export class DatabaseService {
     return ano + '-' + mes + '-' + dia;
   }
 
-  formatImage(array) {
-    if (!array) {
+  BLOB2Base64(Array) {
+    console.log(typeof Array);
+    if (!Array) {
       console.error('Imagen inválida.');
       return null;
     }
-    return String.fromCharCode.apply(null, new Uint8Array(array));
+    return String.fromCharCode.apply(null, new Uint8Array(Array));
+  }
+
+  loadImage2Base64(evt) {
+    return new Promise((resolve, reject) => {
+      const files = (evt as any).target.files;
+      const file = files[0];
+      let string;
+      let resultado = '';
+
+      if (files && file) {
+        switch (file.type) {
+          case 'image/gif':
+            string = 'data:image/gif;base64,';
+            break;
+          case 'image/jpeg':
+            string = 'data:image/jpeg;base64,';
+            break;
+          case 'image/png':
+            string = 'data:image/png;base64,';
+            break;
+          case 'image/svg+xml':
+            string = 'data:image/svg+xml;base64,';
+            break;
+          default:
+            console.error('Imagen con formato inválido');
+            return;
+        }
+        const reader = new FileReader();
+
+        reader.onload = (readerEvt) => {
+          const binaryString = (readerEvt.target as any).result;
+          const base64textString = btoa(binaryString);
+          resultado = string + base64textString;
+          resolve(resultado);
+        };
+        reader.readAsBinaryString(file);
+      } else {
+        reject('Formato de imagen inválido');
+      }
+    });
   }
 
   /* Esta función recibe como primer argumento un string detallando el nombre del modelo

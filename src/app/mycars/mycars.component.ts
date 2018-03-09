@@ -31,7 +31,7 @@ export class MycarsComponent implements OnInit, AfterViewInit {
       });
       for (const carro of array) {
         if (carro.FotoVehiculo) {
-          carro.FotoVehiculo = this.database.formatImage(carro.FotoVehiculo.data);
+          carro.FotoVehiculo = this.database.BLOB2Base64(carro.FotoVehiculo.data);
         }
       }
       this.vehiculos = array;

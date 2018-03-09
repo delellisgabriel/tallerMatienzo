@@ -47,6 +47,7 @@ import { PartsService } from "./parts/parts.service";
 import { EmailService } from './email/email-service.service';
 import { CamaraComponent } from './camara/camara.component';
 import { CamaraService } from './camara/camara.service';
+import { QrService } from './qrService/qr.service';
 
 
 declare var $: any;
@@ -100,6 +101,7 @@ declare var $: any;
     PartsService,
     EmailService,
     CamaraService,
+    QrService
   ],
   bootstrap: [AppComponent]
 })

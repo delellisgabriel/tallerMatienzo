@@ -13,7 +13,8 @@
     "cors": "*",
     "express": "*",
     "mysql": "*",
-    "nodemailer": "^4.6.0"
+    "nodemailer": "^4.6.0",
+    "request": "^2.83.0"
   },
   "author": "GT",
   "license": "ISC",

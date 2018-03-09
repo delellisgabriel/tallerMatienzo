@@ -1,6 +1,8 @@
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {EmailService} from '../email/email-service.service';
+import {QrService} from '../qrService/qr.service';
+import {DatabaseService} from '../database/database.service';
 
 declare var $: any;
 
@@ -11,9 +13,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() {
-  }
-
+  constructor() {  }
 
   ngOnInit() {
   }
