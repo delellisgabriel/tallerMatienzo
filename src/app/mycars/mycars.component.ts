@@ -35,7 +35,6 @@ export class MycarsComponent implements OnInit, AfterViewInit {
         }
       }
       this.vehiculos = array;
-      console.log(this.vehiculos[2]);
       this.loading = false;
     });
   }

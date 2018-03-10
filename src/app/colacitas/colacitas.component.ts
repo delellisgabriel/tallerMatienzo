@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { DatabaseService } from "../database/database.service";
 import { EmailService } from "../email/email-service.service";
+import { QrService } from "../qrService/qr.service";
 
 declare var $: any;
 
@@ -16,7 +17,7 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
 
   loading = true;
 
-  constructor(private database: DatabaseService, private email: EmailService) { }
+  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService) { }
 
   ngOnInit() {
     this.database.getMe('ModeloCitas')
@@ -30,12 +31,19 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
       });
   }
 
-  public asignar(cita) {
+  public async asignar(cita) {
     console.log(cita);
+    var FotoQr;
+    await this.qr.crearQR(JSON.stringify(cita.Vehiculo.idVehiculo), '300').then((res) => {
+      console.log(res);
+      FotoQr = res['resp'];
+    }).catch((err) => {
+      console.log(err);
+      });
     var texto = 'Estimado ' + cita.Usuario.PrimerNombre + ',\nLe informamos que la cita que solicitó para su vehículo ' + cita.Vehiculo.Marca +
       " " + cita.Vehiculo.Modelo +
-      ' se asigno para el dia ' + cita.FechaAsignada + '\n\nSu codigo identificador del vehiculo es el siguiente: **QR AQUI**';
-    this.email.enviarEmail(cita['Usuario']['Correo'], 'Cita asignada', texto).then((res) => {
+      ' se asigno para el dia ' + cita.FechaAsignada + '\n\nSu codigo identificador del vehiculo es el siguiente:\n' + FotoQr;
+    await this.email.enviarEmail(cita['Usuario']['Correo'], 'Cita asignada', texto).then((res) => {
       console.log(res);
     }).catch((err) => { console.log(err); });
 

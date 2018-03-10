@@ -70,7 +70,7 @@
                 <input type="file" accept=".png, .jpg, .jpeg" (change)="onChange($event)" name="Foto"/>
               </div>
               <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" (change)="onChange($event)" [(ngModel)]="vehiculo.FotoVehiculo" name="foto">
+                <input class="file-path validate" type="text" (change)="onChange($event)" required [(ngModel)]="vehiculo.FotoVehiculo" name="foto">
               </div>
             </div>
           </div>

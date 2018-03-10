@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { CamaraService } from "./camara.service";
+import { HttpClient } from "@angular/common/http";
 
 declare var $: any;
 
@@ -13,10 +14,15 @@ export class CamaraComponent implements OnInit {
   @ViewChild('videoplayer') videoPlayer: any;
   @ViewChild('canvas') canvas: any;
   public showVideo: any = false;
+  public codigoQR: any;
+  public json = {
+    MAX_FILE_SIZE: 1048576,
+    file: '',
+  };
 
   context: any;
 
-  constructor(private camaraService: CamaraService) { }
+  constructor(private camaraService: CamaraService, private http: HttpClient) { }
 
   @Input() width: number;
   @Input() height: number;
@@ -40,9 +46,7 @@ export class CamaraComponent implements OnInit {
 
 
     this.context = this.canvas.nativeElement.getContext('2d');
-    console.log(this.context);
-    console.log(this.videoPlayer.nativeElement.width);
-    console.log(this.videoPlayer.nativeElement.height);
+
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -57,35 +61,24 @@ export class CamaraComponent implements OnInit {
     this.context = this.canvas.nativeElement.getContext('2d');
     this.context.drawImage(this.videoPlayer.nativeElement, 0, 0, this.width, this.height);
     this.showVideo = true;
+    console.log(this.canvas.nativeElement);
+    this.codigoQR = this.canvas.nativeElement.toDataURL('img/png');
+    console.log(this.codigoQR);
   }
 
   retake() {
     this.showVideo = false;
   }
 
-  saveImage() {
-    this.showVideo = false;
-    let imgData: any = this.canvas.nativeElement.toDataURL('img/png');
-    imgData = imgData.replace('data:image/png;base64,', '');
-    let postData: any = JSON.stringify({
-      'ImageBase64String': imgData,
-    });
-
-  /*this.camaraService.sendImage(postData).then
-    ( //metodo en el servicio, que retorne una promesa
-        (resp) =>
-      {
-      console.log(resp);
-
-      //TODO Manejo de la imagen
-
-      }.catch
-      ((err) =>
-        {
-        console.log('Algo salio mal');
-        }
-      )
-    );*/
-    }
+  readImg() {
+    var base = 'http://api.qrserver.com/v1/read-qr-code/';
+    this.json.file = this.codigoQR;
+    this.http.post(base, this.json)
+      .subscribe((res) => {
+        console.log(res);
+    }, (err) => {
+      console.log(err);
+      });
+  }
 
 }
