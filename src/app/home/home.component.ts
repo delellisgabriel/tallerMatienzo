@@ -13,9 +13,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(QR: QrService) {
-    QR.leerQR('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQMAAABKLAcXAAAABlBMVEX///8AAABVwtN+AAAAzklEQVQ4jaWUMRKEIAxFs2NB6Q3kJngtCmdghmKvpTeBG1hSOGYTdN21w5CGeRQZ8v8PALdyiOhfmEc64wOyACrgag1A10AjKu5pNIY2CjtYCfmhmXii2Pu/+QTE6oa02p/WdVRquFkqIOqpMPbvJeZJTpYcAegzHLpUk9u14kgZwA3ERHpClxBnjV5ObsFyaXRxpZq4DhvzqamEireUCYrGJidOFuVT0UTnplZS2Y4rny2UVjcDT9RE9E/wAx8Rb9VektVA3x0jbyc53eoDkNE2LZYfINUAAAAASUVORK5CYII=');
-  }
+  constructor() {}
 
   ngOnInit() {
   }
