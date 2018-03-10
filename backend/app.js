@@ -3,9 +3,11 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const request = require('request');
+const nodemailer = require('nodemailer');
+const cloudinary = require('cloudinary');
 
 const app = express();
-const nodemailer = require('nodemailer');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,6 +21,12 @@ const connection = mysql.createConnection({
 	user: 'hoeyizbddk5yfbas',
 	password: 'z11c19ibt769fu51',
 	database: 'ul79atmbxbqwg0en'
+});
+
+cloudinary.config({
+  cloud_name: 'dt2spmmet',
+  api_key: '513593145424553',
+  api_secret: 'k4oOmvSDAPWbSmZgfJxtKlDoMck'
 });
 
 app.post('/queries', function(req, res) {
@@ -68,8 +76,7 @@ app.post('/queries', function(req, res) {
 
 app.post('/', function(req, res) {
   const email = req.body.email;
-  const texto = req.body.texto;
-  const archivo = req.body.archivo;
+  const cuerpo = req.body.html;
   const subject = req.body.subject;
   const remitente = req.body.remitente;
   const password = req.body.password;
@@ -83,25 +90,27 @@ app.post('/', function(req, res) {
       auth: {
         user: remitente,
         pass: password
-      }
+      },
+      logger: false,
+      debug: false
     });
-    const mailOptions = {
-      from: remitente,
-      to: email,
+    const message = {
+      to: '<'+email+'>',
       subject: subject,
-      text: texto
+      html: cuerpo
     };
-    transporter.sendMail(mailOptions, function (error, info) {
+    transporter.sendMail(message, function(error, info) {
       if (error) {
-        console.log(error);
-        res.json({yo: 'error'});
+        console.log('Error occurred');
+        console.log(error.message);
+        return process.exit(1);
       } else {
-        console.log('Mensaje enviado: ' + info.response);
-        res.json({yo: info.response});
+        console.log(info);
+        res.send({ resp: 'Todo bien' });
       }
     });
   } else {
-    res.json({ err: 'Authentication failed' });
+    res.send({ err: 'Authentication failed' });
   }
 });
 
@@ -109,16 +118,34 @@ app.post('/qr', function(req, res) {
   const password = req.body.password;
   const string = req.body.base;
   const operacion = req.body.operacion;
+  const foto = req.body.foto;
   if (password === private) {
     if (operacion === 'crear') {
       request.get(string, function (error, response, body) {
-        res.send({resp: string});
+        if (!err) {
+          res.send({resp: string});
+        } else {
+          res.send({ err: err });
+        }
       });
     } else if (operacion === 'leer') {
-
+      cloudinary.v2.uploader.upload(foto, function(err, resp) {
+        if (err) {
+          console.error(err);
+        } else {
+          const url = resp.url;
+          request.get(string + url, function(errorsote, respuesta) {
+            if (err) {
+              res.send({ err: errorsote });
+            } else {
+              res.send({ resp: respuesta });
+            }
+          });
+        }
+      });
     }
   } else {
-    res.json({ err: 'Authentication failed' });
+    res.send({ err: 'Authentication failed' });
   }
 });
 

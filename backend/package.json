@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "body-parser": "*",
+    "cloudinary": "^1.10.0",
     "concurrently": "*",
     "cors": "*",
     "express": "*",

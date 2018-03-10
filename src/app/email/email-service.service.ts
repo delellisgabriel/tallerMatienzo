@@ -20,11 +20,10 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  enviarEmail(email: String, subject: String, texto: String, archivo?: File): Promise<Object> {
+  enviarEmail(email: String, subject: String, html: String): Promise<Object> {
     return this.http.post(base, {
       email,
-      texto,
-      archivo,
+      html,
       subject,
       remitente: this.remitente,
       password: this.password,
