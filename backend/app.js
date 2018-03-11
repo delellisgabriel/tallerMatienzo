@@ -42,17 +42,21 @@ app.post('/queries', function(req, res) {
       if (funcion === 'getMe') {
         if (subModelos) {
           var arrayAuxiliar = [];
-          for (var i = 0; i < rows.length; i++) {
-            const row = rows[i];
-            const objetoBase = poblarObjetoBase(row, modelo, subModelos);
-            var numeroObjeto;
-            if ((numeroObjeto = objetoBaseYaExiste(arrayAuxiliar, objetoBase)) >= 0) {
-              arrayAuxiliar = insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto);
-            } else {
-              arrayAuxiliar.push(objetoBase);
+          if (rows) {
+            for (var i = 0; i < rows.length; i++) {
+              const row = rows[i];
+              const objetoBase = poblarObjetoBase(row, modelo, subModelos);
+              var numeroObjeto;
+              if ((numeroObjeto = objetoBaseYaExiste(arrayAuxiliar, objetoBase)) >= 0) {
+                arrayAuxiliar = insertarThroughYCollection(objetoBase, arrayAuxiliar, numeroObjeto);
+              } else {
+                arrayAuxiliar.push(objetoBase);
+              }
             }
+            res.send({ resultado: arrayAuxiliar });
+          } else {
+            res.send({ resultado: arrayAuxiliar });
           }
-          res.send({ resultado: arrayAuxiliar });
         } else {
           res.send({ resultado: null, err: 'No se recibieron subModelos' });
         }
@@ -107,7 +111,6 @@ app.post('/', function(req, res) {
         console.log(error.message);
         return process.exit(1);
       } else {
-        console.log(info);
         res.send({ resp: 'Todo bien' });
       }
     });
