@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { QrService } from "../qrService/qr.service";
+import { CarSelectService } from "../car-select/car-select.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -18,7 +20,7 @@ export class CamaraComponent implements OnInit {
 
   context: any;
 
-  constructor(private http: HttpClient, private qrService: QrService) { }
+  constructor(private http: HttpClient, private qrService: QrService, private car: CarSelectService, private router: Router) { }
 
   @Input() width: number;
   @Input() height: number;
@@ -58,7 +60,6 @@ export class CamaraComponent implements OnInit {
     this.context.drawImage(this.videoPlayer.nativeElement, 0, 0, this.width, this.height);
     this.showVideo = true;
     this.codigoQR = this.canvas.nativeElement.toDataURL('img/png');
-    console.log(this.codigoQR);
   }
 
   retake() {
@@ -68,7 +69,16 @@ export class CamaraComponent implements OnInit {
   readImg() {
     this.qrService.leerQR(this.codigoQR)
       .then((resp) => {
-        console.log(resp);
+        console.log(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']);
+        if (JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data'] != null) {
+          var vehiculo = {
+            idVehiculo: Number(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']),
+          };
+          this.car.selectCar(vehiculo);
+          this.router.navigate(['modificararchivo']);
+        } else {
+          //tirar error
+        }
       })
       .catch((err) => {
         console.log(err);

@@ -14,7 +14,7 @@ declare var $: any;
 export class CarHistorialComponent implements OnInit {
 
   vehiculo = {
-    idVehiculo: '',
+    idVehiculo: 0,
   };
 
   ordenes = [];
@@ -33,7 +33,8 @@ export class CarHistorialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vehiculo.idVehiculo = this.carSelect.getCar()['idVehiculo'];
+    this.vehiculo.idVehiculo = Number(this.carSelect.getCar()['idVehiculo']);
+    console.log(this.vehiculo)
     this.database.getMe('ModeloOrdenReparacion', this.vehiculo).then((result) => {
       console.log(result);
       this.ordenes = result['resultado'];

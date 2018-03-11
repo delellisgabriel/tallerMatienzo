@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { CarSelectService } from "../car-select/car-select.service";
+import { DatabaseService } from "../database/database.service";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -10,9 +13,46 @@ declare var $: any;
 })
 export class ModificararchivoComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  public user: any;
+
+  public vehiculo: any;
+
+  public orden = {
+    Cauchos: '',
+    Llaves: '',
+    Gato: '',
+    Herramientas: '',
+    Carroceria: '',
+    EquipoSonido: '',
+    Otros: '',
+    idVehiculo: 0,
+  };
+
+  constructor(private car: CarSelectService, private database: DatabaseService, private auth: AuthService) { }
 
   ngOnInit() {
+    this.user = this.auth.getUser();
+    this.vehiculo = this.car.getCar();
+    console.log(this.vehiculo);
+    this.orden.idVehiculo = this.vehiculo['idVehiculo'];
+    this.database.getMe('ModeloVehiculos', this.vehiculo)
+      .then((res) => {
+        this.vehiculo = res['resultado'][0];
+      }).catch((err) => {
+        console.log(err);
+      });
+
+  }
+
+  crearOrden() {
+    console.log(this.orden);
+    this.database.addThis('ModeloOrdenReparacion', this.orden)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   ngAfterViewInit() {
