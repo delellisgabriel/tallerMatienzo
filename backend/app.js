@@ -8,10 +8,11 @@ const cloudinary = require('cloudinary');
 
 const app = express();
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 const port = 3000;
 const private = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
