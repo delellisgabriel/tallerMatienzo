@@ -29,7 +29,7 @@ export class QrService {
   }
 
   leerQR(fotoBase64: string) {
-    this.http.post(this.base,
+   return this.http.post(this.base,
       {
         foto: fotoBase64,
         password: this.password,

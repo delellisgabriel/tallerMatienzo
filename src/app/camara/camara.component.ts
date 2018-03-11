@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
-import { CamaraService } from "./camara.service";
 import { HttpClient } from "@angular/common/http";
+import { QrService } from "../qrService/qr.service";
 
 declare var $: any;
 
@@ -15,14 +15,10 @@ export class CamaraComponent implements OnInit {
   @ViewChild('canvas') canvas: any;
   public showVideo: any = false;
   public codigoQR: any;
-  public json = {
-    MAX_FILE_SIZE: 1048576,
-    file: '',
-  };
 
   context: any;
 
-  constructor(private camaraService: CamaraService, private http: HttpClient) { }
+  constructor(private http: HttpClient, private qrService: QrService) { }
 
   @Input() width: number;
   @Input() height: number;
@@ -61,7 +57,6 @@ export class CamaraComponent implements OnInit {
     this.context = this.canvas.nativeElement.getContext('2d');
     this.context.drawImage(this.videoPlayer.nativeElement, 0, 0, this.width, this.height);
     this.showVideo = true;
-    console.log(this.canvas.nativeElement);
     this.codigoQR = this.canvas.nativeElement.toDataURL('img/png');
     console.log(this.codigoQR);
   }
@@ -71,13 +66,12 @@ export class CamaraComponent implements OnInit {
   }
 
   readImg() {
-    var base = 'http://api.qrserver.com/v1/read-qr-code/';
-    this.json.file = this.codigoQR;
-    this.http.post(base, this.json)
-      .subscribe((res) => {
-        console.log(res);
-    }, (err) => {
-      console.log(err);
+    this.qrService.leerQR(this.codigoQR)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
