@@ -3,9 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\car-canvas",
+    "\\src\\app\\car-select",
+    "\\src\\app\\carregister",
     "\\src\\app\\database",
-    "\\src\\app\\database\\models"
+    "\\src\\app\\mycars",
+    "\\src\\app\\recibirvehiculo",
+    "\\src\\app\\side-bar-fav"
   ],
-  "SelectedNode": "\\src\\app\\database\\database.service.ts",
+  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
   "PreviewInSolutionExplorer": false
 }
