@@ -19,6 +19,10 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
   constructor(private database: DatabaseService, private email: EmailService) { }
 
   ngOnInit() {
+    this.cargarCitas();
+  }
+
+  public cargarCitas() {
     this.database.getMe('ModeloCitas')
       .then((result) => {
         this.colaCitas = result['resultado'];
