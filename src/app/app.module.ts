@@ -37,6 +37,8 @@ import { PartsManageComponent } from './parts-manage/parts-manage.component';
 import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
+//Canvas
+import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard/index';
 //Servicios
 import { AuthService } from './authService/auth.service';
 import { DatabaseService } from './database/database.service';
@@ -47,6 +49,7 @@ import { PartsService } from "./parts/parts.service";
 import { EmailService } from './email/email-service.service';
 import { CamaraComponent } from './camara/camara.component';
 import { QrService } from './qrService/qr.service';
+import { CarCanvasComponent } from './car-canvas/car-canvas.component';
 
 
 declare var $: any;
@@ -82,6 +85,7 @@ declare var $: any;
     PartModifyComponent,
     CarHistorialComponent,
     CamaraComponent,
+    CarCanvasComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ declare var $: any;
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MaterializeModule
+    MaterializeModule,
+    CanvasWhiteboardModule,
   ],
   providers: [
     DatabaseService,

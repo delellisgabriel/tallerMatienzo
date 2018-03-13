@@ -5457,7 +5457,7 @@ small {
 
   .btn:focus, .btn-large:focus,
   .btn-floating:focus {
-    background-color: #1d7d74;
+    background-color: #1976d2;
   }
 
 .btn, .btn-large {
@@ -5472,7 +5472,7 @@ small {
 }
 
   .btn:hover, .btn-large:hover {
-    background-color: #2bbbad;
+    background-color: #1976d2;
   }
 
 .btn-floating {
@@ -6464,9 +6464,9 @@ textarea.materialize-textarea {
   input[type=search].valid:not(.browser-default):focus,
   textarea.materialize-textarea.valid,
   textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown {
-    border-bottom: 1px solid #4CAF50;
-    -webkit-box-shadow: 0 1px 0 0 #4CAF50;
-    box-shadow: 0 1px 0 0 #4CAF50;
+    border-bottom: 1px solid #1E88E5;
+    -webkit-box-shadow: 0 1px 0 0 #1E88E5;
+    box-shadow: 0 1px 0 0 #1E88E5;
   }
 
   input.invalid:not([type]), input.invalid:not([type]):focus,
@@ -6526,7 +6526,7 @@ textarea.materialize-textarea {
   textarea.materialize-textarea.valid + label:after,
   textarea.materialize-textarea:focus.valid + label:after, .select-wrapper.valid + label:after {
     content: attr(data-success);
-    color: #4CAF50;
+    color: #1E88E5;
     opacity: 1;
     -webkit-transform: translateY(9px);
     transform: translateY(9px);
@@ -7674,7 +7674,7 @@ input[type=range] {
       }
 
       .side-nav li > a.btn:hover, .side-nav li > a.btn-large:hover, .side-nav li > a.btn-large:hover {
-        background-color: #2bbbad;
+        background-color: #1976d2;
       }
 
       .side-nav li > a.btn-floating:hover {
@@ -8484,7 +8484,7 @@ input[type=range] {
     }
 
       .slider .indicators .indicator-item.active {
-        background-color: #4CAF50;
+        background-color: #1E88E5;
       }
 
 .carousel {

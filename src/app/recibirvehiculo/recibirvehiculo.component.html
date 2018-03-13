@@ -10,16 +10,13 @@
         <h5 class="header center col s12 light"></h5>
       </div>
       <br><br>
-
     </div>
   </div>
   <div class="parallax parallaxOscuro"><img src="https://lh3.googleusercontent.com/UOQ1R_UqkwsQJoG8bo7Gcn5pKsro0gX7t8ieBPy8UeOsJzovWpNax4KsNtkE__jM5sbw=h900" alt="Unsplashed background img 1"></div>
 </div>
 
-
 <div class="container">
   <div class="section">
-
     <div class="row">
       <form class="col s12 m12 l12">
         <div class="row">
@@ -40,12 +37,10 @@
             <input id="icon_prefix" type="number" class="validate">
             <label for="icon_prefix">AÑO</label>
           </div>
-
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">date_range</i>
             <label for="datepicker">FECHA DE NACIMIENTO</label>
             <input id="datepicker" type="text" class="datepicker">
-
           </div>
         </div>
         <!-- 3era fila -->
@@ -123,7 +118,12 @@
             <img class="responsive-img" src="http://img.turbo.fr/04353116-photo-bmw-serie-6-gran-coupe-premiers-croquis.jpg" />
           </div>
         </div>
-
+        <!-- 7ma fila -->
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <app-car-canvas></app-car-canvas>
+          </div>
+        </div>
         <div class="row center">
           <button routerLink="/dashclient" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
             Registrar
@@ -134,3 +134,4 @@
 
   </div>
 </div>
+<app-car-canvas></app-car-canvas>

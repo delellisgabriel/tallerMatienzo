@@ -3,9 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\database",
-    "\\src\\app\\database\\models"
+    "\\src\\app\\car-canvas",
+    "\\src\\app\\car-historial",
+    "\\src\\app\\dashclient",
+    "\\src\\app\\footer",
+    "\\src\\app\\home",
+    "\\src\\app\\login",
+    "\\src\\app\\recibirvehiculo"
   ],
-  "SelectedNode": "\\src\\app\\database\\database.service.ts",
+  "SelectedNode": "\\src\\app\\recibirvehiculo\\recibirvehiculo.component.html",
   "PreviewInSolutionExplorer": false
 }

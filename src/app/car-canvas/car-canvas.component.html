@@ -1,0 +1,7 @@
+<canvas-whiteboard #canvasWhiteboard
+                   [options]="canvasOptions"
+                   (onBatchUpdate)="onCanvasDraw($event)"
+                   (onClear)="onCanvasClear()"
+                   (onUndo)="onCanvasUndo($event)"
+                   (onRedo)="onCanvasRedo($event)">
+</canvas-whiteboard>

@@ -17,6 +17,7 @@ export class CamaraComponent implements OnInit {
   @ViewChild('canvas') canvas: any;
   public showVideo: any = false;
   public codigoQR: any;
+  public cargando: any;
 
   context: any;
 
@@ -28,6 +29,7 @@ export class CamaraComponent implements OnInit {
   ngOnInit() {
     this.width = 500;
     this.height = 400;
+    this.cargando = false;
 
   }
 
@@ -67,6 +69,7 @@ export class CamaraComponent implements OnInit {
   }
 
   readImg() {
+    this.cargando = true;
     this.qrService.leerQR(this.codigoQR)
       .then((resp) => {
         console.log(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']);
@@ -75,12 +78,14 @@ export class CamaraComponent implements OnInit {
             idVehiculo: Number(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']),
           };
           this.car.selectCar(vehiculo);
+          this.cargando = false;
           this.router.navigate(['modificararchivo']);
         } else {
-          //tirar error
+          this.cargando = false;
         }
       })
       .catch((err) => {
+        this.cargando = false;
         console.log(err);
       });
   }
