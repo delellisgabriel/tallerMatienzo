@@ -8,6 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SelectControlValueAccessor } from '@angular/forms';
 
 import { FormControl, FormGroup } from '@angular/forms';
+import { EmailService } from "../email/email-service.service";
 declare var $: any;
 
 @Component({
@@ -30,15 +31,8 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
   
   cars: any;
 
-  constructor(private authService: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder) {
-    this.userVehiculos = this.authService.getUser()["Vehiculos"];
-    if(this.userVehiculos){
-    if (this.userVehiculos[0] == null) {
-      this.cars = false;
-    } else {
-      this.cars = true;
-    }
-    }
+  constructor(private authService: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService) {
+    
   }
 
   solicitarCita() {
@@ -61,9 +55,43 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
       console.log(err)
     });
 
+    var user = this.authService.getUser();
+    var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
+    this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
+      console.log(res);
+    }).catch((err) => { console.log(err); });
+
   }
 
   ngOnInit() {
+    var carros = {
+      idUsuario: 0,
+    }
+    carros.idUsuario = this.authService.getUser()['idUsuario'];
+    console.log(carros);
+    this.database.getMe('ModeloVehiculos', carros).then((resp) => {
+      console.log(resp['resultado']);
+      this.userVehiculos = resp['resultado'];
+      if (this.userVehiculos) {
+        if (this.userVehiculos[0] == null) {
+          this.cars = false;
+        } else {
+          this.cars = true;
+        }
+      }
+    });
+
+  }
+
+  ngAfterInit() {
+    this.userVehiculos = this.authService.getUser()["Vehiculos"];
+    if (this.userVehiculos) {
+      if (this.userVehiculos[0] == null) {
+        this.cars = false;
+      } else {
+        this.cars = true;
+      }
+    }
   }
 
 

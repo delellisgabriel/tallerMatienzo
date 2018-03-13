@@ -3,6 +3,7 @@ import { DatabaseService } from "../database/database.service";
 import { CarSelectService } from "../car-select/car-select.service";
 import { OrdenSelectService } from "../orden-select/orden-select.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -17,14 +18,19 @@ export class CarHistorialComponent implements OnInit {
     idVehiculo: 0,
   };
 
+  carModified = {};
+
   ordenes = [];
 
   constructor(private database: DatabaseService, private carSelect: CarSelectService, private orden: OrdenSelectService,
-              private router: Router) { }
+              private router: Router, private auth: AuthService) { }
 
   deshabilitar() {
-
-    //TODO
+    this.carModified['Activado'] = false;
+    this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
+      console.log(res);
+      this.router.navigate(['dashclient', this.auth.getUser()['idUsuario']]);
+    });
   }
 
   detallesOrden(orden: object) {

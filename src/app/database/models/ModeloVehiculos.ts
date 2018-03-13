@@ -10,6 +10,7 @@ const ModeloVehiculos = {
   Activado: 'boolean',
   Ano: 'string',
   FotoVehiculo: 'foto',
+  idUsuario: 'id',
   Usuario: {
     tipo: 'model',
     modelo: 'ModeloUsuarios',

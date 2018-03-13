@@ -14,8 +14,9 @@ declare var $: any;
 })
 export class MycarsComponent implements OnInit, AfterViewInit {
 
-  user = {
+  carro = {
     idUsuario: '',
+    Activado: true,
   };
 
   vehiculos = [];
@@ -23,10 +24,10 @@ export class MycarsComponent implements OnInit, AfterViewInit {
   loading = true;
 
   constructor(private authService: AuthService, private database: DatabaseService, private carService: CarSelectService, private router: Router) {
-    this.user.idUsuario = this.authService.getUser()['idUsuario'];
+    this.carro.idUsuario = this.authService.getUser()['idUsuario'];
 
-    this.database.getMe('ModeloUsuarios', this.user).then((result) => {
-      var array = $.map(result["resultado"][0]["Vehiculos"], function (value, index) {
+    this.database.getMe('ModeloVehiculos', this.carro).then((result) => {
+      var array = $.map(result["resultado"], function (value, index) {
         return value;
       });
       for (const carro of array) {

@@ -127,10 +127,10 @@ app.post('/qr', function(req, res) {
   if (password === private) {
     if (operacion === 'crear') {
       request.get(string, function (error, response, body) {
-        if (!err) {
+        if (!error) {
           res.send({resp: string});
         } else {
-          res.send({ err: err });
+          res.send({ err: error });
         }
       });
     } else if (operacion === 'leer') {
