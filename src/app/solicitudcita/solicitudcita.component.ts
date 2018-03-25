@@ -28,6 +28,8 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
     FechaTentativaInicial: '',
     FechaTentativaFinal: '',
   };
+
+cargando: any;
   
   cars: any;
 
@@ -64,8 +66,10 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.cargando = true;
     var carros = {
       idUsuario: 0,
+      Activado: true,
     }
     carros.idUsuario = this.authService.getUser()['idUsuario'];
     console.log(carros);
@@ -75,9 +79,12 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
       if (this.userVehiculos) {
         if (this.userVehiculos[0] == null) {
           this.cars = false;
+          this.cargando = false;
         } else {
           this.cars = true;
+          this.cargando = false;  
         }
+        
       }
     });
 

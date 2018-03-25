@@ -17,6 +17,7 @@ export class DashclientComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.user = this.authService.getUser();
+    window.scrollTo(0, 0);
   }
 
   ngAfterViewInit() {

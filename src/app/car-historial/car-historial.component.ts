@@ -26,11 +26,15 @@ export class CarHistorialComponent implements OnInit {
               private router: Router, private auth: AuthService) { }
 
   deshabilitar() {
-    this.carModified['Activado'] = false;
-    this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
-      console.log(res);
-      this.router.navigate(['dashclient', this.auth.getUser()['idUsuario']]);
-    });
+    var r = confirm("Seguro que desea inhabilitar este vehiculo?!");
+    if (r == true) {
+      this.carModified['Activado'] = false;
+      this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
+        console.log(res);
+        this.router.navigate(['dashclient', this.auth.getUser()['idUsuario']]);
+      });
+    }
+
   }
 
   detallesOrden(orden: object) {
