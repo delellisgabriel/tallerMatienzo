@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PartsService } from "../parts/parts.service";
 import { DatabaseService } from "../database/database.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -18,9 +19,10 @@ export class PartModifyComponent implements OnInit {
 
   repuesto = {};
 
-  constructor(private parts:PartsService, private database: DatabaseService, private router: Router) { }
+  constructor(private parts:PartsService, private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.repuestoOld.idRepuestos = this.parts.getPart()['idRepuestos'];
     this.repuesto = this.parts.getPart();
   }

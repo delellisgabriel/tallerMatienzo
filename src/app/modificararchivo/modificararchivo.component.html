@@ -87,12 +87,12 @@
         <div class="row center" >
           <div class="col s1 m1 l1"></div>
           <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Front1_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Front1_Mark.png') {
-                                                                                    this.src = 'assets/Front1_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Front1_Mark.png';
-                                                                                  }" />
+            <img class="responsive-img" src="assets/Front1_NoMark.png" onclick=" 
+      if (this.src === 'http://localhost:4200/assets/Front1_Mark.png') {
+        this.src = 'assets/Front1_NoMark.png';
+      } else {
+        this.src = 'assets/Front1_Mark.png';
+      }" />
           </div>
           <div class="collage col s1 m1 l1">
             <img class="responsive-img" src="assets/Front2_NoMark.png" onclick="
@@ -339,7 +339,7 @@
           </div>
         </div>
 
-        <div class="row center">
+        <div class="row center" *ngIf="user.Rol == 1 || user.Rol == 3">
           <button  class="btn waves-effect waves-light blue darken-1" (click)="crearOrden()" name="action">
            Modificar
           </button>

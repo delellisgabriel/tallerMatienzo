@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class CarregisterComponent implements OnInit, AfterViewInit {
 
-  constructor(private authService: AuthService, private databaseService: DatabaseService, private router: Router) { }
+  constructor(private auth: AuthService, private databaseService: DatabaseService, private router: Router) { }
 
   file: File;
 
@@ -33,7 +33,9 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit() {
-    this.user.idUsuario = this.authService.getUser()["idUsuario"];
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    this.user.idUsuario = this.auth.getUser()["idUsuario"];
+
   }
 
   carRegister() {

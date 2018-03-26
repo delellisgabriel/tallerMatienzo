@@ -3,6 +3,7 @@ import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { CarSelectService } from "../car-select/car-select.service";
 import { DatabaseService } from "../database/database.service";
 import { AuthService } from "../authService/auth.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -28,9 +29,10 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     idVehiculo: 0,
   };
 
-  constructor(private car: CarSelectService, private database: DatabaseService, private auth: AuthService) { }
+  constructor(private car: CarSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.user = this.auth.getUser();
     this.vehiculo = this.car.getCar();
     console.log(this.vehiculo);

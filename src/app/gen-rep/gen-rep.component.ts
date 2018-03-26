@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
+import { AuthService } from "../authService/auth.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -10,9 +12,10 @@ declare var $: any;
 })
 export class GenRepComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
   }
 
   ngAfterViewInit() {

@@ -3,6 +3,8 @@ import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { DatabaseService } from "../database/database.service";
 import { EmailService } from "../email/email-service.service";
 import { QrService } from "../qrService/qr.service";
+import { AuthService } from "../authService/auth.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -17,9 +19,10 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
 
   loading = true;
 
-  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService) { }
+  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.database.getMe('ModeloCitas')
       .then((result) => {
         this.colaCitas = result['resultado'];

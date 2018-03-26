@@ -33,7 +33,7 @@ cargando: any;
   
   cars: any;
 
-  constructor(private authService: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService) {
+  constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService) {
     
   }
 
@@ -42,14 +42,14 @@ cargando: any;
       this.solicitud.Vehiculos_idVehiculo = Number.parseInt(this.solicitud.idAux);
       delete this.solicitud.idAux;
     }
-    this.solicitud.Usuarios_idUsuario = this.authService.getUser()['idUsuario'];
+    this.solicitud.Usuarios_idUsuario = this.auth.getUser()['idUsuario'];
     this.solicitud.FechaTentativaInicial = this.database.dateFormatter(this.solicitud.FechaTentativaInicial);
     this.solicitud.FechaTentativaFinal = this.database.dateFormatter(this.solicitud.FechaTentativaFinal);
 
     this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
       console.log(result); //Esto deberia botar True
       if (result['resultado'] == true) {
-        this.router.navigate(['/mycars', this.authService.getUser()["idUsuario"]]);
+        this.router.navigate(['/mycars', this.auth.getUser()["idUsuario"]]);
       } else {
         console.log('Algo Salio Mal');
       }
@@ -57,7 +57,7 @@ cargando: any;
       console.log(err)
     });
 
-    var user = this.authService.getUser();
+    var user = this.auth.getUser();
     var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
     this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
       console.log(res);
@@ -66,12 +66,13 @@ cargando: any;
   }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.cargando = true;
     var carros = {
       idUsuario: 0,
       Activado: true,
     }
-    carros.idUsuario = this.authService.getUser()['idUsuario'];
+    carros.idUsuario = this.auth.getUser()['idUsuario'];
     console.log(carros);
     this.database.getMe('ModeloVehiculos', carros).then((resp) => {
       console.log(resp['resultado']);
@@ -91,7 +92,7 @@ cargando: any;
   }
 
   ngAfterInit() {
-    this.userVehiculos = this.authService.getUser()["Vehiculos"];
+    this.userVehiculos = this.auth.getUser()["Vehiculos"];
     if (this.userVehiculos) {
       if (this.userVehiculos[0] == null) {
         this.cars = false;

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { QrService } from "../qrService/qr.service";
 import { CarSelectService } from "../car-select/car-select.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -21,12 +22,16 @@ export class CamaraComponent implements OnInit {
 
   context: any;
 
-  constructor(private http: HttpClient, private qrService: QrService, private car: CarSelectService, private router: Router) { }
+  constructor(private http: HttpClient, private qrService: QrService, private car: CarSelectService, private router: Router, private auth: AuthService) { }
 
   @Input() width: number;
   @Input() height: number;
 
   ngOnInit() {
+    if (!this.auth.isLoged()) {
+      this.router.navigate(['/404']);
+      this.cargando = true;
+    }
     this.width = 500;
     this.height = 400;
     this.cargando = false;
@@ -81,6 +86,9 @@ export class CamaraComponent implements OnInit {
           this.cargando = false;
           this.router.navigate(['modificararchivo']);
         } else {
+          console.log('entre');
+          alert('No pudimos encontrar este codigo, porfavor intente de nuevo');
+          this.router.navigate(['/dashclient']);
           this.cargando = false;
         }
       })

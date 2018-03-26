@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { AuthService } from '../authService/auth.service';
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -13,11 +14,12 @@ export class DashclientComponent implements OnInit, AfterViewInit {
 
   user = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
+    this.user = this.auth.getUser();
     window.scrollTo(0, 0);
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
   }
 
   ngAfterViewInit() {

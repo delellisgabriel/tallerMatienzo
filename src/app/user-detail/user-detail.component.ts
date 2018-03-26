@@ -22,9 +22,10 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
 
   private userSelected = {};
 
-  constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService) { }
+  constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     document.getElementById("popup").hidden = true;
     this.userRol = this.auth.getUser()['Rol'];
     this.userSelected = this.userSelect.getUser();

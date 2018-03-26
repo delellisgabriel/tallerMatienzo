@@ -31,7 +31,7 @@ export class CarHistorialComponent implements OnInit {
       this.carModified['Activado'] = false;
       this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
         console.log(res);
-        this.router.navigate(['dashclient', this.auth.getUser()['idUsuario']]);
+        this.router.navigate(['dashclient']);
       });
     }
 
@@ -39,10 +39,11 @@ export class CarHistorialComponent implements OnInit {
 
   detallesOrden(orden: object) {
     this.orden.ordenSelect(orden);
-    this.router.navigate(['autoselected', orden['idOrdenReparacion']]);
+    this.router.navigate(['autoselected']);
   }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.vehiculo.idVehiculo = Number(this.carSelect.getCar()['idVehiculo']);
     console.log(this.vehiculo)
     this.database.getMe('ModeloOrdenReparacion', this.vehiculo).then((result) => {

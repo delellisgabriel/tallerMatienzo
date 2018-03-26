@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from "../database/database.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 declare var $: any;
 
 @Component({
@@ -12,12 +13,13 @@ export class PartNewComponent implements OnInit {
 
   repuesto = {};
 
-  constructor(private database: DatabaseService, private router: Router) { }
+  constructor(private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
   }
 
   agregarRepuesto() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.database.addThis('ModeloRepuestos', this.repuesto).then((res) => {
       console.log(res);
       this.router.navigate(['/parts-manage']);

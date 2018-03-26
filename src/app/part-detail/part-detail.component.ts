@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PartsService } from "../parts/parts.service";
+import { AuthService } from "../authService/auth.service";
+import { Router } from "@angular/router";
 
 declare var $: any;
 
@@ -12,9 +14,10 @@ export class PartDetailComponent implements OnInit {
 
   repuesto = {};
 
-  constructor(private parts: PartsService) { }
+  constructor(private parts: PartsService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.repuesto = this.parts.getPart();
   }
 

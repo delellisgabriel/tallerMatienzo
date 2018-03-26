@@ -3,6 +3,7 @@ import { SideBarFavComponent } from '../side-bar-fav/side-bar-fav.component';
 import { DatabaseService } from '../database/database.service';
 import { UserSelectService } from '../user-select/user-select.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -19,7 +20,7 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
 
    users = [];
 
-  constructor(private database: DatabaseService, private userSelect: UserSelectService, private router: Router) { }
+  constructor(private database: DatabaseService, private userSelect: UserSelectService, private router: Router, private auth: AuthService) { }
 
   buscar() {
     this.database.getMe('ModeloUsuarios', this.userBuscado).then((result) => {
@@ -47,13 +48,13 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
   }
 
   selectUser(user: object) {
-    console.log(user);
     this.userSelect.selectUser(user);
-    this.router.navigate(['userdetail', user['idUsuario']]);
+    this.router.navigate(['userdetail']);
 
   }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     this.database.getMe('ModeloUsuarios')
       .then((result) => {
         this.users = result['resultado'];
