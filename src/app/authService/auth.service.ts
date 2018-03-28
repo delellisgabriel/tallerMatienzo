@@ -31,19 +31,21 @@ export class AuthService {
         Correo: (user as any).Correo,
         Password: hashed
       }).then((result) => {
-        this.currentUser = result['resultado'][0];
-        this.http.post(base + 'login', {
-          usuario: this.currentUser,
-          password: this.clave
-        }).toPromise()
-          .then((resp) => {
-            if ((resp as any).token) {
-              if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
-                this.cookies.put('TallerMatienzo', (resp as any).token);
+        if ((result as any).resultado.length !== 0) {
+          this.currentUser = result['resultado'][0];
+          this.http.post(base + 'login', {
+            usuario: this.currentUser,
+            password: this.clave
+          }).toPromise()
+            .then((resp) => {
+              if ((resp as any).token) {
+                if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
+                  this.cookies.put('TallerMatienzo', (resp as any).token);
+                }
               }
-            }
-          });
-        this.logged = true;
+            });
+          this.logged = true;
+        }
         resolve(this.currentUser);
       }).catch((err) => {
         if (err) {
