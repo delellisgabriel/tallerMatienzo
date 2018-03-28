@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatabaseService } from '../database/database.service';
-import {CookieService} from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie';
+import * as shajs from 'sha.js';
 import 'rxjs/add/operator/toPromise';
 
 const httpOptions = {
@@ -20,10 +21,14 @@ export class AuthService {
   currentUser = {};
   logged = false;
 
+  private hasher;
+
   constructor(private http: HttpClient, private database: DatabaseService, private cookies: CookieService) {
+
   }
 
   login(user: object): any {
+    (user as any).Password = this.hashAndSalt((user as any).Password);
     this.database.getMe('ModeloUsuarios', user).then((result) => {
       this.currentUser = result['resultado'][0];
       this.http.post(base + 'login', {
@@ -45,6 +50,7 @@ export class AuthService {
           return {};
         }
       });
+    return this.database.getMe('ModeloUsuarios', user);
   }
 
   getUser() {
@@ -96,11 +102,29 @@ export class AuthService {
     }
   }
 
-  hashAndSalt(password: string): string {
-    return '';
+  hashAndSalt(password: string): any {
+    let semilla = 0;
+    for (let i = 0; i < password.length; i++) {
+      semilla += Number.parseInt(password.charAt(i));
+    }
+    const salt = this.generateSalt(semilla);
+    return shajs('sha256').update(password + salt).digest('hex');
   }
 
   isLoged(): boolean {
     return this.logged;
+  }
+
+  private generateSalt(semilla: number): string {
+    const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let salt = '';
+    let x;
+    for (let i = 0; i < 20; i++) {
+      x = Math.sin(semilla++) * 10000;
+      x -= Math.floor(x);
+      x = Math.floor(x * abc.length);
+      salt += abc.charAt(x);
+    }
+    return salt;
   }
 }
