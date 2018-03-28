@@ -32,8 +32,19 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   SignUp() {
     this.submitted = true;
-    this.user.Fecha_Nacimiento = this.databaseService.dateFormatter(this.user.Fecha_Nacimiento);
-    this.databaseService.addThis('ModeloUsuarios', this.user).then((result) => {
+    const fechaNacimiento = this.databaseService.dateFormatter(this.user.Fecha_Nacimiento);
+    const hashed = this.auth.hashAndSalt(this.user.Password);
+    this.databaseService.addThis('ModeloUsuarios', {
+      PrimerNombre: this.user.PrimerNombre,
+      SegundoNombre: this.user.SegundoNombre,
+      PrimerApellido: this.user.PrimerApellido,
+      SegundoApellido: this.user.SegundoApellido,
+      Cedula: this.user.Cedula,
+      Password: hashed,
+      Rol: this.user.Rol,
+      Correo: this.user.Correo,
+      Fecha_Nacimiento: fechaNacimiento
+    }).then((result) => {
       if (result['resultado'] === false) {
         document.getElementById('popup').hidden = false;
       } else if (result['resultado'] === true) {

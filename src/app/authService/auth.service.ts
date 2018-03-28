@@ -21,36 +21,36 @@ export class AuthService {
   currentUser = {};
   logged = false;
 
-  private hasher;
-
   constructor(private http: HttpClient, private database: DatabaseService, private cookies: CookieService) {
-
   }
 
   login(user: object): any {
-    (user as any).Password = this.hashAndSalt((user as any).Password);
-    this.database.getMe('ModeloUsuarios', user).then((result) => {
-      this.currentUser = result['resultado'][0];
-      this.http.post(base + 'login', {
-        usuario: this.currentUser,
-        password: this.clave
-      }).toPromise()
-        .then((resp) => {
-          if ((resp as any).token) {
-            if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
-              this.cookies.put('TallerMatienzo', (resp as any).token);
+    return new Promise((resolve, reject) => {
+      const hashed = this.hashAndSalt((user as any).Password);
+      this.database.getMe('ModeloUsuarios', {
+        Correo: (user as any).Correo,
+        Password: hashed
+      }).then((result) => {
+        this.currentUser = result['resultado'][0];
+        this.http.post(base + 'login', {
+          usuario: this.currentUser,
+          password: this.clave
+        }).toPromise()
+          .then((resp) => {
+            if ((resp as any).token) {
+              if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
+                this.cookies.put('TallerMatienzo', (resp as any).token);
+              }
             }
-          }
-        });
-      this.logged = true;
-      return this.currentUser;
-    }).catch((err) => {
+          });
+        this.logged = true;
+        resolve(this.currentUser);
+      }).catch((err) => {
         if (err) {
-          console.error(err);
-          return {};
+          reject(err);
         }
       });
-    return this.database.getMe('ModeloUsuarios', user);
+    });
   }
 
   getUser() {
