@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
           document.getElementById("popup").hidden = false;
         }
       }
+    }).catch((err) => {
+      console.error(err);
     });
   }
 

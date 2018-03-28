@@ -18,6 +18,9 @@ app.use(cors());
 const port = 3000;
 const private = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
 
+var usuarios = [];
+var d = new Date();
+
 const connection = mysql.createConnection({
 	host: 'kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
 	user: 'hoeyizbddk5yfbas',
@@ -29,6 +32,90 @@ cloudinary.config({
   cloud_name: 'dt2spmmet',
   api_key: '513593145424553',
   api_secret: 'k4oOmvSDAPWbSmZgfJxtKlDoMck'
+});
+
+app.post('/login', function(req, res) {
+  const password = req.body.password;
+  const usuario = req.body.usuario;
+  const tiempo = d.getTime();
+  if (private === password) {
+    if (usuario) {
+      for (var j = 0; j < usuarios.length; j++) {
+        if (usuarios[j].usuario.id === usuario.id) {
+          if ((usuarios[j].tiempo - d.getTime()) < 1800000) {
+            res.send({
+              token: usuarios[j].token
+            });
+            return;
+          }
+        }
+      }
+      const abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var token = '';
+      for (var i = 0; i < 30; i++) {
+        token += abc.charAt(Math.floor(Math.random() * abc.length ));
+      }
+      usuarios.push({
+        usuario: usuario,
+        tiempo: tiempo,
+        token: token
+      });
+      res.send({ token: token });
+    } else {
+      res.send({ err: 'Error: Undefined user' });
+    }
+  } else {
+    res.send({ err: 'Authentication failed' });
+  }
+});
+
+app.post('/logout', function(req, res) {
+  const password = req.body.password;
+  const token = req.body.token;
+  if (password === private) {
+    if (token) {
+      for (var i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].token === token) {
+          usuarios.splice(i, 1);
+          res.send({ resp: true });
+          return;
+        }
+      }
+      res.send({ err: 'Error: Undefined token '});
+    } else {
+      res.send({ err: 'Error: Undefined token' });
+    }
+  } else {
+    res.send({ err: 'Authentication failed' });
+  }
+});
+
+app.post('/checktoken', function(req, res) {
+  const password = req.body.password;
+  const token = req.body.token;
+  if (password === private) {
+    if (token) {
+      for (var i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].token === token) {
+          if ((usuarios[i].tiempo - d.getTime()) < 1800000) {
+            res.send({
+              usuario: usuarios[i].usuario
+            });
+            return;
+          } else {
+            usuarios.splice(i, 1);
+            res.send({ err: 'Token timeout' });
+            return;
+          }
+        }
+      }
+      res.send({ err: 'Error: Undefined token' });
+    } else {
+      res.send({ err: 'Error: Undefined token' });
+    }
+  } else {
+    res.send({ err: 'Authentication failed' });
+  }
 });
 
 app.post('/queries', function(req, res) {

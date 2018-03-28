@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ModeloUsuarios } from '../database/models/ModeloUsuarios';
 import { NgModule } from '@angular/core';
 import { DatabaseService } from '../database/database.service';
+import { AuthService} from '../authService/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 declare var $: any;
@@ -27,14 +28,14 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   submitted = false;
 
-  constructor(private databaseService: DatabaseService, private router: Router) { }
+  constructor(private databaseService: DatabaseService, private router: Router, private auth: AuthService) { }
 
   SignUp() {
     this.submitted = true;
     this.user.Fecha_Nacimiento = this.databaseService.dateFormatter(this.user.Fecha_Nacimiento);
     this.databaseService.addThis('ModeloUsuarios', this.user).then((result) => {
       if (result['resultado'] === false) {
-        document.getElementById("popup").hidden = false;
+        document.getElementById('popup').hidden = false;
       } else if (result['resultado'] === true) {
         this.router.navigate(['/login']);
       }
@@ -42,7 +43,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    document.getElementById("popup").hidden = true;
+    document.getElementById('popup').hidden = true;
   }
 
   ngAfterViewInit() {

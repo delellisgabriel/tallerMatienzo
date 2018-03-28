@@ -8,11 +8,10 @@ export class UserSelectService {
   constructor() { }
 
   selectUser(user: object) {
-this.user = user;
+    this.user = user;
   }
 
   getUser() {
-
     return this.user;
   }
 
