@@ -47,7 +47,7 @@
           <td>{{cita.FechaTentativaInicial}}</td>
           <td>{{cita.FechaTentativaFinal}}</td>
           <td>
-            <input [(ngModel)]="cita.FechaAsignada" materialize="pickadate" type="text" id="fechaAsignada" name="datepicker" required>
+            <input [(ngModel)]="cita.FechaAsignada" materialize="pickadate" type="text" id="fechaAsignada" name="datepicker" required">
             <label for="datepicker">FECHA TENTATIVA</label>
           </td>
           <td><button [disabled]="cita.FechaAsignada == null" (click)="asignar(cita)" class="btn waves-effect waves-light blue darken-1"><i class="material-icons white-text darken-1">assignment</i></button></td>

@@ -56,12 +56,12 @@
             <div class="row">
               <div class="input-field col s12 m6 l6">
                 <input id="datepicker" materialize="pickadate" name="fecha_inicial"
-                       [(ngModel)]="solicitud.FechaTentativaInicial" />
+                       [(ngModel)]="solicitud.FechaTentativaInicial" [materializeParams]="[{selectYears: 180, monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], weekdaysLetter: ['D', 'L', 'M', 'M', 'J', 'V', 'S'], today: 'Hoy', clear: 'Limpiar', format: 'yyyy-mm-dd'}]" />
                 <label for="fecha_inicial" class="active">A PARTIR DE</label>
               </div>
               <div class="input-field col s12 m6 l6">
                 <input id="datepicker" materialize="pickadate" name="fecha_final"
-                       [(ngModel)]="solicitud.FechaTentativaFinal" />
+                       [(ngModel)]="solicitud.FechaTentativaFinal" [materializeParams]="[{selectYears: 180, monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], weekdaysLetter: ['D', 'L', 'M', 'M', 'J', 'V', 'S'], today: 'Hoy', clear: 'Limpiar', format: 'yyyy-mm-dd'}]" />
                 <label for="fecha_final" class="active">HASTA</label>
               </div>
             </div>

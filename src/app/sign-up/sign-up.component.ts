@@ -32,7 +32,6 @@ export class SignUpComponent implements OnInit, AfterViewInit {
 
   SignUp() {
     this.submitted = true;
-    const fechaNacimiento = this.databaseService.dateFormatter(this.user.Fecha_Nacimiento);
     const hashed = this.auth.hashAndSalt(this.user.Password);
     this.databaseService.addThis('ModeloUsuarios', {
       PrimerNombre: this.user.PrimerNombre,
@@ -43,7 +42,7 @@ export class SignUpComponent implements OnInit, AfterViewInit {
       Password: hashed,
       Rol: this.user.Rol,
       Correo: this.user.Correo,
-      Fecha_Nacimiento: fechaNacimiento
+      Fecha_Nacimiento: this.user.Fecha_Nacimiento
     }).then((result) => {
       if (result['resultado'] === false) {
         document.getElementById('popup').hidden = false;
