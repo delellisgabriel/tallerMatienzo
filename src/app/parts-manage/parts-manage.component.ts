@@ -54,6 +54,7 @@ export class PartsManageComponent implements OnInit {
   }
 
    ngOnInit() {
+     if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
      this.formCreate();
   }
 

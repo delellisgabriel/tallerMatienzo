@@ -1,44 +1,66 @@
 <app-side-bar-fav></app-side-bar-fav>
 <div class="container">
   <div class="section">
-
-    <!-- Video -->
-    <div [hidden]="showVideo" >
-      <div class="row center">
-        <div class="col hide-on-small-only m3 l3"></div>
-        <div class="col s12 m6 l6">
-          <h5 class="light">Escanea el codigo QR del vehiculo</h5>
-          <video class="booth" #videoplayer [width]="width" [height]="height" autoplay></video>
-        </div>
-        <div class="col hide-on-small-only m3 l3"></div>
-      </div>
-
-      <div class="row center">
-        <div class="col hide-on-small-only m3 l3"></div>
-        <div class="col s12 m6 l6">
-          <button class="btn-large waves-effect waves-light blue darken-1" id="snap" (click)="capture()">Tomar Foto</button>
-        </div>
-        <div class="col hide-on-small-only m3 l3"></div>
-      </div>
-    </div>
-    <!-- Canvas de Foto -->
-
-      <div [hidden]="!showVideo" >
-        <div class="row center">
-          <div class="col hide-on-small-only m3 l3"></div>
-          <div class="col s12 m6 l6">
-            <canvas class="booth" #canvas [width]="width" [height]="height"></canvas>
+    <div *ngIf="cargando">
+      <div class="row">
+        <div class="col s12 m12 l12 center-align">
+          <br /><br /><br /><br /><br /><br /><br /><br />
+          <h5 class="light center">Por favor, espere mientras verificamos su codigo. </h5>
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
           </div>
-          <div class="col hide-on-small-only m3 l3"></div>
+          <br /><br /><br /><br /><br /><br /><br /><br />
         </div>
-    <div class="row center">
-      <div class="col hide-on-small-only m3 l3" ></div>
-      <div class="col s12 m6 l6">
-        <button class="btn-large waves-effect waves-light blue darken-1" id="save" (click)="saveImage()">Enviar Foto</button>
-        <button class="btn-large waves-effect waves-light blue darken-1" id="retake" (click)="retake()">Volver a Tomar</button>
       </div>
-      <div class="col hide-on-small-only m3 l3"></div>
     </div>
-  </div>
+
+      <div *ngIf="!cargando">
+        <!-- Video -->
+        <div [hidden]="showVideo">
+          <div class="row center">
+            <div class="col hide-on-small-only m3 l3"></div>
+            <div class="col s12 m6 l6">
+              <h5 class="light">Escanea el codigo QR del vehiculo</h5>
+              <video class="booth" #videoplayer [width]="width" [height]="height" autoplay></video>
+            </div>
+            <div class="col hide-on-small-only m3 l3"></div>
+          </div>
+
+          <div class="row center">
+            <div class="col hide-on-small-only m3 l3"></div>
+            <div class="col s12 m6 l6">
+              <button class="btn-large waves-effect waves-light blue darken-1" id="snap" (click)="capture()">Tomar Foto</button>
+            </div>
+            <div class="col hide-on-small-only m3 l3"></div>
+          </div>
+        </div>
+        <!-- Canvas de Foto -->
+
+        <div [hidden]="!showVideo">
+          <div class="row center">
+            <div class="col hide-on-small-only m3 l3"></div>
+            <div class="col s12 m6 l6">
+              <canvas class="booth" #canvas [width]="width" [height]="height"></canvas>
+            </div>
+            <div class="col hide-on-small-only m3 l3"></div>
+          </div>
+          <div class="row center">
+            <div class="col hide-on-small-only m3 l3"></div>
+            <div class="col s12 m6 l6">
+              <button class="btn-large waves-effect waves-light blue darken-1" id="save" (click)="readImg()">Enviar Foto</button>
+              <button class="btn-large waves-effect waves-light blue darken-1" id="retake" (click)="retake()">Volver a Tomar</button>
+            </div>
+            <div class="col hide-on-small-only m3 l3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
-  </div>

@@ -10,13 +10,23 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class SideBarFavComponent implements OnInit {
 
   userID = '';
-  userRol = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userID = this.authService.currentUser["idUsuario"];
-    this.userRol = this.authService.currentUser["Rol"];
+  }
+
+  ngOnChanges() {
+    this.userID = this.authService.currentUser["idUsuario"];
+  }
+
+  ngAfterContentInit() {
+    this.userID = this.authService.currentUser["idUsuario"];
+  }
+
+  ngAfterViewInit() {
+    this.userID = this.authService.currentUser["idUsuario"];
   }
 
 }

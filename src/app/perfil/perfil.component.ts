@@ -18,7 +18,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     idUsuario: '',
   };
 
-  constructor(private authService: AuthService, private database: DatabaseService, private router: Router) { }
+  constructor(private auth: AuthService, private database: DatabaseService, private router: Router) { }
 
   modificarPerfil() {
     this.database.changeThis('ModeloUsuarios', this.userViejo, this.user)
@@ -28,10 +28,11 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
     document.getElementById("popup").hidden = true;
-    this.user = this.authService.getUser();
+    this.user = this.auth.getUser();
     delete this.user["Vehiculos"];
-    this.userViejo.idUsuario = this.authService.getUser()["idUsuario"];
+    this.userViejo.idUsuario = this.auth.getUser()["idUsuario"];
     console.log(this.user, this.userViejo);
   }
 

@@ -6,6 +6,7 @@ import { DatabaseService } from '../database/database.service';
 export class AuthService {
 
   currentUser = {};
+  loged = false;
 
   constructor(private http: HttpClient, private database: DatabaseService) {
   }
@@ -13,11 +14,17 @@ export class AuthService {
   login(user: object): Promise<Object> {
     this.database.getMe('ModeloUsuarios', user).then((result) => {
       this.currentUser = result["resultado"][0];
+      this.loged = true;
     });
     return this.database.getMe('ModeloUsuarios', user);
   }
 
   getUser() {
     return this.currentUser;
+  }
+
+  isLoged(): boolean {
+    return this.loged;
+
   }
 }

@@ -4,7 +4,23 @@
 <div class="container">
   <div class="section">
     <div *ngIf="loading">
-      <h1 class="center-align">Cargando! :P</h1>
+      <div class="row">
+        <br /><br /><br /><br /><br /><br /><br /><br />
+        <div class="col s12 m12 l12 center-align">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+      </div>
     </div>
 <div class="row" *ngIf="!loading">
   <div class="col s12 m12 l12" >

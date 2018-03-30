@@ -2,9 +2,9 @@
   <ul id="dashmenu" class="side-nav">
 
     <li><label>Cliente</label></li>
-    <li><a routerLink="/mycars/{{userID}}">Mis Autos</a></li>
-    <li><a routerLink="/solicitudcita/{{userID}}">Solicitar Citas</a></li>
-    <li><a routerLink="/perfil/{{userID}}">Mi Perfil</a></li>
+    <li><a routerLink="/mycars">Mis Autos</a></li>
+    <li><a routerLink="/solicitudcita">Solicitar Citas</a></li>
+    <li><a routerLink="/perfil">Mi Perfil</a></li>
     <li><div class="divider"></div></li>
     <li *ngIf="userRol==1"><label>Gerencia</label></li>
     <li *ngIf="userRol==1"><a routerLink="/colacitas">Gestion de Citas</a></li>
@@ -21,8 +21,13 @@
     <li *ngIf="userRol==3"><a routerLink="/parts-search">Repuestos</a></li>
 
   </ul>
-  <div class="fixed-action-btn">
-    <a data-activates="dashmenu" class="button-collapse btn-floating btn-large orange darken-4 pulse">
+  <div class="hide-on-small-only fixed-action-btn">
+    <a data-activates="dashmenu" class="button-collapse btn-floating btn-large blue darken-1 pulse">
+      <i class="large material-icons">menu</i>
+    </a>
+  </div>
+  <div class="hide-on-med-and-up fixed-action-btn">
+    <a data-activates="dashmenu" class="button-collapse btn-floating btn-large blue darken-1">
       <i class="large material-icons">menu</i>
     </a>
   </div>

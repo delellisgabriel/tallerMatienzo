@@ -23,12 +23,10 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { DashclientComponent } from './dashclient/dashclient.component';
 import { MycarsComponent } from './mycars/mycars.component';
 import { CarregisterComponent } from './carregister/carregister.component';
-import { AutoselectedComponent } from './autoselected/autoselected.component';
 import { GenRepComponent } from './gen-rep/gen-rep.component';
 import { SolicitudcitaComponent } from './solicitudcita/solicitudcita.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ColacitasComponent } from './colacitas/colacitas.component';
-import { RecibirvehiculoComponent } from './recibirvehiculo/recibirvehiculo.component';
 import { ModificararchivoComponent } from './modificararchivo/modificararchivo.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -37,8 +35,8 @@ import { PartsManageComponent } from './parts-manage/parts-manage.component';
 import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
-//Canvas
-import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard/index';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CamaraComponent } from './camara/camara.component';
 //Servicios
 import { AuthService } from './authService/auth.service';
 import { DatabaseService } from './database/database.service';
@@ -47,10 +45,8 @@ import { CarSelectService } from "./car-select/car-select.service";
 import { OrdenSelectService } from "./orden-select/orden-select.service";
 import { PartsService } from "./parts/parts.service";
 import { EmailService } from './email/email-service.service';
-import { CamaraComponent } from './camara/camara.component';
-import { CamaraService } from './camara/camara.service';
 import { QrService } from './qrService/qr.service';
-import { CarCanvasComponent } from './car-canvas/car-canvas.component';
+
 
 
 declare var $: any;
@@ -69,12 +65,10 @@ declare var $: any;
     DashclientComponent,
     MycarsComponent,
     CarregisterComponent,
-    AutoselectedComponent,
     GenRepComponent,
     SolicitudcitaComponent,
     PerfilComponent,
     ColacitasComponent,
-    RecibirvehiculoComponent,
     ModificararchivoComponent,
     UserManagerComponent,
     UserDetailComponent,
@@ -86,7 +80,7 @@ declare var $: any;
     PartModifyComponent,
     CarHistorialComponent,
     CamaraComponent,
-    CarCanvasComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,7 +89,6 @@ declare var $: any;
     HttpClientModule,
     ReactiveFormsModule,
     MaterializeModule,
-    CanvasWhiteboardModule,
   ],
   providers: [
     DatabaseService,
@@ -105,8 +98,7 @@ declare var $: any;
     OrdenSelectService,
     PartsService,
     EmailService,
-    CamaraService,
-    QrService
+    QrService,
   ],
   bootstrap: [AppComponent]
 })

@@ -4,63 +4,85 @@
 
 <div class="container">
   <div class="section">
-    <br><br><br>
-    <div class="row">
-      <div *ngIf="cars == false">
-        <br /><br />
-          <h3 class="waves-light center">Debe registrar un vehiculo primero!</h3>
-        <br /><br /><br /><br /><br /><br /><br />
+    <div *ngIf="cargando">
+      <br /><br /><br /><br /><br />
+      <div class="row">
+        <div class="col s12 m12 l12 center-align">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <form *ngIf="cars == true" materialize (submit)="solicitarCita()" >
-        <div class="form-group col s12 m12 l12">
-          <div class="row">
-            <div class="input-field col s12 m6 l6">
-
-              <select [(ngModel)]="solicitud.idAux" materialize="material_select" name="idVehiculo">
-                <option value="" disabled>Selecciona un vehiculo</option>
-                <option *ngFor="let carro of userVehiculos" [value]="carro.idVehiculo">
-                  {{ carro.Marca }} {{ carro.Modelo }}
-                </option>
-              </select>
-              <label>Vehiculo</label>
-            </div>
-
-            <div class=" input-fueld col s12 m6 l6">
-              <label for="motivo">MOTIVO</label>
-              <input id="motivo" class="validate" type="text" name="motivo" [(ngModel)]="solicitud.Motivo" required />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12 m6 l6">
-              <input id="datepicker" materialize="pickadate" name="fecha_inicial"
-                     [(ngModel)]="solicitud.FechaTentativaInicial" />
-              <label for="fecha_inicial" class="active">A PARTIR DE</label>
-            </div>
-            <div class="input-field col s12 m6 l6">
-              <input id="datepicker" materialize="pickadate" name="fecha_final"
-                     [(ngModel)]="solicitud.FechaTentativaFinal" />
-              <label for="fecha_final" class="active">HASTA</label>
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="row">
-          <div class="col s12 m12 l12 center-align ">
-            <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit">
-              Solicitar
-            </button>
-          </div>
-        </div>
-
-      </form>
-
-
-
+      <br /><br /><br /><br /><br />
     </div>
 
+    <div *ngIf="!cargando">
+      <br><br><br>
+      <div class="row">
+        <div *ngIf="cars == false">
+          <br /><br />
+          <h3 class="waves-light center">Debe registrar un vehiculo primero!</h3>
+          <br /><br /><br /><br /><br /><br /><br />
+        </div>
+
+        <form *ngIf="cars == true" materialize (submit)="solicitarCita()">
+          <div class="form-group col s12 m12 l12">
+            <div class="row">
+              <div class="input-field col s12 m6 l6">
+
+                <select [(ngModel)]="solicitud.idAux" materialize="material_select" name="idVehiculo">
+                  <option value="" disabled>Selecciona un vehiculo</option>
+                  <option *ngFor="let carro of userVehiculos" [value]="carro.idVehiculo">
+                    {{ carro.Marca }} {{ carro.Modelo }}
+                  </option>
+                </select>
+                <label>Vehiculo</label>
+              </div>
+
+              <div class=" input-fueld col s12 m6 l6">
+                <label for="motivo">MOTIVO</label>
+                <input id="motivo" class="validate" type="text" name="motivo" [(ngModel)]="solicitud.Motivo" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12 m6 l6">
+                <input id="datepicker" materialize="pickadate" name="fecha_inicial"
+                       [(ngModel)]="solicitud.FechaTentativaInicial" />
+                <label for="fecha_inicial" class="active">A PARTIR DE</label>
+              </div>
+              <div class="input-field col s12 m6 l6">
+                <input id="datepicker" materialize="pickadate" name="fecha_final"
+                       [(ngModel)]="solicitud.FechaTentativaFinal" />
+                <label for="fecha_final" class="active">HASTA</label>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col s12 m12 l12 center-align ">
+              <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit">
+                Solicitar
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
   </div>
 </div>

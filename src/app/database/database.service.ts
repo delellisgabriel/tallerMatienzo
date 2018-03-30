@@ -207,7 +207,6 @@ export class DatabaseService {
   }
 
   BLOB2Base64(Array) {
-    console.log(typeof Array);
     if (!Array) {
       console.error('Imagen inválida.');
       return null;
@@ -314,7 +313,7 @@ export class DatabaseService {
               const modeloDebil = this.modelos[subModelo['modeloDebil']];
               inner += ' left join ' + modeloDebil['tabla'] + ' on ';
               inner += modeloDebil['tabla'] + '.' + subModelo['FK'] + ' = ' + model['tabla'] + '.' + this.encuentraID(model);
-              inner += ' right join ' + modeloExterno['tabla'] + ' on ';
+              inner += ' left join ' + modeloExterno['tabla'] + ' on ';
               inner += modeloExterno['tabla'] + '.' + this.encuentraID(modeloExterno)
                 + ' = ' + modeloDebil['tabla'] + '.' + subModelo['FKDebil'];
               break;

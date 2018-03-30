@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\backend",
+    "\\e2e",
+    "\\fonts",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\car-canvas",
-    "\\src\\app\\car-historial",
-    "\\src\\app\\colacitas",
     "\\src\\app\\dashclient",
-    "\\src\\app\\footer",
-    "\\src\\app\\home",
-    "\\src\\app\\side-bar-fav"
+    "\\src\\app\\not-found",
+    "\\src\\app\\side-bar-fav",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\styles.css",
+  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
   "PreviewInSolutionExplorer": false
 }

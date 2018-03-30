@@ -3,6 +3,7 @@ import { DatabaseService } from "../database/database.service";
 import { CarSelectService } from "../car-select/car-select.service";
 import { OrdenSelectService } from "../orden-select/orden-select.service";
 import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -14,26 +15,37 @@ declare var $: any;
 export class CarHistorialComponent implements OnInit {
 
   vehiculo = {
-    idVehiculo: '',
+    idVehiculo: 0,
   };
+
+  carModified = {};
 
   ordenes = [];
 
   constructor(private database: DatabaseService, private carSelect: CarSelectService, private orden: OrdenSelectService,
-              private router: Router) { }
+              private router: Router, private auth: AuthService) { }
 
   deshabilitar() {
+    var r = confirm("Seguro que desea inhabilitar este vehiculo?!");
+    if (r == true) {
+      this.carModified['Activado'] = false;
+      this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
+        console.log(res);
+        this.router.navigate(['dashclient']);
+      });
+    }
 
-    //TODO
   }
 
   detallesOrden(orden: object) {
     this.orden.ordenSelect(orden);
-    this.router.navigate(['autoselected', orden['idOrdenReparacion']]);
+    this.router.navigate(['autoselected']);
   }
 
   ngOnInit() {
-    this.vehiculo.idVehiculo = this.carSelect.getCar()['idVehiculo'];
+    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    this.vehiculo.idVehiculo = Number(this.carSelect.getCar()['idVehiculo']);
+    console.log(this.vehiculo)
     this.database.getMe('ModeloOrdenReparacion', this.vehiculo).then((result) => {
       console.log(result);
       this.ordenes = result['resultado'];

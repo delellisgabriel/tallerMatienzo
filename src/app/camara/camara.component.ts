@@ -1,5 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
-import { CamaraService } from "./camara.service";
+import { HttpClient } from "@angular/common/http";
+import { QrService } from "../qrService/qr.service";
+import { CarSelectService } from "../car-select/car-select.service";
+import { Router } from "@angular/router";
+import { AuthService } from "../authService/auth.service";
 
 declare var $: any;
 
@@ -13,17 +17,24 @@ export class CamaraComponent implements OnInit {
   @ViewChild('videoplayer') videoPlayer: any;
   @ViewChild('canvas') canvas: any;
   public showVideo: any = false;
+  public codigoQR: any;
+  public cargando: any;
 
   context: any;
 
-  constructor(private camaraService: CamaraService) { }
+  constructor(private http: HttpClient, private qrService: QrService, private car: CarSelectService, private router: Router, private auth: AuthService) { }
 
   @Input() width: number;
   @Input() height: number;
 
   ngOnInit() {
+    if (!this.auth.isLoged()) {
+      this.router.navigate(['/404']);
+      this.cargando = true;
+    }
     this.width = 500;
     this.height = 400;
+    this.cargando = false;
 
   }
 
@@ -40,9 +51,7 @@ export class CamaraComponent implements OnInit {
 
 
     this.context = this.canvas.nativeElement.getContext('2d');
-    console.log(this.context);
-    console.log(this.videoPlayer.nativeElement.width);
-    console.log(this.videoPlayer.nativeElement.height);
+
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -57,35 +66,36 @@ export class CamaraComponent implements OnInit {
     this.context = this.canvas.nativeElement.getContext('2d');
     this.context.drawImage(this.videoPlayer.nativeElement, 0, 0, this.width, this.height);
     this.showVideo = true;
+    this.codigoQR = this.canvas.nativeElement.toDataURL('img/png');
   }
 
   retake() {
     this.showVideo = false;
   }
 
-  saveImage() {
-    this.showVideo = false;
-    let imgData: any = this.canvas.nativeElement.toDataURL('img/png');
-    imgData = imgData.replace('data:image/png;base64,', '');
-    let postData: any = JSON.stringify({
-      'ImageBase64String': imgData,
-    });
-
-  /*this.camaraService.sendImage(postData).then
-    ( //metodo en el servicio, que retorne una promesa
-        (resp) =>
-      {
-      console.log(resp);
-
-      //TODO Manejo de la imagen
-
-      }.catch
-      ((err) =>
-        {
-        console.log('Algo salio mal');
+  readImg() {
+    this.cargando = true;
+    this.qrService.leerQR(this.codigoQR)
+      .then((resp) => {
+        console.log(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']);
+        if (JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data'] != null) {
+          var vehiculo = {
+            idVehiculo: Number(JSON.parse(resp['resp']['body'])[0]['symbol'][0]['data']),
+          };
+          this.car.selectCar(vehiculo);
+          this.cargando = false;
+          this.router.navigate(['modificararchivo']);
+        } else {
+          console.log('entre');
+          alert('No pudimos encontrar este codigo, porfavor intente de nuevo');
+          this.router.navigate(['/dashclient']);
+          this.cargando = false;
         }
-      )
-    );*/
-    }
+      })
+      .catch((err) => {
+        this.cargando = false;
+        console.log(err);
+      });
+  }
 
 }

@@ -1,45 +1,65 @@
-<footer class="page-footer blue darken-1">
+<footer class="market-grey page-footer">
   <div class="container">
     <div class="row">
-      <div class="hide-on-small-only col m3 l3 center-align">
-        <h5 class="white-text">Taller Matienzo</h5>
-        <ul>
-          <li><a class="white-text">Realizado por:</a></li>
-          <li><a class="white-text">Gabriel De Lellis</a></li>
-          <li><a class="white-text">Gabriele Troncone</a></li>
-          <li><a class="white-text">Maximiliano Casale</a></li>
+      <!--First Col-->
+      <div class="col m8 l9 s12">
+        <h5 class="hide-on-small-only footer-title">ENLACES</h5>
+        <h5 class="hide-on-med-and-up footer-title center-align">ENLACES</h5>
+        <ul class="hide-on-small-only">
+          <li>
+            <a style="font-size: 1.3em; margin-right: 15px;" class="" routerLink="/">Inicio</a>
+            <a style="font-size: 1.3em; margin-right: 15px;" class="" routerLink="/contacto">Contacto</a>
+            <a style="font-size: 1.3em; margin-right: 15px;" class="" routerLink="/equipo">Equipo</a>
+            <a style="font-size: 1.3em; margin-right: 15px;" class="" routerLink="/signup">Registrar</a>
+          </li>
+        </ul>
+        <ul class="hide-on-med-and-up center-align">
+          <li>
+            <a style="margin-right: 5px;" class="" routerLink="/">Inicio</a>
+            <a style="margin-right: 5px;" class="" routerLink="/contacto">Contacto</a>
+            <a style="margin-right: 5px;" class="" routerLink="/equipo">Equipo</a>
+            <a style="margin-right: 5px;" class="" routerLink="/signup">Registrar</a>
+          </li>
         </ul>
       </div>
-      <div class="col m3 l3 s12 center-align">
-        <h5 class="white-text">Navegacion</h5>
-        <ul>
-          <li><a class="white-text" routerLink="/">Inicio</a></li>
-          <li><a class="white-text" routerLink="/contacto">Contacto</a></li>
-          <li><a class="white-text" routerLink="/equipo">Equipo</a></li>
-          <li><a class="white-text" routerLink="/signup">Registrar</a></li>
+      <!--END First Col-->
+      <!--Third Col-->
+      <div class="hide-on-med-and-up s12">
+        <h5 class="footer-title center-align">REDES SOCIALES</h5>
+        <ul class="center-align">
+          <li>
+            <a style="font-size: 1.3em; margin-right: 10px; margin-left: 18px;" routerLink="/">   <i class="icon-instagram"></i></a>
+            <a style="font-size: 1.3em; margin-right: 10px;" routerLink="/">     <i class="icon-twitter"></i></a>
+            <a style="font-size: 1.3em; margin-right: 10px;" routerLink="/">    <i class="icon-facebook"></i></a>
+            <a style="font-size: 1.3em; margin-right: 10px;" routerLink="/"><i class="icon-youtube-play"></i></a>
+          </li>
         </ul>
       </div>
-      <div class="col m3 l3 s12 center-align">
-        <h5 class="white-text">-</h5>
+      <div class="hide-on-small-only col m4 l3">
+        <h5 class="footer-title">TALLER MATIENZO</h5>
         <ul>
-          <li><a class="white-text" routerLink="/mycars">Mis Autos</a></li>
-          <li><a class="white-text" routerLink="/perfil">Mi Perfil</a></li>
-          <li><a class="white-text" routerLink="/solicitudcita">Solicitar Cita</a></li>
-          <li><a class="white-text" routerLink="#!">-</a></li>
+          <li *ngIf="!userID">
+            <a style="margin-right: 1px; margin-top: 4px;" routerLink="/signup" id="download-button" class="truncate btn waves-effect waves-light blue darken-1">REGISTRO</a>
+            <a style="margin-top: 4px;" routerLink="/login" id="download-button" class="truncate btn waves-effect waves-light blue darken-1">INGRESO</a>
+          </li>
+          <li *ngIf="userID"><h1>XDXD hola</h1></li>
         </ul>
       </div>
-      <div class="col m3 l3 s12 center-align">
-        <h5 class="white-text">Redes Sociales</h5>
-        <a routerLink="" class="icon-button facebook  tooltipped" data-position="bottom" data-delay="50" data-tooltip="Facebook"><i  class="icon-facebook"></i><span></span></a>
-        <a routerLink="" class="icon-button twitter   tooltipped" data-position="bottom" data-delay="50" data-tooltip="Twitter"><i   class="icon-twitter"></i><span></span></a>
-        <a routerLink="" class="icon-button instagram tooltipped" data-position="bottom" data-delay="50" data-tooltip="Instagram"><i class="icon-instagram"></i><span></span></a>
-        <a routerLink="" class="icon-button youtube   tooltipped" data-position="bottom" data-delay="50" data-tooltip="Youtube"><i   class="icon-youtube-play"></i><span></span></a>
-      </div>
+      <!--END Third Col-->
     </div>
   </div>
+  <!--BEGINNING FOOTER COPYRIGHT-->
   <div class="footer-copyright center-align">
     <div class="container">
-      Taller Matienzo 2018 <a class="white-text text-lighten-3" routerLink="#">Todos los Derechos Reservados. Desarrollado por: Metropaveo Solutions.</a>
+      <span class="hide-on-small-only left">Taller Matienzo 2018 <a class="white-text text-lighten-3" routerLink="/">Todos los Derechos Reservados. Desarrollado por: Metropaveo Solutions.</a></span>
+      <span class="hide-on-small-only right">
+        <a style="font-size: 1.3em;" routerLink="/"><i class="icon-instagram footer-title"></i></a>
+        <a style="font-size: 1.3em;" routerLink="/"><i class="icon-twitter footer-title"></i></a>
+        <a style="font-size: 1.3em;" routerLink="/"><i class="icon-facebook footer-title"></i></a>
+        <a style="font-size: 1.3em;" routerLink="/"><i class="icon-youtube-play footer-title"></i></a>
+      </span>
+      <span class="hide-on-med-and-up">Taller Matienzo 2018 <a class="white-text text-lighten-3" routerLink="/">Todos los Derechos Reservados. Desarrollado por: Metropaveo Solutions.</a></span>
     </div>
   </div>
+  <!--END FOOTER COPYRIGHT-->
 </footer>

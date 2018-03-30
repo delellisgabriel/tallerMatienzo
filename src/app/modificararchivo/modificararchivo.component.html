@@ -19,113 +19,328 @@
 
 <div class="container">
   <div class="section">
-
+    <h5 class="light center">Vehículo</h5>
+    <div class="divider"></div>
+    <br />
     <div class="row">
-      <form class="col s12 m12 l12">
+      <form >
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">SERIAL</label>
+            <input id="serial" type="text" class="validate" disabled name="serial" [(ngModel)]="vehiculo.SerialMotor">
+            <label class="active" for="serial">SERIAL</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="last_name" type="text" class="validate">
-            <label for="lastName">MODELO</label>
+            <input id="modelo" type="text" class="validate" disabled name="modelo" [(ngModel)]="vehiculo.Modelo">
+            <label class="active" for="modelo">MODELO</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">date_range</i>
-            <input id="icon_prefix" type="number" class="validate">
-            <label for="icon_prefix">AÑO</label>
+            <input id="ano" type="number" class="validate" disabled name="ano" [(ngModel)]="vehiculo.Ano">
+            <label class="active" for="ano">AÑO</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
-            <label for="lastName">PLACA</label>
-            <input type="text" class="datepicker">
-
+            <input type="text" class="validate" disabled name="placa" [(ngModel)]="vehiculo.Placa">
+            <label class="active" for="lastName">PLACA</label>
           </div>
         </div>
-        <!-- 3era fila -->
-        <div class="row">
-          <div class="input-field col s12 m6 l6">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">DIAGNOSTICO</label>
-          </div>
-          <div class="input-field col s12 m6 l6">
-            <textarea id="textarea1" class="materialize-textarea"></textarea>
-            <label for="textarea1">REPUESTOS</label>
-          </div>
-        </div>
+        <h5 class="light center">Recepción</h5>
+        <div class="divider"></div>
+        <br/>
         <!-- 4ta fila -->
         <div class="row">
-          <div class="col s12 m6 l6">
-            <p>
-              <input type="checkbox" id="test1" />
-              <label for="test1">Caucho de Repuesto</label>
-            </p>
-            <p>
-              <input type="checkbox" id="test2" />
-              <label for="test2">Llaves</label>
-            </p>
-            <p>
-              <input type="checkbox" id="test3" />
-              <label for="test3">Gato</label>
-            </p>
+          <div class="input-field col s12 m6 l6">
+              <input type="text" class="validate" id="caucho" [disabled]="user.Rol != 1" name="cauchos" [(ngModel)]="orden.Cauchos"/>
+              <label for="caucho">Caucho de Repuesto</label>
+            </div>
+            <div class="input-field col s12 m6 l6">
+                <input type="text" class="validate" id="llaves" [disabled]="user.Rol != 1" name="llaves" [(ngModel)]="orden.Llaves"/>
+                <label for="llaves">Llaves</label>
+             </div>
           </div>
-          <div class="col s12 m6 l6">
-            <p>
-              <input type="checkbox" id="test4" />
-              <label for="test4">Herramientas</label>
-            </p>
-            <p>
-              <input type="checkbox" id="test5" />
-              <label for="test5">Equipo de Sonido</label>
-            </p>
-            <p>
-              <input type="checkbox" id="test6" />
-              <label for="test6">Otros</label>
-            </p>
-          </div>
-        </div>
-        <!-- 5ta fila -->
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">account_box</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">MECANICO</label>
+            <input type="text" class="validate" id="gato" [disabled]="user.Rol != 1" name="gato" [(ngModel)]="orden.Gato"/>
+            <label for="gato">Gato</label>
           </div>
           <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">content_paste</i>
-            <input id="icon_prefix" type="text" class="validate">
-            <label for="icon_prefix">OTROS</label>
+            <input type="text" class="validate" id="herramientas" [disabled]="user.Rol != 1" name="herramientas" [(ngModel)]="orden.Herramientas"/>
+            <label for="herramientas">Herramientas</label>
           </div>
         </div>
         <div class="row">
-          <div class="file-field input-field col s12 m12 l12">
-            <div class="btn waves-effect waves-light blue darken-1">
-              <span>File</span>
-              <input type="file" accept=".png, .jpg, .jpeg" >
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
-            </div>
+          <div class="input-field col s12 m6 l6">
+            <input type="text" class="validate" id="sonido" [disabled]="user.Rol != 1" name="sonido" [(ngModel)]="orden.EquipoSonido"/>
+            <label for="sonido">Equipo de Sonido</label>
+          </div>
+          <div class="input-field col s12 m6 l6">
+            <input type="text" class="validate" id="otros" [disabled]="user.Rol != 1" name="otros" [(ngModel)]="orden.Otros"/>
+            <label for="otros">Otros</label>
           </div>
         </div>
         <!-- 6ta fila -->
-        <div class="row center">
-          <div class="col s12 m6 l6">
-            <img class="responsive-img" src="http://cdn.bmwblog.com/wp-content/uploads/BMW-Gran-Coupe-2.jpg" />
+        <div class="row center" >
+          <div class="col s1 m1 l1"></div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Front1_NoMark.png" onclick=" 
+      if (this.src === 'http://localhost:4200/assets/Front1_Mark.png') {
+        this.src = 'assets/Front1_NoMark.png';
+      } else {
+        this.src = 'assets/Front1_Mark.png';
+      }" />
           </div>
-          <div class="col s12 m6 l6">
-            <img class="responsive-img" src="http://img.turbo.fr/04353116-photo-bmw-serie-6-gran-coupe-premiers-croquis.jpg" />
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Front2_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Front2_Mark.png') {
+                                                                                    this.src = 'assets/Front2_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Front2_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Front3_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Front3_Mark.png') {
+                                                                                    this.src = 'assets/Front3_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Front3_Mark.png';
+                                                                                  }" /> 
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Front4_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Front4_Mark.png') {
+                                                                                    this.src = 'assets/Front4_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Front4_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="col s2 m2 l2"></div> <!-- SEPARACION DEL MEDIO-->
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Back1_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Back1_Mark.png') {
+                                                                                    this.src = 'assets/Back1_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Back1_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Back2_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Back2_Mark.png') {
+                                                                                    this.src = 'assets/Back2_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Back2_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Back3_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Back3_Mark.png') {
+                                                                                    this.src = 'assets/Back3_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Back3_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Back4_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Back4_Mark.png') {
+                                                                                    this.src = 'assets/Back4_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Back4_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="col s1 m1 l1"></div>
+        </div>
+        <!-- Top View -->
+        <div class="row center no-margin">
+          <div class="collage col s3 m3 l3"></div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top1_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top1_Mark.png') {
+                                                                                    this.src = 'assets/Top1_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top1_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top2_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top2_Mark.png') {
+                                                                                    this.src = 'assets/Top2_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top2_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top3_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top3_Mark.png') {
+                                                                                    this.src = 'assets/Top3_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top3_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top4_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top4_Mark.png') {
+                                                                                    this.src = 'assets/Top4_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top4_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top5_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top5_Mark.png') {
+                                                                                    this.src = 'assets/Top5_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top5_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top6_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top6_Mark.png') {
+                                                                                    this.src = 'assets/Top6_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top6_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s3 m3 l3"></div>
+        </div>
+        <div class="row center">
+          <div class="collage col s3 m3 l3"></div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top7_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top7_Mark.png') {
+                                                                                    this.src = 'assets/Top7_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top7_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top8_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top8_Mark.png') {
+                                                                                    this.src = 'assets/Top8_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top8_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top9_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top9_Mark.png') {
+                                                                                    this.src = 'assets/Top9_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top9_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top10_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top10_Mark.png') {
+                                                                                    this.src = 'assets/Top10_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top10_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top11_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top11_Mark.png') {
+                                                                                    this.src = 'assets/Top11_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top11_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Top12_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Top12_Mark.png') {
+                                                                                    this.src = 'assets/Top12_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Top12_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s3 m3 l3"></div>
+        </div>
+        <!-- Lateral View -->
+        <div class="row center">
+          <div class="collage col s3 m3 l3"></div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat1_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat1_Mark.png') {
+                                                                                    this.src = 'assets/Lat1_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat1_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat2_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat2_Mark.png') {
+                                                                                    this.src = 'assets/Lat2_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat2_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat3_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat3_Mark.png') {
+                                                                                    this.src = 'assets/Lat3_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat3_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat4_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat4_Mark.png') {
+                                                                                    this.src = 'assets/Lat4_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat4_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat5_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat5_Mark.png') {
+                                                                                    this.src = 'assets/Lat5_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat5_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s1 m1 l1">
+            <img class="responsive-img" src="assets/Lat6_NoMark.png" onclick="
+                                                                                  if (this.src === 'http://localhost:4200/assets/Lat6_Mark.png') {
+                                                                                    this.src = 'assets/Lat6_NoMark.png';
+                                                                                  }else {
+                                                                                    this.src = 'assets/Lat6_Mark.png';
+                                                                                  }" />
+          </div>
+          <div class="collage col s3 m3 l3"></div>
+        </div>
+        <!-- fin views-->
+        <h5 class="light center">Mecánico</h5>
+        <div class="divider"></div>
+        <br />
+        <!-- 5ta fila -->
+        <div class="row">
+          <div class="col hide-on-small-only m2 l2"></div>
+          <div class="input-field col s12 m8 l8">
+            <i class="material-icons prefix">account_box</i>
+            <input id="mecanico" type="text" class="validate" [disabled]="user.Rol != 1">
+            <label for="mecanico">MECANICO</label>
+          </div>
+          <div class="col hide-on-small-only m2 l2"></div>
+        </div>
+        <!-- 3era fila -->
+        <div >
+          <div class="row">
+            <div class="input-field col s12 m6 l6" >
+              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3"></textarea>
+              <label for="diagnostico">DIAGNOSTICO</label>
+            </div>
+            <div class="input-field col s12 m6 l6">
+              <textarea id="textarea1" class="materialize-textarea" [disabled]="user.Rol != 3"></textarea>
+              <label for="diagnostico">REPUESTOS</label>
+            </div>
           </div>
         </div>
 
-        <div class="row center">
-          <button routerLink="/dashclient" class="btn waves-effect waves-light blue darken-1" type="submit" name="action">
+        <div class="row center" *ngIf="user.Rol == 1 || user.Rol == 3">
+          <button  class="btn waves-effect waves-light blue darken-1" (click)="crearOrden()" name="action">
            Modificar
           </button>
         </div>

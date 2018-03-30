@@ -97,7 +97,7 @@
           <div class="row">
             <div class="col hide-on-small-only m3 l3"></div>
             <div *ngIf="(userRol == 2)" class="col s12 m6 l6">
-              <select name="rol" [(ngModel)]="userSelected.Rol" required>
+              <select name="rol" [(ngModel)]="userSelected.Rol"  materialize="material_select" required>
                 <option value="0">Cliente</option>
                 <option value="1">Gerente</option>
                 <option value="2">Administrador</option>

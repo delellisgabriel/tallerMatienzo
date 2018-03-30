@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (result["resultado"][0]) {
           var id = result["resultado"][0].idUsuario;
           if (id) {
-            this.router.navigate(['dashclient', id]);
+            this.router.navigate(['dashclient']);
           } else {
             document.getElementById("popup").hidden = false;
           }
