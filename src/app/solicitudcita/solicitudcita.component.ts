@@ -9,6 +9,7 @@ import { SelectControlValueAccessor } from '@angular/forms';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmailService } from "../email/email-service.service";
+import { StatusService } from "../status-service/status-service.service";
 declare var $: any;
 
 @Component({
@@ -33,7 +34,7 @@ cargando: any;
   
   cars: any;
 
-  constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService) {
+  constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService, private carStatus: StatusService) {
     
   }
 
@@ -47,26 +48,27 @@ cargando: any;
     this.solicitud.FechaTentativaFinal = this.database.dateFormatter(this.solicitud.FechaTentativaFinal);
 
     this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
-      console.log(result); //Esto deberia botar True
       if (result['resultado'] == true) {
-        this.router.navigate(['/mycars', this.auth.getUser()["idUsuario"]]);
+        this.carStatus.updateStatus(this.solicitud.Vehiculos_idVehiculo, 'Esperando');
+        var user = this.auth.getUser();
+        var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
+        this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
+          console.log(res);
+        }).catch((err) => { console.log(err); });
+        this.router.navigate(['/mycars']);
       } else {
-        console.log('Algo Salio Mal');
+        alert('El vehiculo seleccionado ya tiene una cita pendiente.');
       }
     }).catch((err) => {
       console.log(err)
     });
 
-    var user = this.auth.getUser();
-    var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
-    this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
-      console.log(res);
-    }).catch((err) => { console.log(err); });
+
 
   }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.cargando = true;
     var carros = {
       idUsuario: 0,

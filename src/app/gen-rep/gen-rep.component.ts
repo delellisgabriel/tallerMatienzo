@@ -15,7 +15,7 @@ export class GenRepComponent implements OnInit, AfterViewInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
   }
 
   ngAfterViewInit() {

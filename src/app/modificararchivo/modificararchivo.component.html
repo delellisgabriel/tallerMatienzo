@@ -28,7 +28,7 @@
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
             <input id="serial" type="text" class="validate" disabled name="serial" [(ngModel)]="vehiculo.SerialMotor">
-            <label class="active" for="serial">SERIAL</label>
+            <label for="serial">SERIAL</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
@@ -46,7 +46,7 @@
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
             <input type="text" class="validate" disabled name="placa" [(ngModel)]="vehiculo.Placa">
-            <label class="active" for="lastName">PLACA</label>
+            <label class="active" for="placa">PLACA</label>
           </div>
         </div>
         <h5 class="light center">Recepción</h5>
@@ -55,32 +55,40 @@
         <!-- 4ta fila -->
         <div class="row">
           <div class="input-field col s12 m6 l6">
+            <input id="datepicker" materialize="pickadate" name="fecha_recepcion"
+                   [(ngModel)]="orden.FechaRecepcion" />
+            <label for="fecha_recepcion" class="active">Fecha</label>
+          </div>
+          <div class="input-field col s12 m6 l6"></div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
               <input type="text" class="validate" id="caucho" [disabled]="user.Rol != 1" name="cauchos" [(ngModel)]="orden.Cauchos"/>
-              <label for="caucho">Caucho de Repuesto</label>
+              <label class="active" for="caucho">Caucho de Repuesto</label>
             </div>
             <div class="input-field col s12 m6 l6">
                 <input type="text" class="validate" id="llaves" [disabled]="user.Rol != 1" name="llaves" [(ngModel)]="orden.Llaves"/>
-                <label for="llaves">Llaves</label>
+                <label class="active" for="llaves">Llaves</label>
              </div>
           </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <input type="text" class="validate" id="gato" [disabled]="user.Rol != 1" name="gato" [(ngModel)]="orden.Gato"/>
-            <label for="gato">Gato</label>
+            <label class="active" for="gato">Gato</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <input type="text" class="validate" id="herramientas" [disabled]="user.Rol != 1" name="herramientas" [(ngModel)]="orden.Herramientas"/>
-            <label for="herramientas">Herramientas</label>
+            <label class="active" for="herramientas">Herramientas</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <input type="text" class="validate" id="sonido" [disabled]="user.Rol != 1" name="sonido" [(ngModel)]="orden.EquipoSonido"/>
-            <label for="sonido">Equipo de Sonido</label>
+            <label class="active" for="sonido">Equipo de Sonido</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <input type="text" class="validate" id="otros" [disabled]="user.Rol != 1" name="otros" [(ngModel)]="orden.Otros"/>
-            <label for="otros">Otros</label>
+            <label class="active" for="otros">Otros</label>
           </div>
         </div>
         <!-- 6ta fila -->
@@ -320,8 +328,12 @@
           <div class="col hide-on-small-only m2 l2"></div>
           <div class="input-field col s12 m8 l8">
             <i class="material-icons prefix">account_box</i>
-            <input id="mecanico" type="text" class="validate" [disabled]="user.Rol != 1">
-            <label for="mecanico">MECANICO</label>
+            <select [(ngModel)]="orden.Mecanico" materialize="material_select" name="mecanico">
+              <option value="" disabled>Seleccione un mecanico</option>
+              <option *ngFor="let mec of listaMecanicos" [value]="mec" >{{ mec.PrimerNombre }} {{ mec.PrimerApellido }}
+              </option>
+            </select>
+            <label>Mecanico</label>
           </div>
           <div class="col hide-on-small-only m2 l2"></div>
         </div>
@@ -339,9 +351,19 @@
           </div>
         </div>
 
-        <div class="row center" *ngIf="user.Rol == 1 || user.Rol == 3">
+        <div class="row center" *ngIf="user.Rol == 1">
           <button  class="btn waves-effect waves-light blue darken-1" (click)="crearOrden()" name="action">
-           Modificar
+           Recibir Vehiculo
+          </button>
+        </div>
+        <div class="row center" *ngIf="user.Rol == 3">
+          <button class="btn waves-effect waves-light blue darken-1" (click)="Terminar()" name="action">
+            Terminar Trabajo
+          </button>
+        </div>
+        <div class="row center" *ngIf="user.Rol == 1">
+          <button class="btn waves-effect waves-light blue darken-1" (click)="cerrar()" name="action">
+            Cerrar Orden
           </button>
         </div>
       </form>

@@ -5,6 +5,7 @@ import { EmailService } from "../email/email-service.service";
 import { QrService } from "../qrService/qr.service";
 import { AuthService } from "../authService/auth.service";
 import { Router } from "@angular/router";
+import { StatusService } from "../status-service/status-service.service";
 
 declare var $: any;
 
@@ -19,10 +20,10 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
 
   loading = true;
 
-  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService, private router: Router, private auth: AuthService) { }
+  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService, private router: Router, private auth: AuthService, private carStatus: StatusService ) { }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloCitas')
       .then((result) => {
         this.colaCitas = result['resultado'];
@@ -49,6 +50,8 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
     await this.email.enviarEmail(cita['Usuario']['Correo'], 'Cita asignada', texto).then((res) => {
       console.log(res);
     }).catch((err) => { console.log(err); });
+
+
 
   }
 

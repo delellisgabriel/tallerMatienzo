@@ -11,6 +11,7 @@ const ModeloVehiculos = {
   Ano: 'string',
   FotoVehiculo: 'foto',
   idUsuario: 'id',
+  estatus: 'string',
   Usuario: {
     tipo: 'model',
     modelo: 'ModeloUsuarios',

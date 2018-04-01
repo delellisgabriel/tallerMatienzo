@@ -4,6 +4,7 @@ import { CarSelectService } from "../car-select/car-select.service";
 import { DatabaseService } from "../database/database.service";
 import { AuthService } from "../authService/auth.service";
 import { Router } from "@angular/router";
+import { StatusService } from "../status-service/status-service.service";
 
 declare var $: any;
 
@@ -27,15 +28,25 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     EquipoSonido: '',
     Otros: '',
     idVehiculo: 0,
+    FechaRecepcion: '',
+    Mecanico: {},
   };
 
-  constructor(private car: CarSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
+  public listaMecanicos = [];
+
+  constructor(private car: CarSelectService, private database: DatabaseService, private auth: AuthService, private router: Router, private carStatus: StatusService) {
+
+    this.getMecanicos();
+  }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.user = this.auth.getUser();
+    this.getMecanicos();
     this.vehiculo = this.car.getCar();
-    console.log(this.vehiculo);
+    delete this.vehiculo['Usuario'];
+    delete this.vehiculo['Activado'];
+    delete this.vehiculo['FotoVehiculo'];
     this.orden.idVehiculo = this.vehiculo['idVehiculo'];
     this.database.getMe('ModeloVehiculos', this.vehiculo)
       .then((res) => {
@@ -44,6 +55,17 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
         console.log(err);
       });
 
+
+
+
+  }
+
+  async getMecanicos() {
+    var mecanico = { Rol: 3 }
+    await this.database.getMe('ModeloUsuarios', mecanico).then((resp) => {
+      this.listaMecanicos = resp['resultado'];
+      console.log(this.listaMecanicos);
+    })
   }
 
   crearOrden() {
@@ -51,10 +73,34 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     this.database.addThis('ModeloOrdenReparacion', this.orden)
       .then((res) => {
         console.log(res);
+        this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Reparando');
+        this.router.navigate
       })
       .catch((err) => {
         console.log(err);
       });
+
+  }
+
+  cerrar() {
+    var ordenCerrada = {};
+    ordenCerrada['Completada'] = true;
+    this.database.changeThis('ModeloOrdenReparacion', this.orden, ordenCerrada).then((resp) => {
+      alert('Orden cerrada exitosamente');
+      this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Normal');
+    }
+    );
+  }
+
+  Terminar() {
+    this.database.addThis('ModeloOrdenReparacion', this.orden)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Listo');
   }
 
   ngAfterViewInit() {

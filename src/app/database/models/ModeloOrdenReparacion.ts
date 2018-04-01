@@ -11,7 +11,7 @@ const ModeloOrdenReparacion = {
   EquipoSonido: 'string',
   Otros: 'string',
   Completada: 'boolean',
-  FechaCulminacion: 'fecha',
+  FechaRecepcion: 'fecha',
   idVehiculo: 'id',
   Vehiculo: {
     tipo: 'model',

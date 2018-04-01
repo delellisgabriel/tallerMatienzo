@@ -19,7 +19,7 @@ export class DashclientComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.user = this.auth.getUser();
     window.scrollTo(0, 0);
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
   }
 
   ngAfterViewInit() {

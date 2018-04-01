@@ -22,7 +22,7 @@ export class PartModifyComponent implements OnInit {
   constructor(private parts:PartsService, private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.repuestoOld.idRepuestos = this.parts.getPart()['idRepuestos'];
     this.repuesto = this.parts.getPart();
   }

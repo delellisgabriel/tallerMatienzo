@@ -29,7 +29,7 @@ export class CamaraComponent implements OnInit {
 
   ngOnInit() {
     if (!this.auth.isLoged()) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['/login']);
       this.cargando = true;
     }
     this.width = 500;
