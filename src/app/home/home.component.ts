@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {EmailService} from '../email/email-service.service';
 import {QrService} from '../qrService/qr.service';
 import {DatabaseService} from '../database/database.service';
+import {CookieService} from 'ngx-cookie';
 
 declare var $: any;
 

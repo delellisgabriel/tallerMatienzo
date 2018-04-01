@@ -14,30 +14,30 @@ export class LoginComponent implements OnInit, AfterViewInit {
   user = {
     Password: '',
     Correo: '',
-  }
+  };
 
   constructor(private authService: AuthService, private router: Router) {
   }
 
   Login() {
     this.authService.login(this.user).then((result) => {
-      if (result.hasOwnProperty('resultado')) {
-        if (result["resultado"][0]) {
-          var id = result["resultado"][0].idUsuario;
-          if (id) {
-            this.router.navigate(['dashclient']);
-          } else {
-            document.getElementById("popup").hidden = false;
-          }
+      if (result['idUsuario']) {
+        const id = result['idUsuario'];
+        if (id) {
+          this.router.navigate(['dashclient']);
         } else {
-          document.getElementById("popup").hidden = false;
+          document.getElementById('popup').hidden = false;
         }
+      } else {
+        document.getElementById('popup').hidden = false;
       }
+    }).catch((err) => {
+      console.error(err);
     });
   }
 
   ngOnInit() {
-    document.getElementById("popup").hidden = true;
+    document.getElementById('popup').hidden = true;
   }
 
   ngAfterViewInit() {

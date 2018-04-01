@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { JavascriptComponent } from './javascript/javascript.component';
 import { WebCamComponent } from 'ng2-webcam';
+import { CookieModule } from 'ngx-cookie';
 //Rutas
 import { Rutas } from '../rutas';
 //Componentes visibles
@@ -46,6 +47,7 @@ import { PartsService } from "./parts/parts.service";
 import { EmailService } from './email/email-service.service';
 import { QrService } from './qrService/qr.service';
 import { StatusService } from "./status-service/status-service.service";
+import { CookieService } from 'ngx-cookie';
 
 
 declare var $: any;
@@ -87,6 +89,7 @@ declare var $: any;
     HttpClientModule,
     ReactiveFormsModule,
     MaterializeModule,
+    CookieModule.forRoot()
   ],
   providers: [
     DatabaseService,
@@ -98,6 +101,7 @@ declare var $: any;
     EmailService,
     QrService,
     StatusService
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

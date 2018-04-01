@@ -63,7 +63,7 @@
 
           <div class="input-field col s12 m6 l6">
           <i class="material-icons prefix">date_range</i>
-            <input materialize="pickadate" type="text" id="datepicker" name="datepicker" [(ngModel)]="user.Fecha_Nacimiento" required> 
+            <input materialize="pickadate" type="text" id="datepicker" name="datepicker" [(ngModel)]="user.Fecha_Nacimiento" required [materializeParams]="[{selectYears: 180, monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], weekdaysLetter: ['D', 'L', 'M', 'M', 'J', 'V', 'S'], today: 'Hoy', clear: 'Limpiar', format: 'yyyy-mm-dd'}]">
             <label for="datepicker">FECHA DE NACIMIENTO</label>
           </div>
         </div>

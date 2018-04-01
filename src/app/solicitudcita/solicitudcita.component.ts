@@ -31,7 +31,7 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
   };
 
 cargando: any;
-  
+
   cars: any;
 
   constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService, private carStatus: StatusService) {
@@ -44,8 +44,6 @@ cargando: any;
       delete this.solicitud.idAux;
     }
     this.solicitud.Usuarios_idUsuario = this.auth.getUser()['idUsuario'];
-    this.solicitud.FechaTentativaInicial = this.database.dateFormatter(this.solicitud.FechaTentativaInicial);
-    this.solicitud.FechaTentativaFinal = this.database.dateFormatter(this.solicitud.FechaTentativaFinal);
 
     this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
       if (result['resultado'] == true) {
@@ -62,9 +60,6 @@ cargando: any;
     }).catch((err) => {
       console.log(err)
     });
-
-
-
   }
 
   ngOnInit() {
@@ -85,9 +80,9 @@ cargando: any;
           this.cargando = false;
         } else {
           this.cars = true;
-          this.cargando = false;  
+          this.cargando = false;
         }
-        
+
       }
     });
 

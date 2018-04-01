@@ -26,8 +26,8 @@ export class CarHistorialComponent implements OnInit {
               private router: Router, private auth: AuthService) { }
 
   deshabilitar() {
-    var r = confirm("Seguro que desea inhabilitar este vehiculo?!");
-    if (r == true) {
+    let r = confirm('Seguro que desea inhabilitar este vehiculo?!');
+    if (r === true) {
       this.carModified['Activado'] = false;
       this.database.changeThis('ModeloVehiculos', this.vehiculo, this.carModified).then((res) => {
         console.log(res);
@@ -50,7 +50,7 @@ export class CarHistorialComponent implements OnInit {
       console.log(result);
       this.ordenes = result['resultado'];
 
-      for (var i = 0; i < this.ordenes.length; i++) {
+      for (let i = 0; i < this.ordenes.length; i++) {
         if (this.ordenes[i]['Completada'] === '000') {
           this.ordenes[i]['Completada'] = 'En Curso';
         } else if (this.ordenes[i]['Completada'] === '001') {
