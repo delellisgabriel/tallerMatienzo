@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatabaseService } from '../database/database.service';
 import { CookieService } from 'ngx-cookie';
+import { base } from '../base';
 import * as shajs from 'sha.js';
 import 'rxjs/add/operator/toPromise';
 
@@ -10,8 +11,6 @@ const httpOptions = {
     'Content-Type': 'application/json',
   })
 };
-
-const base = 'http://localhost:3000/';
 
 @Injectable()
 export class AuthService {

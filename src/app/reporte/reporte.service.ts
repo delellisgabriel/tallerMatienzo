@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { base } from '../base';
 import * as jsPDF from 'jspdf';
 import {DatabaseService} from '../database/database.service';
 import * as moment from 'moment';
-
-const base = 'http://localhost:3000/';
 
 @Injectable()
 export class ReporteService {
