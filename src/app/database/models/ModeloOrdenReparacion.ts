@@ -18,17 +18,17 @@ const ModeloOrdenReparacion = {
     modelo: 'ModeloVehiculos',
     FK: 'Vehiculos_idVehiculo'
   },
-  Fotos: {
-    tipo: 'collection',
-    modelo: 'ModeloFotos',
-    FK: 'OrdenReparacion_idOrdenReparacion'
-  },
   Repuestos: {
     tipo: 'through',
     modelo: 'ModeloRepuestos',
     FK: 'OrdenReparacion_idOrdenReparacion',
     modeloDebil: 'ModeloUtilizo',
     FKDebil: 'Repuestos_idRepuestos'
+  },
+  Mecanico: {
+    tipo: 'model',
+    modelo: 'ModeloUsuarios',
+    FK: 'Mecanico_idUsuario'
   }
 };
 

@@ -100,7 +100,7 @@ declare var $: any;
     PartsService,
     EmailService,
     QrService,
-    StatusService
+    StatusService,
     CookieService
   ],
   bootstrap: [AppComponent]
