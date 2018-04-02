@@ -43,7 +43,7 @@ export class PartsManageComponent implements OnInit {
 
    constructor(private auth: AuthService, private database: DatabaseService, public fb: FormBuilder, private parts:PartsService, private router: Router) {
     // identificar rol de usuario
-    this.user = this.auth.getUser();
+     this.bringUser();
     // recibir repuestos de la bd
     this.database.getMe('ModeloRepuestos').then((res) => {
       this.repuestos = res['resultado'];
@@ -52,6 +52,10 @@ export class PartsManageComponent implements OnInit {
       console.log(err);
       });
   }
+
+   async bringUser() {
+     this.user = await this.auth.getUser();
+   }
 
    ngOnInit() {
      if (!this.auth.isLoged()) { this.router.navigate(['/login']); }

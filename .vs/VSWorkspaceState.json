@@ -3,13 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\car-historial",
-    "\\src\\app\\database",
     "\\src\\app\\database\\models",
-    "\\src\\app\\modificararchivo",
-    "\\src\\app\\solicitudcita",
-    "\\src\\app\\status-service"
+    "\\src\\app\\mycars"
   ],
-  "SelectedNode": "\\src\\app\\car-historial\\car-historial.component.html",
+  "SelectedNode": "\\src\\app\\mycars\\mycars.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -39,14 +39,16 @@ cargando: any;
   constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService, private carStatus: StatusService) {
     
   }
-
+     async bringUser() {
+       this.solicitud.Usuarios_idUsuario = await this.auth.getUser()['idUsuario'];
+   }
   //enviar los datos para registrar la cita
   solicitarCita() {
     if (this.solicitud.idAux) {
       this.solicitud.Vehiculos_idVehiculo = Number.parseInt(this.solicitud.idAux);
       delete this.solicitud.idAux;
     }
-    this.solicitud.Usuarios_idUsuario = this.auth.getUser()['idUsuario'];
+    this.bringUser();
     //POST
     this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
       if (result['resultado'] == true) {

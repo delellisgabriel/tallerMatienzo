@@ -13,7 +13,7 @@ export class OrdenSelectService {
     EquipoSonido: '',
     Otros: '',
     Carroceria: '',
-    Mecanico_idUsuario: '',
+    Mecanico_idUsuario: 0,
     Diagnostico: '',
     Repuestos: [],
   };
@@ -21,7 +21,7 @@ export class OrdenSelectService {
 
 constructor() { }
 
-ordenSelect(orden:object){
+ordenSelect(orden:any){
   this.orden = orden;
 }
 

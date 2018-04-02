@@ -35,8 +35,12 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
-    this.user.idUsuario = this.auth.getUser()["idUsuario"];
+    this.bringUser();
 
+  }
+
+  async bringUser() {
+    this.user.idUsuario = await this.auth.getUser()["idUsuario"];
   }
 
   carRegister() {

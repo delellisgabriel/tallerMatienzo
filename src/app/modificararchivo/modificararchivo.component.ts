@@ -55,10 +55,14 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     this.getMecanicos();
   }
 
+  async bringUser() {
+    this.user = await this.auth.getUser();
+  }
+
   ngOnInit() {
     if (!(this.selectedOrder.getOrden() === {})) { this.orden = this.selectedOrder.getOrden() }
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
-    this.user = this.auth.getUser();
+    this.bringUser();
     this.getMecanicos();
     this.vehiculo = this.car.getCar();
     delete this.vehiculo['Usuario'];
