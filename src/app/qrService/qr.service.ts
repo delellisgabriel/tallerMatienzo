@@ -20,7 +20,7 @@ export class QrService {
   constructor(private http: HttpClient) { }
 
   crearQR(datos: string, tamano: string) {
-    return this.http.post(base,
+    return this.http.post(base + 'qr',
       {
         base: this.base1 + datos + this.base2 + tamano + 'x' + tamano,
         password: this.password,
@@ -29,7 +29,7 @@ export class QrService {
   }
 
   leerQR(fotoBase64: string) {
-   return this.http.post(base,
+   return this.http.post(base + 'qr',
       {
         foto: fotoBase64,
         password: this.password,
