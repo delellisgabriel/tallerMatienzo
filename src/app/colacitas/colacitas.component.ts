@@ -43,9 +43,7 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
     }).catch((err) => {
       console.log(err);
       });
-    var texto = 'Estimado <b>' + cita.Usuario.PrimerNombre + '</b>,\nLe informamos que la cita que solicitó para su vehículo ' + cita.Vehiculo.Marca +
-      " " + cita.Vehiculo.Modelo +
-      ' se asigno para el dia ' + cita.FechaAsignada + '\n\nSu codigo identificador del vehiculo es el siguiente:\n <img src="'+FotoQr+'" alt="Código QR">';
+    var texto = '<table><tr><td style="" align="center"><h2 style="text-align: center; background-color: ;">Taller Matienzo - Cita</h2></td></tr><tr><td align="center"><b>Estimado ' + cita.Usuario.PrimerNombre + ' </b>,<br><br>Le informamos que la cita solicitada para su vehículo ' + cita.Vehiculo.Marca + " " + cita.Vehiculo.Modelo + ' ha sido aprobada y asignada para el dia ' + cita.FechaAsignada + '.<br>Su código identificador del vehículo es el siguiente:<br></tr><td align="center"><img style="width: 125px; height: 125px;" src="' + FotoQr + '" alt="Código QR"></td><br><br><br><tr><td align="center">Dirección: Distribuidor Universidad Autopista Petare- Guarenas.Urbanización Terrazas del Ávila.</td></tr></table>';
     await this.email.enviarEmail(cita['Usuario']['Correo'], 'Cita asignada', texto).then((res) => {
       console.log(res);
     }).catch((err) => { console.log(err); });

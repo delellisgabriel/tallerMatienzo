@@ -1,13 +1,13 @@
-<div class="row center">
+<div>
   <app-side-bar-fav></app-side-bar-fav>
 </div>
 
 
-<div class="container">
+<div style="min-height: 75vh;" class="container">
   <div style="padding-top: 40px" class="section">
     <div *ngIf="loading">
       <div class="row">
-        <br /><br /><br /><br />
+
         <div class="col s12 m12 l12 center-align">
           <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
@@ -21,13 +21,17 @@
             </div>
           </div>
         </div>
-        <br /><br /><br /><br />
+
       </div>
       </div>
 
     <div class="row" *ngIf="!loading">
-<!-- Lista de Carros-->
-      <div class="col s12 m4" *ngFor="let carro of vehiculos" >
+      <!-- Lista de Carros-->
+      <div class="col s12 m12 l12">
+        <h2 class="flow-text center-align">Mis Vehículos</h2>
+        <br>
+      </div>
+      <div class="col s12 m4" *ngFor="let carro of vehiculos">
         <div (click)="selectCar(carro)">
           <div class="icon-block notAsigned" id="tile">
             <h4 class="center">{{carro.Marca}} {{carro.Modelo}}</h4>

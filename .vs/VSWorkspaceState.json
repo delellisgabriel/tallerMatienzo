@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\backend",
-    "\\e2e",
-    "\\fonts",
+    "\\backend\\etc",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\dashclient",
-    "\\src\\app\\not-found",
-    "\\src\\app\\side-bar-fav",
-    "\\src\\environments"
+    "\\src\\app\\database",
+    "\\src\\app\\database\\controllers",
+    "\\src\\app\\database\\models",
+    "\\src\\app\\mycars",
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\side-bar-fav\\side-bar-fav.component.html",
+  "SelectedNode": "\\src\\assets",
   "PreviewInSolutionExplorer": false
 }
