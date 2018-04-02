@@ -5,6 +5,7 @@ import { EmailService } from "../email/email-service.service";
 import { QrService } from "../qrService/qr.service";
 import { AuthService } from "../authService/auth.service";
 import { Router } from "@angular/router";
+import { StatusService } from "../status-service/status-service.service";
 
 declare var $: any;
 
@@ -19,10 +20,10 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
 
   loading = true;
 
-  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService, private router: Router, private auth: AuthService) { }
+  constructor(private database: DatabaseService, private email: EmailService, private qr: QrService, private router: Router, private auth: AuthService, private carStatus: StatusService ) { }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloCitas')
       .then((result) => {
         this.colaCitas = result['resultado'];
@@ -48,11 +49,13 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
       console.log(res);
     }).catch((err) => { console.log(err); });
 
+
+
   }
 
   public rechazar(cita) {
-    var texto = 'Su cita no pudo ser asignada ya que no contamos con la capacidad para recibir más vehiculos en las fechas solicitadas'
-      +         ', le pedimos disculpas. Por favor solicite otra cita para otro rango de fechas.';
+    var texto = 'Su cita no pudo ser asignada ya que no tenemos capacidad para recibir mas autos en esas fechas'
+      +         ', le pedimos disculpas y que por favor solicite otra cita para otro rango de fechas.';
     this.email.enviarEmail(cita['Usuario']['Correo'], 'Su cita no pudo ser asignada', texto).then((res) => {
       console.log(res);
     }).catch((err) => { console.log(err); });

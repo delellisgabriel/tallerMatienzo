@@ -24,7 +24,24 @@ export class MycarsComponent implements OnInit, AfterViewInit {
   loading = true;
 
   constructor(private auth: AuthService, private database: DatabaseService, private carService: CarSelectService, private router: Router) {
-    this.carro.idUsuario = this.auth.getUser()['idUsuario'];
+
+  }
+
+
+  selectCar(car: object) {
+    this.carService.selectCar(car);
+    this.router.navigate(['car-historial']);
+  }
+
+  async bringUser() {
+    
+  }
+
+  async ngOnInit() {
+    this.carro.idUsuario = await this.auth.getUser()['idUsuario'];
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+
+
 
     this.database.getMe('ModeloVehiculos', this.carro).then((result) => {
       var array = $.map(result["resultado"], function (value, index) {
@@ -38,20 +55,6 @@ export class MycarsComponent implements OnInit, AfterViewInit {
       this.vehiculos = array;
       this.loading = false;
     });
-  }
-
-  prueba(carro: any) {
-    console.log(carro.FotoVehiculo);
-  }
-
-  selectCar(car: object) {
-    console.log(car);
-    this.carService.selectCar(car);
-    this.router.navigate(['car-historial']);
-  }
-
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
   }
 
   ngAfterViewInit() {

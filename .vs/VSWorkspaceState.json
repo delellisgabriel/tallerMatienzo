@@ -5,6 +5,7 @@
     "\\backend\\etc",
     "\\src",
     "\\src\\app",
+<<<<<<< HEAD
     "\\src\\app\\database",
     "\\src\\app\\database\\controllers",
     "\\src\\app\\database\\models",
@@ -12,5 +13,11 @@
     "\\src\\assets"
   ],
   "SelectedNode": "\\src\\assets",
+=======
+    "\\src\\app\\database\\models",
+    "\\src\\app\\mycars"
+  ],
+  "SelectedNode": "\\src\\app\\mycars\\mycars.component.ts",
+>>>>>>> origin/Entrega3
   "PreviewInSolutionExplorer": false
 }

@@ -27,26 +27,26 @@
         <div class="row">
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">border_color</i>
-            <input id="serial" type="text" class="validate" disabled name="serial" [(ngModel)]="vehiculo.SerialMotor">
-            <label class="active" for="serial">SERIAL</label>
+            <input placeholder="Marca" id="marca" type="text" class="validate" disabled name="marca" [(ngModel)]="vehiculo.Marca">
+            <label for="marca">Marca</label>
           </div>
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">account_box</i>
-            <input id="modelo" type="text" class="validate" disabled name="modelo" [(ngModel)]="vehiculo.Modelo">
-            <label class="active" for="modelo">MODELO</label>
+            <input placeholder="Modelo" id="modelo" type="text" class="validate" disabled name="modelo" [(ngModel)]="vehiculo.Modelo">
+            <label class="active" for="modelo">Modelo</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <i class="material-icons prefix">date_range</i>
-            <input id="ano" type="number" class="validate" disabled name="ano" [(ngModel)]="vehiculo.Ano">
-            <label class="active" for="ano">AÑO</label>
+            <i class="material-icons prefix">border_color</i>
+            <input placeholder="Serial" id="serial" type="text" class="validate" disabled name="serial" [(ngModel)]="vehiculo.SerialMotor">
+            <label for="serial">Serial</label>
           </div>
 
           <div class="input-field col s12 m6 l6">
             <i class="material-icons prefix">branding_watermark</i>
-            <input type="text" class="validate" disabled name="placa" [(ngModel)]="vehiculo.Placa">
-            <label class="active" for="lastName">PLACA</label>
+            <input  placeholder="Placa" type="text" class="validate" disabled name="placa" [(ngModel)]="vehiculo.Placa">
+            <label class="active" for="placa">Placa</label>
           </div>
         </div>
         <h5 class="light center">Recepción</h5>
@@ -55,259 +55,159 @@
         <!-- 4ta fila -->
         <div class="row">
           <div class="input-field col s12 m6 l6">
-              <input type="text" class="validate" id="caucho" [disabled]="user.Rol != 1" name="cauchos" [(ngModel)]="orden.Cauchos"/>
-              <label for="caucho">Caucho de Repuesto</label>
+            <input placeholder="Fecha" id="datepicker" materialize="pickadate" name="fecha_recepcion"
+                   [(ngModel)]="orden.FechaRecepcion" />
+            <label for="fecha_recepcion" class="active">Fecha de Recepcion</label>
+          </div>
+          <div class="input-field col s12 m6 l6"></div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6 l6">
+              <input placeholder="Caucho" type="text" class="validate" id="caucho" [disabled]="user.Rol != 1" name="cauchos" [(ngModel)]="orden.Cauchos"/>
+              <label class="active" for="caucho">Caucho de Repuesto</label>
             </div>
             <div class="input-field col s12 m6 l6">
-                <input type="text" class="validate" id="llaves" [disabled]="user.Rol != 1" name="llaves" [(ngModel)]="orden.Llaves"/>
-                <label for="llaves">Llaves</label>
+                <input placeholder="Llaves" type="text" class="validate" id="llaves" [disabled]="user.Rol != 1" name="llaves" [(ngModel)]="orden.Llaves"/>
+                <label class="active" for="llaves">Llaves</label>
              </div>
           </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <input type="text" class="validate" id="gato" [disabled]="user.Rol != 1" name="gato" [(ngModel)]="orden.Gato"/>
-            <label for="gato">Gato</label>
+            <input placeholder="Gato" type="text" class="validate" id="gato" [disabled]="user.Rol != 1" name="gato" [(ngModel)]="orden.Gato"/>
+            <label class="active" for="gato">Gato</label>
           </div>
           <div class="input-field col s12 m6 l6">
-            <input type="text" class="validate" id="herramientas" [disabled]="user.Rol != 1" name="herramientas" [(ngModel)]="orden.Herramientas"/>
-            <label for="herramientas">Herramientas</label>
+            <input placeholder="Herramientas" type="text" class="validate" id="herramientas" [disabled]="user.Rol != 1" name="herramientas" [(ngModel)]="orden.Herramientas"/>
+            <label class="active" for="herramientas">Herramientas</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <input type="text" class="validate" id="sonido" [disabled]="user.Rol != 1" name="sonido" [(ngModel)]="orden.EquipoSonido"/>
-            <label for="sonido">Equipo de Sonido</label>
+            <input  placeholder="Sonido" type="text" class="validate" id="sonido" [disabled]="user.Rol != 1" name="sonido" [(ngModel)]="orden.EquipoSonido"/>
+            <label class="active" for="sonido">Equipo de Sonido</label>
           </div>
           <div class="input-field col s12 m6 l6">
-            <input type="text" class="validate" id="otros" [disabled]="user.Rol != 1" name="otros" [(ngModel)]="orden.Otros"/>
-            <label for="otros">Otros</label>
+            <input placeholder="Otros" type="text" class="validate" id="otros" [disabled]="user.Rol != 1" name="otros" [(ngModel)]="orden.Otros"/>
+            <label class="active" for="otros">Otros</label>
           </div>
         </div>
         <!-- 6ta fila -->
         <div class="row center" >
           <div class="col s1 m1 l1"></div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Front1_NoMark.png" onclick=" 
-      if (this.src === 'http://localhost:4200/assets/Front1_Mark.png') {
-        this.src = 'assets/Front1_NoMark.png';
-      } else {
-        this.src = 'assets/Front1_Mark.png';
-      }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(0)">
+            <img class="responsive-img" src="{{detailsImg[0].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Front2_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Front2_Mark.png') {
-                                                                                    this.src = 'assets/Front2_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Front2_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(1)">
+            <img class="responsive-img" src="{{detailsImg[1].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Front3_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Front3_Mark.png') {
-                                                                                    this.src = 'assets/Front3_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Front3_Mark.png';
-                                                                                  }" /> 
+          <div class="collage col s1 m1 l1" (click)="changeDetails(2)">
+            <img class="responsive-img" src="{{detailsImg[2].img}}"  /> 
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Front4_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Front4_Mark.png') {
-                                                                                    this.src = 'assets/Front4_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Front4_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(3)">
+            <img class="responsive-img" src="{{detailsImg[3].img}}"  />
           </div>
           <div class="col s2 m2 l2"></div> <!-- SEPARACION DEL MEDIO-->
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Back1_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Back1_Mark.png') {
-                                                                                    this.src = 'assets/Back1_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Back1_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(4)">
+            <img class="responsive-img" src="{{detailsImg[4].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Back2_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Back2_Mark.png') {
-                                                                                    this.src = 'assets/Back2_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Back2_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(5)">
+            <img class="responsive-img" src="{{detailsImg[5].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Back3_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Back3_Mark.png') {
-                                                                                    this.src = 'assets/Back3_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Back3_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(6)">
+            <img class="responsive-img" src="{{detailsImg[6].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Back4_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Back4_Mark.png') {
-                                                                                    this.src = 'assets/Back4_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Back4_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(7)">
+            <img class="responsive-img" src="{{detailsImg[7].img}}"  />
           </div>
           <div class="col s1 m1 l1"></div>
+        </div>
+        <div class="row center">
+          <div class="collage col s3 m3 l3"></div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(8)">
+            <img class="responsive-img" src="{{detailsImg[8].img}}"  />
+          </div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(9)">
+            <img class="responsive-img" src="{{detailsImg[9].img}}"  />
+          </div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(10)">
+            <img class="responsive-img" src="{{detailsImg[10].img}}"  />
+          </div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(11)">
+            <img class="responsive-img" src="{{detailsImg[11].img}}"  />
+          </div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(12)">
+            <img class="responsive-img" src="{{detailsImg[12].img}}"  />
+          </div>
+          <div class="collage col s1 m1 l1" (click)="changeDetails(13)">
+            <img class="responsive-img" src="{{detailsImg[13].img}}"  />
+          </div>
+          <div class="collage col s3 m3 l3"></div>
         </div>
         <!-- Top View -->
         <div class="row center no-margin">
           <div class="collage col s3 m3 l3"></div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top1_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top1_Mark.png') {
-                                                                                    this.src = 'assets/Top1_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top1_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(14)">
+            <img class="responsive-img" src="{{detailsImg[14].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top2_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top2_Mark.png') {
-                                                                                    this.src = 'assets/Top2_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top2_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(15)">
+            <img class="responsive-img" src="{{detailsImg[15].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top3_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top3_Mark.png') {
-                                                                                    this.src = 'assets/Top3_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top3_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(16)">
+            <img class="responsive-img" src="{{detailsImg[16].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top4_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top4_Mark.png') {
-                                                                                    this.src = 'assets/Top4_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top4_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(17)">
+            <img class="responsive-img" src="{{detailsImg[17].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top5_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top5_Mark.png') {
-                                                                                    this.src = 'assets/Top5_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top5_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(18)">
+            <img class="responsive-img" src="{{detailsImg[18].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top6_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top6_Mark.png') {
-                                                                                    this.src = 'assets/Top6_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top6_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(19)">
+            <img class="responsive-img" src="{{detailsImg[19].img}}"  />
           </div>
           <div class="collage col s3 m3 l3"></div>
         </div>
         <div class="row center">
           <div class="collage col s3 m3 l3"></div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top7_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top7_Mark.png') {
-                                                                                    this.src = 'assets/Top7_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top7_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(20)">
+            <img class="responsive-img" src="{{detailsImg[20].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top8_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top8_Mark.png') {
-                                                                                    this.src = 'assets/Top8_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top8_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(21)">
+            <img class="responsive-img" src="{{detailsImg[21].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top9_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top9_Mark.png') {
-                                                                                    this.src = 'assets/Top9_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top9_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(22)">
+            <img class="responsive-img" src="{{detailsImg[22].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top10_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top10_Mark.png') {
-                                                                                    this.src = 'assets/Top10_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top10_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(23)">
+            <img class="responsive-img" src="{{detailsImg[23].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top11_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top11_Mark.png') {
-                                                                                    this.src = 'assets/Top11_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top11_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(24)">
+            <img class="responsive-img" src="{{detailsImg[24].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Top12_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Top12_Mark.png') {
-                                                                                    this.src = 'assets/Top12_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Top12_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(25)">
+            <img class="responsive-img" src="{{detailsImg[25].img}}"  />
           </div>
           <div class="collage col s3 m3 l3"></div>
         </div>
         <!-- Lateral View -->
         <div class="row center">
           <div class="collage col s3 m3 l3"></div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat1_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat1_Mark.png') {
-                                                                                    this.src = 'assets/Lat1_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat1_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(26)">
+            <img class="responsive-img" src="{{detailsImg[26].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat2_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat2_Mark.png') {
-                                                                                    this.src = 'assets/Lat2_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat2_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(27)">
+            <img class="responsive-img" src="{{detailsImg[27].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat3_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat3_Mark.png') {
-                                                                                    this.src = 'assets/Lat3_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat3_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(28)">
+            <img class="responsive-img" src="{{detailsImg[28].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat4_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat4_Mark.png') {
-                                                                                    this.src = 'assets/Lat4_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat4_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(29)">
+            <img class="responsive-img" src="{{detailsImg[29].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat5_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat5_Mark.png') {
-                                                                                    this.src = 'assets/Lat5_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat5_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(30)">
+            <img class="responsive-img" src="{{detailsImg[30].img}}"  />
           </div>
-          <div class="collage col s1 m1 l1">
-            <img class="responsive-img" src="assets/Lat6_NoMark.png" onclick="
-                                                                                  if (this.src === 'http://localhost:4200/assets/Lat6_Mark.png') {
-                                                                                    this.src = 'assets/Lat6_NoMark.png';
-                                                                                  }else {
-                                                                                    this.src = 'assets/Lat6_Mark.png';
-                                                                                  }" />
+          <div class="collage col s1 m1 l1" (click)="changeDetails(31)">
+            <img class="responsive-img" src="{{detailsImg[31].img}}"  />
           </div>
           <div class="collage col s3 m3 l3"></div>
         </div>
@@ -320,8 +220,13 @@
           <div class="col hide-on-small-only m2 l2"></div>
           <div class="input-field col s12 m8 l8">
             <i class="material-icons prefix">account_box</i>
-            <input id="mecanico" type="text" class="validate" [disabled]="user.Rol != 1">
-            <label for="mecanico">MECANICO</label>
+            <select [(ngModel)]="orden.idMecanico" materialize="material_select" name="mecanico">
+              <option value="" disabled>Seleccione un mecanico</option>
+              <option *ngFor="let mec of listaMecanicos" [value]="mec.idUsuario" >{{ mec.PrimerNombre }} {{ mec.PrimerApellido }}
+              </option>
+              <option value=""> Refresh</option>
+            </select>
+            <label>Mecanico</label>
           </div>
           <div class="col hide-on-small-only m2 l2"></div>
         </div>
@@ -329,7 +234,7 @@
         <div >
           <div class="row">
             <div class="input-field col s12 m6 l6" >
-              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3"></textarea>
+              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3" [(ngModel)]="trabajo.Diagnostico" name="diagnostico"></textarea>
               <label for="diagnostico">DIAGNOSTICO</label>
             </div>
             <div class="input-field col s12 m6 l6">
@@ -339,9 +244,17 @@
           </div>
         </div>
 
-        <div class="row center" *ngIf="user.Rol == 1 || user.Rol == 3">
+        <div class="row center" *ngIf="user.Rol == 1">
           <button  class="btn waves-effect waves-light blue darken-1" (click)="crearOrden()" name="action">
-           Modificar
+           Recibir Vehiculo
+          </button>
+          <button class="btn waves-effect waves-light blue darken-1" (click)="cerrar()" name="action">
+            Cerrar Orden
+          </button>
+        </div>
+        <div class="row center" *ngIf="user.Rol == 3">
+          <button class="btn waves-effect waves-light blue darken-1" (click)="Terminar()" name="action">
+            Terminar Trabajo
           </button>
         </div>
       </form>

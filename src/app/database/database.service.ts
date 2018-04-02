@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { base } from '../base';
 import {
   ModeloCitas,
   ModeloFotos,
@@ -16,8 +17,6 @@ const httpOptions = {
     'Content-Type': 'application/json',
   })
 };
-
-const base = 'http://localhost:3000/';
 
 @Injectable()
 export class DatabaseService {

@@ -36,7 +36,6 @@ import { PartsManageComponent } from './parts-manage/parts-manage.component';
 import { PartDetailComponent } from './part-detail/part-detail.component';
 import { PartNewComponent } from './part-new/part-new.component';
 import { PartModifyComponent } from './part-modify/part-modify.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { CamaraComponent } from './camara/camara.component';
 //Servicios
 import { AuthService } from './authService/auth.service';
@@ -47,6 +46,7 @@ import { OrdenSelectService } from "./orden-select/orden-select.service";
 import { PartsService } from "./parts/parts.service";
 import { EmailService } from './email/email-service.service';
 import { QrService } from './qrService/qr.service';
+import { StatusService } from "./status-service/status-service.service";
 import { CookieService } from 'ngx-cookie';
 
 
@@ -81,7 +81,6 @@ declare var $: any;
     PartModifyComponent,
     CarHistorialComponent,
     CamaraComponent,
-    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +100,7 @@ declare var $: any;
     PartsService,
     EmailService,
     QrService,
+    StatusService,
     CookieService
   ],
   bootstrap: [AppComponent]

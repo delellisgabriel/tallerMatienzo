@@ -33,7 +33,7 @@
       </div>
       <div class="col s12 m4" *ngFor="let carro of vehiculos">
         <div (click)="selectCar(carro)">
-          <div class="icon-block notAsigned" id="tile">
+          <div [className]="carro.estatus" id="tile">
             <h4 class="center">{{carro.Marca}} {{carro.Modelo}}</h4>
             <h5 class="light center">Color: {{carro.Color}}</h5>
             <h5 class="light center">Placa: {{carro.Placa}}</h5>
@@ -41,7 +41,7 @@
             <br />
             <img *ngIf="carro.FotoVehiculo" src="{{carro.FotoVehiculo}}" />
             <br />
-            <h5 class="light center">Estatus: <!--TODO--></h5>
+            <h5 class="light center">Estatus: {{carro.estatus}}</h5>
           </div>
         </div>
       </div>

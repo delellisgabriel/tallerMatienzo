@@ -19,7 +19,7 @@ export class PartNewComponent implements OnInit {
   }
 
   agregarRepuesto() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.database.addThis('ModeloRepuestos', this.repuesto).then((res) => {
       console.log(res);
       this.router.navigate(['/parts-manage']);

@@ -9,6 +9,7 @@ import { SelectControlValueAccessor } from '@angular/forms';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { EmailService } from "../email/email-service.service";
+import { StatusService } from "../status-service/status-service.service";
 declare var $: any;
 
 @Component({
@@ -17,9 +18,11 @@ declare var $: any;
   styleUrls: ['./solicitudcita.component.css']
 })
 export class SolicitudcitaComponent implements OnInit, AfterViewInit {
-
+  
+  //vehiculos registrados por el usuario
   userVehiculos = {};
 
+  // form para la solicitud de la cita
   solicitud = {
     Vehiculos_idVehiculo: 0,
     idAux: '',
@@ -28,32 +31,44 @@ export class SolicitudcitaComponent implements OnInit, AfterViewInit {
     FechaTentativaInicial: '',
     FechaTentativaFinal: '',
   };
-
+  //spinner mientras cargamos
 cargando: any;
-
+  // boolean si tiene carros o no.
   cars: any;
 
-  constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService) {
-
+  constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService, private carStatus: StatusService) {
+    
   }
-
+     async bringUser() {
+       this.solicitud.Usuarios_idUsuario = await this.auth.getUser()['idUsuario'];
+   }
+  //enviar los datos para registrar la cita
   solicitarCita() {
     if (this.solicitud.idAux) {
       this.solicitud.Vehiculos_idVehiculo = Number.parseInt(this.solicitud.idAux);
       delete this.solicitud.idAux;
     }
-    this.solicitud.Usuarios_idUsuario = this.auth.getUser()['idUsuario'];
-
+    this.bringUser();
+    //POST
     this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
-      console.log(result); //Esto deberia botar True
       if (result['resultado'] == true) {
-        this.router.navigate(['/mycars', this.auth.getUser()["idUsuario"]]);
+        //Cambiamos el status del vehiculo
+        this.carStatus.updateStatus(this.solicitud.Vehiculos_idVehiculo, 'Esperando');
+        //Enviamos el correo al usuario
+        var user = this.auth.getUser();
+        var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
+        this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
+          console.log(res);
+        }).catch((err) => { console.log(err); });
+        //Procede a ver sus autos
+        this.router.navigate(['/mycars']);
       } else {
-        console.log('Algo Salio Mal');
+        alert('El vehiculo seleccionado ya tiene una cita pendiente.');
       }
     }).catch((err) => {
       console.log(err)
     });
+/*<<<<<<< HEAD
 
     var user = this.auth.getUser();
     var texto = '<b>Su solicitud de cita</b> ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos su solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
@@ -61,15 +76,22 @@ cargando: any;
       console.log(res);
     }).catch((err) => { console.log(err); });
 
+=======
+>>>>>>> origin/Entrega3*/
   }
 
+  
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    //validamos que haya un usuario logeado
+
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.cargando = true;
+    //pedimos los carros activos
     var carros = {
       idUsuario: 0,
       Activado: true,
     }
+    //get
     carros.idUsuario = this.auth.getUser()['idUsuario'];
     console.log(carros);
     this.database.getMe('ModeloVehiculos', carros).then((resp) => {
@@ -88,18 +110,6 @@ cargando: any;
     });
 
   }
-
-  ngAfterInit() {
-    this.userVehiculos = this.auth.getUser()["Vehiculos"];
-    if (this.userVehiculos) {
-      if (this.userVehiculos[0] == null) {
-        this.cars = false;
-      } else {
-        this.cars = true;
-      }
-    }
-  }
-
 
   ngAfterViewInit() {
 

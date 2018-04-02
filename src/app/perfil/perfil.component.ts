@@ -28,12 +28,16 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/404']); }
+    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     document.getElementById("popup").hidden = true;
-    this.user = this.auth.getUser();
+    this.bringUser();
     delete this.user["Vehiculos"];
     this.userViejo.idUsuario = this.auth.getUser()["idUsuario"];
     console.log(this.user, this.userViejo);
+  }
+
+  async bringUser() {
+    this.user = await this.auth.getUser();
   }
 
   ngAfterViewInit() {

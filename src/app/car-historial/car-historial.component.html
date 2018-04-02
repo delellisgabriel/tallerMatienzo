@@ -38,7 +38,7 @@
           <thead>
             <tr>
               <th>Estado</th>
-              <th>Fecha Culminacion</th>
+              <th>Fecha de recepcion</th>
               <th>Detalles</th>
             </tr>
           </thead>
@@ -46,7 +46,7 @@
           <tbody>
             <tr *ngFor="let orden of ordenes">
               <td>{{orden.Completada}}</td>
-              <td>{{orden.FechaCulminacion}}</td>
+              <td>{{orden.FechaRecepcion}}</td>
               <td><button class="btn" (click)="detallesOrden(orden)"><i class="material-icons white-text darken-1">add</i></button></td>
             </tr>
           </tbody>

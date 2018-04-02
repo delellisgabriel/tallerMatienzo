@@ -11,17 +11,12 @@ const ModeloOrdenReparacion = {
   EquipoSonido: 'string',
   Otros: 'string',
   Completada: 'boolean',
-  FechaCulminacion: 'fecha',
+  FechaRecepcion: 'fecha',
   idVehiculo: 'id',
   Vehiculo: {
     tipo: 'model',
     modelo: 'ModeloVehiculos',
     FK: 'Vehiculos_idVehiculo'
-  },
-  Fotos: {
-    tipo: 'collection',
-    modelo: 'ModeloFotos',
-    FK: 'OrdenReparacion_idOrdenReparacion'
   },
   Repuestos: {
     tipo: 'through',
@@ -29,6 +24,11 @@ const ModeloOrdenReparacion = {
     FK: 'OrdenReparacion_idOrdenReparacion',
     modeloDebil: 'ModeloUtilizo',
     FKDebil: 'Repuestos_idRepuestos'
+  },
+  Mecanico: {
+    tipo: 'model',
+    modelo: 'ModeloUsuarios',
+    FK: 'Mecanico_idUsuario'
   }
 };
 

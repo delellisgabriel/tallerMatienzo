@@ -32,35 +32,35 @@
     margin-bottom: 15px;
   }
 
-  .notAsigned {
+  .Normal {
     background-color: #1e88e5;
   }
 
-    .notAsigned:hover {
+    .Normal:hover {
       background-color: #42a5f5;
     }
 
-  .waiting {
+  .Esperando {
     background-color: #ff6d00;
   }
 
-    .waiting:hover {
+    .Esperando:hover {
       background-color: #ffab40;
     }
 
-  .repairing {
+  .Reparando {
     background-color: #ffd600;
   }
 
-    .repairing:hover {
+    .Reparando:hover {
       background-color: #ffea00;
     }
 
-  .ready {
+  .Listo {
     background-color: #00e676;
   }
 
-    .ready:hover {
+    .Listo:hover {
       background-color: #69f0ae;
     }
 
