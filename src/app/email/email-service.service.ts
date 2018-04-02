@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { base } from '../base';
 import 'rxjs/add/operator/toPromise';
 
 const httpOptions = {
@@ -9,8 +10,6 @@ const httpOptions = {
 };
 
 const codigo = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
-
-const base = 'http://localhost:3000/';
 
 @Injectable()
 export class EmailService {
