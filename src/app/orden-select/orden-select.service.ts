@@ -5,6 +5,7 @@ export class OrdenSelectService {
 
   orden = {
     Vehiculos_idVehiculo: 0,
+    Kilometraje: 0,
     FechaRecepcion: '',
     Cauchos: '',
     Llaves: '',

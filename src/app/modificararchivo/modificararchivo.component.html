@@ -55,9 +55,14 @@
         <!-- 4ta fila -->
         <div class="row">
           <div class="input-field col s12 m6 l6">
-            <input placeholder="Fecha" id="datepicker" materialize="pickadate" name="fecha_recepcion"
+            <input placeholder="Fecha" id="datepicker" materialize="pickadate" name="fecha_recepcion " [disabled]="user.Rol != 1"
                    [(ngModel)]="orden.FechaRecepcion" />
             <label for="fecha_recepcion" class="active">Fecha de Recepcion</label>
+          </div>
+          <div class="input-field col s12 m6 l6">
+            <input placeholder="Kilometros" id="kilometraje" type="number" class="validate" name="kilometraje" id="Kilometraje"
+                   [(ngModel)]="orden.Kilometraje" />
+            <label for="Kilometraje" class="active">Kilometraje</label>
           </div>
           <div class="input-field col s12 m6 l6"></div>
         </div>

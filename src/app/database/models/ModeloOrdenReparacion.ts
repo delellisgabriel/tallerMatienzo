@@ -3,6 +3,7 @@ const ModeloOrdenReparacion = {
   tienePK: true,
   idOrdenReparacion: 'id',
   Diagnostico: 'string',
+  Kilometraje: 'number',
   Cauchos: 'string',
   Llaves: 'string',
   Gato: 'string',

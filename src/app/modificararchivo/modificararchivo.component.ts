@@ -25,6 +25,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
 
   public orden = {
     Vehiculos_idVehiculo: 0,
+    Kilometraje: 0,
     FechaRecepcion: '',
     Cauchos: '',
     Llaves: '',
