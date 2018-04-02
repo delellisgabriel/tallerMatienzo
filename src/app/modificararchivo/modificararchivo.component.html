@@ -220,10 +220,11 @@
           <div class="col hide-on-small-only m2 l2"></div>
           <div class="input-field col s12 m8 l8">
             <i class="material-icons prefix">account_box</i>
-            <select [(ngModel)]="orden.Mecanico" materialize="material_select" name="mecanico">
+            <select [(ngModel)]="orden.idMecanico" materialize="material_select" name="mecanico">
               <option value="" disabled>Seleccione un mecanico</option>
-              <option *ngFor="let mec of listaMecanicos" [value]="mec" >{{ mec.PrimerNombre }} {{ mec.PrimerApellido }}
+              <option *ngFor="let mec of listaMecanicos" [value]="mec.idUsuario" >{{ mec.PrimerNombre }} {{ mec.PrimerApellido }}
               </option>
+              <option value=""> Refresh</option>
             </select>
             <label>Mecanico</label>
           </div>
@@ -233,7 +234,7 @@
         <div >
           <div class="row">
             <div class="input-field col s12 m6 l6" >
-              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3"></textarea>
+              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3" [(ngModel)]="trabajo.Diagnostico" name="diagnostico"></textarea>
               <label for="diagnostico">DIAGNOSTICO</label>
             </div>
             <div class="input-field col s12 m6 l6">

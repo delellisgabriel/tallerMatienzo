@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class OrdenSelectService {
 
   orden = {
-    idVehiculo: 0,
+    Vehiculos_idVehiculo: 0,
     FechaRecepcion: '',
     Cauchos: '',
     Llaves: '',
@@ -13,7 +13,7 @@ export class OrdenSelectService {
     EquipoSonido: '',
     Otros: '',
     Carroceria: '',
-    Mecanico: '',
+    Mecanico_idUsuario: '',
     Diagnostico: '',
     Repuestos: [],
   };

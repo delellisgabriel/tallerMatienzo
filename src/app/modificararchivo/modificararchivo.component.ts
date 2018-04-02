@@ -24,7 +24,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   public vehiculo: any;
 
   public orden = {
-    idVehiculo: 0,
+    Vehiculos_idVehiculo: 0,
     FechaRecepcion: '',
     Cauchos: '',
     Llaves: '',
@@ -33,11 +33,13 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     EquipoSonido: '',
     Otros: '',
     Carroceria: '00000000',
-    Mecanico: '',
-    Diagnostico: '',
-    Repuestos: [],
+    Mecanico_idUsuario: 0,
   };
 
+  public trabajo = {
+    Repuestos: [],
+    Diagnostico: '',
+  }
   public listaMecanicos = [];
 
   constructor(private car: CarSelectService,
@@ -62,7 +64,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     delete this.vehiculo['Usuario'];
     delete this.vehiculo['Activado'];
     delete this.vehiculo['FotoVehiculo'];
-    this.orden.idVehiculo = this.vehiculo['idVehiculo'];
+    this.orden.Vehiculos_idVehiculo = this.vehiculo['idVehiculo'];
     this.database.getMe('ModeloVehiculos', this.vehiculo)
       .then((res) => {
         this.vehiculo = res['resultado'][0];
@@ -91,10 +93,17 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     this.orden.Carroceria = chain;
   }
 
-   crearOrden() {
+  crearOrden() {
+    if (this.orden['idMecanico']) {
+      this.orden.Mecanico_idUsuario = Number.parseInt(this.orden['idMecanico']);
+      delete this.orden['idMecanico'];
+    }
      this.guardarChain();
+     delete this.orden['Repuestos'];
+     delete this.orden['Diagnostico'];
      this.database.addThis('ModeloOrdenReparacion', this.orden)
-      .then((res) => {
+       .then((res) => {
+         console.log(res);
         this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Reparando');
         this.router.navigate(['/dashclient']);
       })
@@ -114,7 +123,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   }
 
   Terminar() {
-    this.database.addThis('ModeloOrdenReparacion', this.orden)
+    this.database.changeThis('ModeloOrdenReparacion', this.orden, this.trabajo)
       .then((res) => {
         console.log(res);
       })
