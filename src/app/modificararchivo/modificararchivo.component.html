@@ -60,7 +60,7 @@
             <label for="fecha_recepcion" class="active">Fecha de Recepcion</label>
           </div>
           <div class="input-field col s12 m6 l6">
-            <input placeholder="Kilometros" id="kilometraje" type="number" class="validate" name="kilometraje" id="Kilometraje"
+            <input placeholder="Kilometros" id="kilometraje" type="number" class="validate" name="kilometraje" [disabled]="user.Rol != 1"
                    [(ngModel)]="orden.Kilometraje" />
             <label for="Kilometraje" class="active">Kilometraje</label>
           </div>
@@ -225,7 +225,7 @@
           <div class="col hide-on-small-only m2 l2"></div>
           <div class="input-field col s12 m8 l8">
             <i class="material-icons prefix">account_box</i>
-            <select [(ngModel)]="orden.idMecanico" materialize="material_select" name="mecanico">
+            <select [(ngModel)]="orden.idMecanico" materialize="material_select" name="mecanico" [disabled]="user.Rol != 1">
               <option value="" disabled>Seleccione un mecanico</option>
               <option *ngFor="let mec of listaMecanicos" [value]="mec.idUsuario" >{{ mec.PrimerNombre }} {{ mec.PrimerApellido }}
               </option>
@@ -239,12 +239,12 @@
         <div >
           <div class="row">
             <div class="input-field col s12 m6 l6" >
-              <textarea id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3" [(ngModel)]="trabajo.Diagnostico" name="diagnostico"></textarea>
+              <textarea placeholder="Diagnostico" id="diagnostico" class="materialize-textarea" [disabled]="user.Rol != 3" [(ngModel)]="trabajo.Diagnostico" name="diagnostico"></textarea>
               <label for="diagnostico">DIAGNOSTICO</label>
             </div>
             <div class="input-field col s12 m6 l6">
-              <textarea id="textarea1" class="materialize-textarea" [disabled]="user.Rol != 3"></textarea>
-              <label for="diagnostico">REPUESTOS</label>
+              <textarea placeholder="repuestos" id="repuestos" class="materialize-textarea" [disabled]="user.Rol != 3"  [(ngModel)]="trabajo.Repuestos" name="repuestos"></textarea>
+              <label for="repuestos">REPUESTOS</label>
             </div>
           </div>
         </div>

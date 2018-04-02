@@ -1,23 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backend",
-    "\\backend\\etc",
     "\\src",
     "\\src\\app",
-<<<<<<< HEAD
-    "\\src\\app\\database",
-    "\\src\\app\\database\\controllers",
-    "\\src\\app\\database\\models",
-    "\\src\\app\\mycars",
-    "\\src\\assets"
+    "\\src\\app\\modificararchivo",
+    "\\src\\app\\orden-select"
   ],
-  "SelectedNode": "\\src\\assets",
-=======
-    "\\src\\app\\database\\models",
-    "\\src\\app\\mycars"
-  ],
-  "SelectedNode": "\\src\\app\\mycars\\mycars.component.ts",
->>>>>>> origin/Entrega3
+  "SelectedNode": "\\src\\app\\orden-select\\orden-select.service.ts",
   "PreviewInSolutionExplorer": false
 }
