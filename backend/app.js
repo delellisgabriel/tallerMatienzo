@@ -14,7 +14,6 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-
 const port = 3000;
 const private = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
 
