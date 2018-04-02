@@ -14,7 +14,8 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
   }

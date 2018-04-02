@@ -14,7 +14,7 @@ const codigo = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
 @Injectable()
 export class EmailService {
 
-  private remitente = 'tallermatienzo@gmail.com';
+  private remitente = 'tallermatienzo@tm.com';
   private password = 'gabogabomax';
 
   constructor(private http: HttpClient) { }
