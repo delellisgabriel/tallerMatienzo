@@ -3,9 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\car-historial",
+    "\\src\\app\\colacitas",
+    "\\src\\app\\database",
+    "\\src\\app\\database\\models",
     "\\src\\app\\modificararchivo",
     "\\src\\app\\orden-select"
   ],
-  "SelectedNode": "\\src\\app\\orden-select\\orden-select.service.ts",
+  "SelectedNode": "\\src\\app\\database\\database.service.ts",
   "PreviewInSolutionExplorer": false
 }

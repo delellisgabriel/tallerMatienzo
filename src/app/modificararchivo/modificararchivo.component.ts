@@ -45,12 +45,12 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   }
 
   async bringUser() {
-    this.user = this.auth.getUser();
+    this.user =  await this.auth.getUser();
   }
 
   ngOnInit() {
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
-    this.user = this.auth.getUser();
+    this.bringUser();
     this.getMecanicos();
     this.vehiculo = this.car.getCar();
     delete this.vehiculo['Usuario'];
@@ -75,6 +75,8 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
             if (res['resultado'][0]) {
               this.orden = res['resultado'][0];
               this.calculateDetails();
+              this.trabajo.Diagnostico = this.orden['Diagnostico'];
+              this.trabajo.Repuestos = this.orden['Repuestos'];
             }
           })
         }
@@ -128,11 +130,15 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   }
 
   cerrar() {
+    var localizador = {
+      idOrdenReparacion: this.orden['idOrdenReparacion'],
+    }
     var ordenCerrada = {};
     ordenCerrada['Completada'] = true;
-    this.database.changeThis('ModeloOrdenReparacion', this.orden, ordenCerrada).then((resp) => {
+    this.database.changeThis('ModeloOrdenReparacion', localizador, ordenCerrada).then((resp) => {
       alert('Orden cerrada exitosamente');
       this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Normal');
+      this.router.navigate(['dashclient']);
     }
     );
   }
