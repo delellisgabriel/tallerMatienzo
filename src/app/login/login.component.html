@@ -3,10 +3,7 @@
   <div class="section no-pad-bot">
     <div class="container">
       <br><br>
-      <h1 class="header center white-text">INICIAR SESION</h1>
-      <div class="row">
-        <h5 class="header center col s12 light"></h5>
-      </div>
+      <h1 class="header center white-text">INICIAR SESIÓN</h1>
       <br><br>
 
     </div>
@@ -15,12 +12,12 @@
 </div>
 
 
-<div class="container">
+<div style="min-height: 60vh;" class="container">
   <div class="section">
 
     <div class="alert" id="popup">
       <span  class="closebtn" onclick="this.parentElement.hidden=true;">&times;</span>
-      <strong>¡Usuario</strong> o <strong>contraseña</strong> incorrecta!
+      <strong>Usuario</strong> y/o <strong>contraseña</strong> incorrectos.
     </div>
     <br><br><br>
     <div class="row">
@@ -55,15 +52,16 @@
         <div class="row">
           <div class="col hide-on-small-only m3 l3"></div>
 
-          <div class="col m6 l6">
-            <p class="flow-text center-align">¿No estas registrado? click <a routerLink="/signup">Aquí</a></p>
+          <div class="col m6 l6 s12">
+            <p class="flow-text center-align">¿No estas registrado? click <a routerLink="/signup">Aquí</a>.</p>
           </div>
 
           <div class="col hide-on-small-only m3 l3"></div>
         </div>
 
         <div class="row">
-          <div class="col s12 m12 l12 center-align ">
+          <br>
+          <div class="col s12 m12 l12 center-align">
             <button class="btn btn-large waves-effect waves-light blue darken-1" type="submit" [disabled]="!loginForm.form.valid">
               Entrar
             </button>
@@ -76,4 +74,3 @@
 </div>
 
 
-<br><br><br><br>

@@ -23,21 +23,10 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
 
   public vehiculo: any;
 
-  public orden = {
-    Vehiculos_idVehiculo: 0,
-    FechaRecepcion: '',
-    Cauchos: '',
-    Llaves: '',
-    Gato: '',
-    Herramientas: '',
-    EquipoSonido: '',
-    Otros: '',
-    Carroceria: '00000000',
-    Mecanico_idUsuario: 0,
-  };
+  public orden = {};
 
   public trabajo = {
-    Repuestos: [],
+    Repuestos: '',
     Diagnostico: '',
   }
   public listaMecanicos = [];
@@ -56,11 +45,10 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   }
 
   async bringUser() {
-    this.user = await this.auth.getUser();
+    this.user =  await this.auth.getUser();
   }
 
   ngOnInit() {
-    if (!(this.selectedOrder.getOrden() === {})) { this.orden = this.selectedOrder.getOrden() }
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     this.bringUser();
     this.getMecanicos();
@@ -68,14 +56,36 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     delete this.vehiculo['Usuario'];
     delete this.vehiculo['Activado'];
     delete this.vehiculo['FotoVehiculo'];
-    this.orden.Vehiculos_idVehiculo = this.vehiculo['idVehiculo'];
+    this.orden['Vehiculos_idVehiculo'] = this.vehiculo['idVehiculo'];
     this.database.getMe('ModeloVehiculos', this.vehiculo)
       .then((res) => {
         this.vehiculo = res['resultado'][0];
+        if (!(this.selectedOrder.getOrden() === undefined)) {
+          this.orden = this.selectedOrder.getOrden();
+          this.calculateDetails();
+          this.trabajo.Diagnostico = this.orden['Diagnostico'];
+          this.trabajo.Repuestos = this.orden['Repuestos'];
+        }
+        else {
+          var searchOrder = {
+            idVehiculo: this.vehiculo['idVehiculo'],
+            Completada: false,
+          }
+          this.database.getMe('ModeloOrdenReparacion', searchOrder).then((res) => {
+            if (res['resultado'][0]) {
+              this.orden = res['resultado'][0];
+              this.calculateDetails();
+              this.trabajo.Diagnostico = this.orden['Diagnostico'];
+              this.trabajo.Repuestos = this.orden['Repuestos'];
+            }
+          })
+        }
       }).catch((err) => {
         console.log(err);
       });
-    this.calculateDetails();
+
+
+ 
   }
 
   async getMecanicos() {
@@ -94,47 +104,62 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     for (let i = 8 - chain.length; i > 0; i--) {
       chain = "0" + chain;
     }
-    this.orden.Carroceria = chain;
+    this.orden['Carroceria'] = chain;
   }
 
   crearOrden() {
-    if (this.orden['idMecanico']) {
-      this.orden.Mecanico_idUsuario = Number.parseInt(this.orden['idMecanico']);
-      delete this.orden['idMecanico'];
+    if (!this.orden['Carroceria']) {
+      if (this.orden['idMecanico']) {
+        this.orden['Mecanico_idUsuario'] = Number.parseInt(this.orden['idMecanico']);
+        delete this.orden['idMecanico'];
+      }
+      this.guardarChain();
+      delete this.orden['Repuestos'];
+      delete this.orden['Diagnostico'];
+      this.database.addThis('ModeloOrdenReparacion', this.orden)
+        .then((res) => {
+          console.log(res);
+          this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Reparando');
+          this.router.navigate(['/dashclient']);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-     this.guardarChain();
-     delete this.orden['Repuestos'];
-     delete this.orden['Diagnostico'];
-     this.database.addThis('ModeloOrdenReparacion', this.orden)
-       .then((res) => {
-         console.log(res);
-        this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Reparando');
-        this.router.navigate(['/dashclient']);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    else { alert('Ya existe un reporte abierto para este vehiculo'); }
   }
 
   cerrar() {
+    var localizador = {
+      idOrdenReparacion: this.orden['idOrdenReparacion'],
+    }
     var ordenCerrada = {};
     ordenCerrada['Completada'] = true;
-    this.database.changeThis('ModeloOrdenReparacion', this.orden, ordenCerrada).then((resp) => {
+    this.database.changeThis('ModeloOrdenReparacion', localizador, ordenCerrada).then((resp) => {
       alert('Orden cerrada exitosamente');
       this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Normal');
+      this.router.navigate(['dashclient']);
     }
     );
   }
 
   Terminar() {
-    this.database.changeThis('ModeloOrdenReparacion', this.orden, this.trabajo)
+    var localizador = {
+      idOrdenReparacion: this.orden['idOrdenReparacion'],
+    }
+    
+    this.database.changeThis('ModeloOrdenReparacion', localizador, this.trabajo)
       .then((res) => {
         console.log(res);
+        if (res['resultado'] === true) {
+          this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Listo');
+          this.router.navigate(['/dashclient']);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-    this.carStatus.updateStatus(this.vehiculo['idVehiculo'], 'Listo');
+
   }
 
  checkHex(n) { return /^[0-9A-Fa-f]{1,64}$/.test(n) }
@@ -145,7 +170,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   calculateDetails() {
 
     //calcula la secuencia de trues y false
-    var chain = this.Hex2Bin(this.orden.Carroceria);
+    var chain = this.Hex2Bin(this.orden['Carroceria']);
     for (let i = 32 - chain.toString().length; i > 0; i--) {
       chain = "0" + chain.toString()
     }
@@ -170,22 +195,24 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
   }
 
   changeDetails(num: any) {
-    var img = this.detailsImg[num];
-    if (img.active === "0") {
-      img.active = "1";
-    } else if (img.active === "1") {
-      img.active = "0";
-    }
-    else {
-      console.log('err');
-    }
-    if (img.active === "0") {
-      img.img = img.imgURL;
-    } else if (img.active === "1") {
-      img.img = img.activeImgURL;
-    }
-    else {
-      console.log('err');
+    if (this.user['Rol'] == 1) {
+      var img = this.detailsImg[num];
+      if (img.active === "0") {
+        img.active = "1";
+      } else if (img.active === "1") {
+        img.active = "0";
+      }
+      else {
+        console.log('err');
+      }
+      if (img.active === "0") {
+        img.img = img.imgURL;
+      } else if (img.active === "1") {
+        img.img = img.activeImgURL;
+      }
+      else {
+        console.log('err');
+      }
     }
   }
 

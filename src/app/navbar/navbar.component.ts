@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../authService/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,16 @@ import { AuthService } from "../authService/auth.service";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  userID = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.userID = this.authService.currentUser["idUsuario"];
+  }
+
+  ngAfterContentChecked() {
+    this.userID = this.authService.currentUser["idUsuario"];
   }
 
 }

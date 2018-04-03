@@ -68,6 +68,16 @@ cargando: any;
     }).catch((err) => {
       console.log(err)
     });
+/*<<<<<<< HEAD
+
+    var user = this.auth.getUser();
+    var texto = '<b>Su solicitud de cita</b> ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos su solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
+    this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
+      console.log(res);
+    }).catch((err) => { console.log(err); });
+
+=======
+>>>>>>> origin/Entrega3*/
   }
 
   

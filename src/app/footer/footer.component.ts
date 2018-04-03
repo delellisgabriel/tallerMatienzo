@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from '../authService/auth.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  userID = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.userID = this.authService.currentUser["idUsuario"];
   }
+
+  ngAfterContentChecked() {
+    this.userID = this.authService.currentUser["idUsuario"];
+  }
+
 
 }
