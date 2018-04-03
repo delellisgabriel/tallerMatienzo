@@ -17,7 +17,7 @@ export class AuthService {
 
   private clave = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
 
-  currentUser = {};
+  currentUser = null;
   logged = false;
 
   constructor(private http: HttpClient, private database: DatabaseService, private cookies: CookieService) {
@@ -40,6 +40,8 @@ export class AuthService {
               if ((resp as any).token) {
                 if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
                   this.cookies.put('TallerMatienzo', (resp as any).token);
+                } else if (!this.cookies.get('TallerMatienzo')) {
+                  this.cookies.put('TallerMatienzo', (resp as any).token);
                 }
               }
             });
@@ -54,28 +56,28 @@ export class AuthService {
     });
   }
 
-  getUser() {
-    if (this.currentUser) {
+  async getUser() {
+    if (this.currentUser !== null) {
       return this.currentUser;
     } else {
       if (this.cookies.get('TallerMatienzo')) {
         const token = this.cookies.get('TallerMatienzo');
-        this.http.post(base + 'checktoken', {
+        await this.http.post(base + 'checktoken', {
           token: token,
           password: this.clave
         }).toPromise()
           .then((resp) => {
             if ((resp as any).err) {
               console.error((resp as any).err);
-              return null;
+              this.currentUser = null;
             } else if ((resp as any).usuario) {
               this.currentUser = (resp as any).usuario;
-              return this.currentUser;
             } else {
               console.error('An unknown error occurred.');
-              return null;
+              this.currentUser = null;
             }
           });
+        return this.currentUser;
       } else {
         return null;
       }
@@ -91,13 +93,12 @@ export class AuthService {
         .then((resp) => {
           if ((resp as any).err) {
             console.error((resp as any).err);
-            return false;
           } else {
             this.cookies.remove('TallerMatienzo');
             this.currentUser = null;
-            return true;
           }
         });
+      return (this.currentUser === null);
     } else {
       return false;
     }

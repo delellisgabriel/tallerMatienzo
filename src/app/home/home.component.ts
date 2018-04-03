@@ -4,6 +4,8 @@ import {EmailService} from '../email/email-service.service';
 import {QrService} from '../qrService/qr.service';
 import {DatabaseService} from '../database/database.service';
 import {CookieService} from 'ngx-cookie';
+import {ReporteService} from '../reporte/reporte.service';
+import {AuthService} from '../authService/auth.service';
 
 declare var $: any;
 
@@ -14,7 +16,14 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  constructor(private reporte: ReporteService, private auth: AuthService) {
+    this.funcionAux();
+  }
+
+  async funcionAux() {
+    const usuario = await this.auth.getUser();
+    console.log(usuario);
+    this.reporte.generarReporte(false, true, '1992-08-15', '2019-01-01', usuario, undefined, undefined, false);
   }
 
   ngOnInit() {
