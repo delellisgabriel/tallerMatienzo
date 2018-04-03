@@ -7,12 +7,10 @@
     "\\src\\app\\authService",
     "\\src\\app\\colacitas",
     "\\src\\app\\contacto",
+    "\\src\\app\\dashclient",
     "\\src\\app\\footer",
-    "\\src\\app\\login",
-    "\\src\\app\\navbar",
-    "\\src\\app\\sign-up",
-    "\\src\\app\\solicitudcita"
+    "\\src\\app\\home"
   ],
-  "SelectedNode": "\\src\\app\\solicitudcita\\solicitudcita.component.ts",
+  "SelectedNode": "\\src\\app\\dashclient\\dashclient.component.css",
   "PreviewInSolutionExplorer": false
 }
