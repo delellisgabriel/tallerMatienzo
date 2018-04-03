@@ -58,6 +58,7 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
       +         ', le pedimos disculpas y que por favor solicite otra cita para otro rango de fechas.';
     this.email.enviarEmail(cita['Usuario']['Correo'], 'Su cita no pudo ser asignada', texto).then((res) => {
       console.log(res);
+      this.carStatus.updateStatus(cita['Vehiculo']['idVehiculo'], 'Normal');
     }).catch((err) => { console.log(err); });
 
   }

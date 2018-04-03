@@ -3,6 +3,7 @@ const ModeloOrdenReparacion = {
   tienePK: true,
   idOrdenReparacion: 'id',
   Diagnostico: 'string',
+  Kilometraje: 'number',
   Cauchos: 'string',
   Llaves: 'string',
   Gato: 'string',
@@ -18,13 +19,7 @@ const ModeloOrdenReparacion = {
     modelo: 'ModeloVehiculos',
     FK: 'Vehiculos_idVehiculo'
   },
-  Repuestos: {
-    tipo: 'through',
-    modelo: 'ModeloRepuestos',
-    FK: 'OrdenReparacion_idOrdenReparacion',
-    modeloDebil: 'ModeloUtilizo',
-    FKDebil: 'Repuestos_idRepuestos'
-  },
+  Repuestos: 'string',
   Mecanico: {
     tipo: 'model',
     modelo: 'ModeloUsuarios',
