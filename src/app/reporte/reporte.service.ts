@@ -4,7 +4,6 @@ import * as jsPDF from 'jspdf';
 import {DatabaseService} from '../database/database.service';
 import * as moment from 'moment';
 import {AuthService} from '../authService/auth.service';
-import * as excelNode from 'excel4node';
 
 @Injectable()
 export class ReporteService {
@@ -68,16 +67,6 @@ export class ReporteService {
                  usuario?: object, vehiculo?: object, modelo?: string, isMecanico?: boolean) {
     const doc = new jsPDF();
     doc.setFont('Roboto');
-    const excel = new excelNode();
-    const workbook = new excel.Workbook();
-    const worksheet = workbook.addWorksheet('Mecánico');
-    const style = workbook.createStyle({
-      font: {
-        color: '#FF0800',
-        size: 12
-      },
-      numberFormat: '$#,##0.00; ($#,##0.00); -'
-    });
     let text = '';
     let fechaI = '';
     let fechaF = '';
