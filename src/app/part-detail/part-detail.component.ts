@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class PartDetailComponent implements OnInit {
 
-  repuesto = {};
+  repuesto: any = {};
 
   constructor(private parts: PartsService, private auth: AuthService, private router: Router) { }
 

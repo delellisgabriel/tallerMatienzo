@@ -14,13 +14,15 @@ declare var $: any;
 })
 export class UserDetailComponent implements OnInit, AfterViewInit {
 
-  private userViejo = {
-    idUsuario: '',
-  }
+  userViejo: any = {
 
-  private userRol: any;
+  };
 
-  private userSelected = {};
+  userRol: any;
+
+  userSelected: any = {
+
+  };
 
   constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
 
@@ -45,7 +47,7 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
     }
 
     this.userSelected["CantVehiculos"] = this.userSelected["Vehiculos"].length;
-    
+
 
     console.log(this.userViejo);
     console.log(this.userSelected);

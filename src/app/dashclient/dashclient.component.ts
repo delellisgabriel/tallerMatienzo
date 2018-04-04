@@ -12,7 +12,9 @@ declare var $: any;
 })
 export class DashclientComponent implements OnInit, AfterViewInit {
 
-  user = {};
+  user = {
+    PrimerNombre: ''
+  };
 
   constructor(private auth: AuthService, private router: Router) { }
 

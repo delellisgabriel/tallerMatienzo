@@ -13,11 +13,11 @@ declare var $: any;
 })
 export class PartModifyComponent implements OnInit {
 
-  repuestoOld = {
+  repuestoOld: any = {
     idRepuestos: 0,
   };
 
-  repuesto = {};
+  repuesto: any = {};
 
   constructor(private parts:PartsService, private database: DatabaseService, private router: Router, private auth: AuthService) { }
 

@@ -13,12 +13,15 @@ export class FooterComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.userID = this.authService.currentUser["idUsuario"];
+  async traerUsuario() {
+    this.userID = await this.authService.getUser();
+  }
+
+  async ngOnInit() {
+    this.traerUsuario();
   }
 
   ngAfterContentChecked() {
-    this.userID = this.authService.currentUser["idUsuario"];
   }
 
 

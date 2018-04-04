@@ -14,9 +14,9 @@ declare var $: any;
 })
 export class PartsManageComponent implements OnInit {
 
-  public user = {}; //esto es el usuario, se recibe bien! nada raro aqui!
+  public user: any = {}; //esto es el usuario, se recibe bien! nada raro aqui!
 
-  public repuestos = []; // Mi lista de repuestos! todo bien aqui!
+  public repuestos: any = []; // Mi lista de repuestos! todo bien aqui!
 
   public select = {
     Modelos: [],
@@ -39,7 +39,7 @@ export class PartsManageComponent implements OnInit {
     {
       name: 'Ford'
     }
-  ]
+  ];
 
    constructor(private auth: AuthService, private database: DatabaseService, public fb: FormBuilder, private parts:PartsService, private router: Router) {
     // identificar rol de usuario

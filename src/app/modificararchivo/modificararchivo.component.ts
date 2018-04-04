@@ -23,12 +23,22 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
 
   public vehiculo: any;
 
-  public orden = {};
+  public orden = {
+    FechaRecepcion: '',
+    Kilometraje: '',
+    Cauchos: '',
+    Llaves: '',
+    Gato: '',
+    Herramientas: '',
+    EquipoSonido: '',
+    Otros: '',
+    idMecanico: '0'
+  };
 
   public trabajo = {
     Repuestos: '',
     Diagnostico: '',
-  }
+  };
   public listaMecanicos = [];
 
   constructor(private car: CarSelectService,
@@ -85,7 +95,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
       });
 
 
- 
+
   }
 
   async getMecanicos() {
@@ -147,7 +157,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     var localizador = {
       idOrdenReparacion: this.orden['idOrdenReparacion'],
     }
-    
+
     this.database.changeThis('ModeloOrdenReparacion', localizador, this.trabajo)
       .then((res) => {
         console.log(res);

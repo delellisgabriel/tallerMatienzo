@@ -9,14 +9,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class SideBarFavComponent implements OnInit {
 
-  userID = '';
-  userRol = '';
+  userID: number;
+  userRol: number;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.userID = this.authService.currentUser["idUsuario"];
-    this.userRol = this.authService.currentUser["Rol"];
+    this.userID = Number.parseInt(this.authService.currentUser["idUsuario"]);
+    this.userRol = Number.parseInt(this.authService.currentUser["Rol"]);
   }
 
 }

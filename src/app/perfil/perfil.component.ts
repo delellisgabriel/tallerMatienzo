@@ -13,9 +13,23 @@ declare var $: any;
 })
 export class PerfilComponent implements OnInit, AfterViewInit {
 
-  user = {};
+  user = {
+    idUsuario: '',
+    PrimerNombre: '',
+    SegundoNombre: '',
+    PrimerApellido: '',
+    SegundoApellido: '',
+    Cedula: '',
+    Fecha_Nacimiento: ''
+  };
   userViejo = {
     idUsuario: '',
+    PrimerNombre: '',
+    SegundoNombre: '',
+    PrimerApellido: '',
+    SegundoApellido: '',
+    Cedula: '',
+    Fecha_Nacimiento: ''
   };
 
   constructor(private auth: AuthService, private database: DatabaseService, private router: Router) { }
