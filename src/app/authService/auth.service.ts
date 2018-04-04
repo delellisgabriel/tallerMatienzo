@@ -112,8 +112,9 @@ export class AuthService {
     return shajs('sha256').update(password + salt).digest('hex');
   }
 
-  isLoged(): boolean {
-    return this.logged;
+  async isLoged() {
+    await this.getUser();
+    return (this.currentUser !== null);
   }
 
   private generateSalt(semilla: number): string {
