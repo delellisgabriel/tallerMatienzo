@@ -3,13 +3,17 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\car-historial",
-    "\\src\\app\\colacitas",
-    "\\src\\app\\database",
-    "\\src\\app\\database\\models",
-    "\\src\\app\\modificararchivo",
-    "\\src\\app\\orden-select"
+    "\\src\\app\\parts",
+    "\\src\\app\\parts-manage",
+    "\\src\\app\\perfil",
+    "\\src\\app\\reporte",
+    "\\src\\app\\sign-up",
+    "\\src\\app\\solicitudcita",
+    "\\src\\app\\status-service",
+    "\\src\\app\\user-detail",
+    "\\src\\app\\user-manager",
+    "\\src\\app\\user-select"
   ],
-  "SelectedNode": "\\src\\app\\database\\database.service.ts",
+  "SelectedNode": "\\src\\app\\user-select",
   "PreviewInSolutionExplorer": false
 }

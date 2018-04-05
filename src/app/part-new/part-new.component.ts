@@ -11,15 +11,15 @@ declare var $: any;
 })
 export class PartNewComponent implements OnInit {
 
-  repuesto = {};
+  repuesto: any = {};
 
   constructor(private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
   }
 
-  agregarRepuesto() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async agregarRepuesto() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.database.addThis('ModeloRepuestos', this.repuesto).then((res) => {
       console.log(res);
       this.router.navigate(['/parts-manage']);

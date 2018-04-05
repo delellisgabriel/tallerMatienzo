@@ -9,16 +9,25 @@ import { AuthService } from '../authService/auth.service';
 })
 export class FooterComponent implements OnInit {
 
-  userID = '';
+  userID = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.userID = this.authService.currentUser["idUsuario"];
+  async traerUsuario() {
+    this.userID = await this.authService.getUser();
+  }
+
+  async logout() {
+    await this.authService.logout();
+    await this.traerUsuario();
+    this.router.navigate(['/']);
+  }
+
+  async ngOnInit() {
+    await this.traerUsuario();
   }
 
   ngAfterContentChecked() {
-    this.userID = this.authService.currentUser["idUsuario"];
   }
 
 

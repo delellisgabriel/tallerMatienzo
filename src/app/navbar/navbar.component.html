@@ -6,13 +6,14 @@
       <li><a routerLink="/">Inicio</a></li>
       <li><a routerLink="/equipo">Equipo</a></li>
       <li><a routerLink="/contacto">Contacto</a></li>
-      <li *ngIf="userID"><a routerLink="/" (click)="logout()">Salir</a></li>
+      <li *ngIf="userID !== null"><a routerLink="/" (click)="logout()">Salir</a></li>
     </ul>
 
     <ul id="nav-mobile" class="side-nav">
       <li><a routerLink="/">Inicio</a></li>
       <li><a routerLink="/equipo">Equipo</a></li>
       <li><a routerLink="/contacto">Contacto</a></li>
+      <li *ngIf="userID"><a routerLink="/" (click)="logout()">Cerrar Sesión</a></li>
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>

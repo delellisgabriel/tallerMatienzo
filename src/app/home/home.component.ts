@@ -4,6 +4,9 @@ import {EmailService} from '../email/email-service.service';
 import {QrService} from '../qrService/qr.service';
 import {DatabaseService} from '../database/database.service';
 import {CookieService} from 'ngx-cookie';
+import {ReporteService} from '../reporte/reporte.service';
+import { AuthService } from '../authService/auth.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -14,11 +17,17 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  userID = null;
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  async ngOnInit() {
+    const temporal = await this.authService.getUser();
+    if (temporal !== null) {
+      this.userID = (temporal as any).idUsuario;
+    }
   }
 
-  ngOnInit() {
-  }
 
   ngAfterViewInit() {
 

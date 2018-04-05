@@ -12,14 +12,16 @@ declare var $: any;
 })
 export class DashclientComponent implements OnInit, AfterViewInit {
 
-  user = {};
+  user = {
+    PrimerNombre: ''
+  };
 
   constructor(private auth: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.bringUser();
+  async ngOnInit() {
+    await this.bringUser();
     window.scrollTo(0, 0);
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
   }
 
   async bringUser() {

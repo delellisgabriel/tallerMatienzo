@@ -1,11 +1,11 @@
 <div class="row center">
   <app-side-bar-fav></app-side-bar-fav>
 </div>
-<div class="container">
+<div style="min-height: 60vh;" class="container">
   <div class="section">
     <div *ngIf="loading">
       <div class="row">
-        <br /><br /><br /><br /><br /><br /><br /><br />
+        <br><br><br><br><br><br><div class="hide-on-small-only"><br><br><br></div>
         <div class="col s12 m12 l12 center-align">
           <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
@@ -19,7 +19,6 @@
             </div>
           </div>
         </div>
-        <br /><br /><br /><br /><br /><br /><br /><br />
       </div>
     </div>
 <div class="row" *ngIf="!loading">

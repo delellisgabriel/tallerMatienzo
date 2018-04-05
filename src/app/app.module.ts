@@ -48,6 +48,8 @@ import { EmailService } from './email/email-service.service';
 import { QrService } from './qrService/qr.service';
 import { StatusService } from "./status-service/status-service.service";
 import { CookieService } from 'ngx-cookie';
+import {ReporteService} from './reporte/reporte.service';
+import { DeactivatedCarListComponent } from './deactivated-car-list/deactivated-car-list.component';
 
 
 declare var $: any;
@@ -81,6 +83,7 @@ declare var $: any;
     PartModifyComponent,
     CarHistorialComponent,
     CamaraComponent,
+    DeactivatedCarListComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ declare var $: any;
     EmailService,
     QrService,
     StatusService,
-    CookieService
+    CookieService,
+    ReporteService
   ],
   bootstrap: [AppComponent]
 })
