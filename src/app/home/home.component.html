@@ -6,14 +6,11 @@
       <div class="row center">
         <h5 class="header center col s12 light">Los Mejores en Mecánica Automotriz</h5>
       </div>
-      <div *ngIf="userID === null" class="row center">
+      <div class="row center">
         <a routerLink="/signup" id="download-button" class="btn-large waves-effect waves-light blue darken-1">Registrarme</a>
         <a routerLink="/login" id="download-button" class="btn-large waves-effect waves-light blue darken-1">Entrar</a>
       </div>
-      <div *ngIf="userID !== null" class="row center">
-        <a routerLink="/dashclient" id="download-button" class="btn-large waves-effect waves-light blue darken-1">Volver</a>
-        <app-side-bar-fav></app-side-bar-fav>
-      </div>
+
       <br><br>
     </div>
   </div>

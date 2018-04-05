@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   userID = null;
+  salir = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -17,11 +18,22 @@ export class NavbarComponent implements OnInit {
     this.userID = await this.authService.getUser();
   }
 
-  async ngOnInit() {
-    this.traerUsuario();
+   async ngOnInit() {
+     this.userID = await this.authService.getUser();
+     if (this.userID !== null) {
+       this.salir = true;
+     }
   }
 
-  ngAfterContentChecked() {
+    ngAfterContentChecked() {
+    this.userID =  this.authService.getUser();
+  }
+
+  logout() {
+    console.log(this.salir);
+    this.authService.logout();
+    this.salir = false;
+    console.log(this.salir);
   }
 
 }

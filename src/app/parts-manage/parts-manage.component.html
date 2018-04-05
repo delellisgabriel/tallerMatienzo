@@ -35,6 +35,8 @@
 
                 {{ marca }}
               </option>
+              <option value="">Refresh</option>
+
             </select>
             <label>Marca</label>
           </div>
@@ -48,6 +50,7 @@
               <option *ngFor="let modelo of select.Modelos" [value]="modelo">
                 {{ modelo }}
               </option>
+              <option value="">Refresh</option>
             </select>
             <label>Modelo</label>
           </div>
