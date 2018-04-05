@@ -19,12 +19,12 @@ export class FooterComponent implements OnInit {
 
   async logout() {
     await this.authService.logout();
-    this.router.navigate(['/']);
     await this.traerUsuario();
+    this.router.navigate(['/']);
   }
 
   async ngOnInit() {
-    this.traerUsuario();
+    await this.traerUsuario();
     this.ciclo();
   }
 
@@ -34,7 +34,7 @@ export class FooterComponent implements OnInit {
   }
 
   async refresh() {
-    return new Promise(resolve => setTimeout(resolve, 2000));
+    return new Promise(resolve => setTimeout(resolve, 800));
   }
 
   ngAfterContentChecked() {
