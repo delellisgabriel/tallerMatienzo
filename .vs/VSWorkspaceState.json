@@ -1,29 +1,17 @@
 {
   "ExpandedNodes": [
     "",
-<<<<<<< HEAD
-    "\\backend",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\authService",
-    "\\src\\app\\colacitas",
-    "\\src\\app\\contacto",
-    "\\src\\app\\dashclient",
-    "\\src\\app\\footer",
-    "\\src\\app\\home"
-  ],
-  "SelectedNode": "\\src\\app\\dashclient\\dashclient.component.css",
-=======
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\car-historial",
     "\\src\\app\\colacitas",
     "\\src\\app\\database",
     "\\src\\app\\database\\models",
-    "\\src\\app\\modificararchivo",
-    "\\src\\app\\orden-select"
+    "\\src\\app\\deactivated-car-list",
+    "\\src\\app\\footer",
+    "\\src\\app\\login",
+    "\\src\\app\\side-bar-fav",
+    "\\src\\app\\solicitudcita"
   ],
-  "SelectedNode": "\\src\\app\\database\\database.service.ts",
->>>>>>> origin/Canvas
+  "SelectedNode": "\\src\\app\\database\\models\\ModeloVehiculos.ts",
   "PreviewInSolutionExplorer": false
 }

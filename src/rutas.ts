@@ -20,6 +20,7 @@ import { PartNewComponent } from './app/part-new/part-new.component';
 import { PartModifyComponent } from './app/part-modify/part-modify.component';
 import { CarHistorialComponent } from './app/car-historial/car-historial.component';
 import { CamaraComponent } from './app/camara/camara.component';
+import { DeactivatedCarListComponent } from './app/deactivated-car-list/deactivated-car-list.component';
 
 export const Rutas: Routes = [
   { path: '', component: HomeComponent },
@@ -46,4 +47,5 @@ export const Rutas: Routes = [
   { path: 'part-modify', component: PartModifyComponent },
   { path: 'car-historial', component: CarHistorialComponent },
   { path: 'camara', component: CamaraComponent },
+  { path: 'lista-desactivados', component: DeactivatedCarListComponent },
 ];
