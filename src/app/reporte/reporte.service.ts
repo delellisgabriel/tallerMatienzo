@@ -328,6 +328,75 @@ export class ReporteService {
           }
           if (Excel) {
             // Reporte de cliente en Excel
+            this.db.getMe('ModeloUsuarios', usuario).then((resp) => {
+              this.db.getMe('ModeloCitas').then((resp2) => {
+                this.db.getMe('ModeloOrdenReparacion').then(async (resp3) => {
+                  if ((resp as any).resultado.length > 0) {
+                    const solicitante = await this.auth.getUser();
+                    const cliente = (resp as any).resultado[0];
+                    const citas = this.filtrarCitas((resp2 as any).resultado, cliente);
+                    const fecha = moment().format('DD/MM/YYYY');
+                    const vehiculos = cliente.Vehiculos;
+                    const ordenes = this.filtrarOrdenes((resp3 as any).resultado, cliente);
+                    if (ordenes && ordenes.length > 0) {
+                      text += 'Datos de las Órdenes';
+                    }
+                    text += 'Reporte de Usuario\n';
+                    text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
+                    text += 'Fecha: ' + fecha + '\n\n';
+                    text += 'Datos del Cliente:\n\n';
+                    text += 'Nombre: ' + (cliente as any).PrimerNombre + ' ' + (cliente as any).SegundoNombre + ' ' + (cliente as any).PrimerApellido + ' ' + (cliente as any).SegundoApellido + '\n';
+                    text += 'Cedula: ' + (cliente as any).Cedula + '\n';
+                    text += 'Correo: ' + (cliente as any).Correo + '\n\n';
+                    if (cliente.Vehiculos.length > 0) {
+                      text += 'Datos de sus Vehículos:\n\n';
+                      for (const vehicle of vehiculos) {
+                        text += 'Marca: ' + (vehicle as any).Marca + '\n';
+                        text += 'Modelo: ' + (vehicle as any).Modelo + '\n';
+                        text += 'Año: ' + (vehicle as any).Ano + '\n';
+                        text += 'Color: ' + (vehicle as any).Color + '\n';
+                        text += 'Placa: ' + (vehicle as any).Placa + '\n\n';
+                      }
+                    } else {
+                      text += 'El cliente no tiene vehículos registrados\n\n';
+                    }
+                    if (citas.length > 0) {
+                      text += 'Información de las citas del cliente:\n\n';
+                      for (const cita of citas) {
+                        const FTI = moment((cita as any).FechaTentativaInicial).format('DD/MM/YYYY');
+                        const FTF = moment((cita as any).FechaTentativaFinal).format('DD/MM/YYYY');
+                        let FA = '';
+                        if ((cita as any).FechaAsignada !== null) {
+                          FA = moment((cita as any).FechaAsignada).format('DD/MM/YYYY');
+                        } else {
+                          FA = 'No asignada';
+                        }
+                        text += 'Fecha Tentativa Inicial: ' + FTI + '\n';
+                        text += 'Fecha Tentativa Final: ' + FTF + '\n';
+                        text += 'Fecha Asignada: ' + FA + '\n';
+                        text += 'Motivo: ' + (cita as any).Motivo + '\n\n';
+                      }
+                      if ((ordenes as any).length > 0) {
+                        text += 'Datos de las Órdenes de Reparación de los Vehículos del Cliente:\n\n';
+                        for (const orden of ordenes) {
+                          text += 'Vehículo: ' + (orden as any).Vehiculo.Marca + ' ' + (orden as any).Vehiculo.Modelo + ' ' + (orden as any).Vehiculo.Ano + ' ' + (orden as any).Vehiculo.Color + '\n';
+                          text += 'Mecánico: ' + (orden as any).Mecanico.PrimerNombre + ' ' + (orden as any).Mecanico.PrimerApellido + '\n\n';
+                        }
+                      } else {
+                        text += 'El cliente no tiene órdenes de reparación asociados a sus vehículos\n\n';
+                      }
+                    }
+                  } else {
+                    console.error('El cliente del cual el reporte fue solicitado no existe');
+                  }
+                  const aux = this.transformarTextoEnArray(text);
+                  const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aux);
+                  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+                  XLSX.utils.book_append_sheet(wb, ws, 'Cliente');
+                  XLSX.writeFile(wb, 'reporte.xlsx');
+                }).catch((err) => console.error(err));
+              }).catch((err) => console.error(err));
+            }).catch((err) => console.error(err));
           }
         }
       } else if (vehiculo) {
@@ -387,11 +456,58 @@ export class ReporteService {
                 } else {
                   text += 'No hay repuestos asociados a esta orden de reparación\n';
                 }
-                doc.text(text, 10, 10);
-                doc.save();
               } else {
                 text += 'No hay órdenes de reparación para el vehículo escogido\n\n';
               }
+            }).catch((err) => console.error(err));
+          }).catch((err) => console.error(err));
+          doc.text(text, 10, 10);
+          doc.save();
+        }
+        if (Excel) {
+          this.db.getMeOne('ModeloVehiculos', (vehiculo as any).idVehiculo).then((resp) => {
+            const vehicle = (resp as any).resultado;
+            this.db.getMe('ModeloOrdenReparacion').then(async (resp2) => {
+              const solicitante = await this.auth.getUser();
+              const ordenes = this.filtrarOrdenesVehiculo((resp2 as any).resultado, vehicle);
+              const fecha = moment().format('DD/MM/YYYY');
+              text += 'Reporte de Vehículo\n';
+              text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
+              text += 'Fecha: ' + fecha + '\n\n';
+              text += 'Datos del Vehículo:\n\n';
+              text += 'Marca: ' + (vehicle as any).Marca + '\n';
+              text += 'Modelo: ' + (vehicle as any).Modelo + '\n';
+              text += 'Año: ' + (vehicle as any).Ano + '\n';
+              text += 'Color: ' + (vehicle as any).Color + '\n';
+              text += 'Placa: ' + (vehicle as any).Placa + '\n\n';
+              if (ordenes && ordenes.length > 0) {
+                text += 'Órdenes de Reparación del Vehículo: ' + '\n\n';
+                for (const orden of ordenes) {
+                  text += 'Mecánico: ' + (orden as any).Mecanico.PrimerNombre + ' ' + (orden as any).Mecanico.PrimerApellido + '\n';
+                  text += 'Kilometraje: ' + (orden as any).Kilometraje + '\n';
+                  if ((orden as any).FechaRecepcion !== null) {
+                    text += 'Fecha Asignada: ' + moment((orden as any).FechaRecepcion).format('DD/MM/YYYY') + '\n\n';
+                  } else {
+                    text += 'Fecha Asignada: No tiene fecha asignada\n\n';
+                  }
+                }
+                const repuestos = (ordenes as any).Repuestos;
+                if (repuestos && repuestos.length > 0) {
+                  text += 'Repuestos;\n\n';
+                  for (const repuesto of repuestos) {
+                    text += 'Nombre: ' + (repuesto as any).Nombre + '\n\n';
+                  }
+                } else {
+                  text += 'No hay repuestos asociados a esta orden de reparación\n';
+                }
+              } else {
+                text += 'No hay órdenes de reparación para el vehículo escogido\n\n';
+              }
+              const aux = this.transformarTextoEnArray(text);
+              const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aux);
+              const wb: XLSX.WorkBook = XLSX.utils.book_new();
+              XLSX.utils.book_append_sheet(wb, ws, 'Vehículos');
+              XLSX.writeFile(wb, 'reporte.xlsx');
             }).catch((err) => console.error(err));
           }).catch((err) => console.error(err));
         }
@@ -449,6 +565,44 @@ export class ReporteService {
             } else {
               text += 'No hay órdenes de reparación para el vehículo escogido\n\n';
             }
+          }).catch((err) => console.error(err));
+        }
+        if (Excel) {
+          this.db.getMe('ModeloOrdenReparacion').then(async (resp) => {
+            const ordenes = this.filtrarOrdenesModelo((resp as any).resultado, modelo);
+            const solicitante = await this.auth.getUser();
+            const fecha = moment().format('DD/MM/YYYY');
+            text += 'Reporte de Vehículo\n';
+            text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
+            text += 'Fecha: ' + fecha + '\n\n';
+            if (ordenes && ordenes.length > 0) {
+              text += 'Órdenes de Reparación del Vehículo: ' + '\n\n';
+              for (const orden of ordenes) {
+                text += 'Mecánico: ' + (orden as any).Mecanico.PrimerNombre + ' ' + (orden as any).Mecanico.PrimerApellido + '\n';
+                text += 'Kilometraje: ' + (orden as any).Kilometraje + '\n';
+                if ((orden as any).FechaRecepcion !== null && moment((orden as any).FechaRecepcion).format('DD/MM/YYYY') !== 'Invalid date') {
+                  text += 'Fecha Asignada: ' + moment((orden as any).FechaRecepcion).format('DD/MM/YYYY') + '\n\n';
+                } else {
+                  text += 'Fecha Asignada: No tiene fecha asignada\n\n';
+                }
+              }
+              const repuestos = (ordenes as any).Repuestos;
+              if (repuestos && repuestos.length > 0) {
+                text += 'Repuestos;\n\n';
+                for (const repuesto of repuestos) {
+                  text += 'Nombre: ' + (repuesto as any).Nombre + '\n\n';
+                }
+              } else {
+                text += 'No hay repuestos asociados a esta orden de reparación\n';
+              }
+            } else {
+              text += 'No hay órdenes de reparación para el vehículo escogido\n\n';
+            }
+            const aux = this.transformarTextoEnArray(text);
+            const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(aux);
+            const wb: XLSX.WorkBook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Cliente');
+            XLSX.writeFile(wb, 'reporte.xlsx');
           }).catch((err) => console.error(err));
         }
       } else {

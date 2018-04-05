@@ -20,17 +20,19 @@
 
 
       <div class="row">
-        <form class="col s12">
+        <form class="col s12" materialize>
           <div class="row">
             <div class="col s12 m2 l2">
               <h3 class="flow-text">Rango</h3><p>Nota: En caso de dejar en blanco se escogen todos los reportes</p></div>
-            <div class="input-field col s12 m5 l5">
-              <input type="text" class="datepicker validate">
-              <label for="first_name">Desde</label>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">date_range</i>
+              <input materialize="pickadate" type="text" id="datepicker1" name="datepicker" [(ngModel)]="datosReporte.FechaInicial" [materializeParams]="[{selectYears: 180, monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], weekdaysLetter: ['D', 'L', 'M', 'M', 'J', 'V', 'S'], today: 'Hoy', clear: 'Limpiar', format: 'yyyy-mm-dd'}]">
+              <label for="datepicker1">FECHA INICIAL</label>
             </div>
-            <div class="input-field col s12 m5 l5">
-              <input type="text" class="datepicker validate">
-              <label for="Hasta">Hasta</label>
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">date_range</i>
+              <input materialize="pickadate" type="text" id="datepicker2" name="datepicker" [(ngModel)]="datosReporte.FechaFinal" [materializeParams]="[{selectYears: 180, monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'], monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'], weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'], weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'], weekdaysLetter: ['D', 'L', 'M', 'M', 'J', 'V', 'S'], today: 'Hoy', clear: 'Limpiar', format: 'yyyy-mm-dd'}]">
+              <label for="datepicker2">FECHA FINAL</label>
             </div>
           </div>
 
@@ -38,15 +40,15 @@
             <div class="col s12 m2 l2">
               <h3 class="flow-text">Formato</h3>
             </div>
-            <div class="input-field col s12 m5 l5">
+            <div class="switch col s12 m5 l5">
               <p>
-                <input type="checkbox" class="filled-in" id="filled-in-box1" checked="checked" />
+                <input type="checkbox" class="filled-in" id="filled-in-box1" (click)="pdf()"/>
                 <label for="filled-in-box1">PDF</label>
               </p>
             </div>
-            <div class="input-field col s12 m5 l5">
+            <div class="switch col s12 m5 l5">
               <p>
-                <input type="checkbox" class="filled-in" id="filled-in-box2" checked="checked" />
+                <input type="checkbox" class="filled-in" id="filled-in-box2" (click)="excel()"/>
                 <label for="filled-in-box2">EXCEL</label>
               </p>
             </div>
@@ -64,75 +66,48 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Tipo</th>
-                    <th>Nº Carros</th>
                     <th>Reporte Histórico</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Rafael Matienzo</td>
-                    <td>Administrador</td>
-                    <td>4</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Pedro Pérez</td>
-                    <td>Administrador</td>
-                    <td>3</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Maximiliano Casale</td>
-                    <td>Mecánico</td>
-                    <td>1</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Gabriele Troncone</td>
-                    <td>Mecánico</td>
-                    <td>2</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Sara Macayo</td>
-                    <td>Cliente</td>
-                    <td>0</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Luciano Pineda</td>
-                    <td>Cliente</td>
-                    <td>2</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>John Doe</td>
-                    <td>Cliente</td>
-                    <td>1</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Gabriel De Lellis</td>
-                    <td>Cliente</td>
-                    <td>1</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Carl Marx</td>
-                    <td>Cliente</td>
-                    <td>2</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
+                  <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.PrimerNombre}} {{usuario.PrimerApellido}}</td>
+                    <td>{{usuario.Rol}}</td>
+                    <td><i class="material-icons blue-text darken-1" (click)="reporteUsuario(usuario)">assignment</i></td>
                   </tr>
                 </tbody>
               </table>
 
-
+              <br /><br />
 
             </div>
           </div>
 
+      <div class="row">
+        <div class="col s12 m12 l12">
 
+          <h3 class="center-align">Lista de Mecánicos</h3>
+          <table class="bordered highlight centered responsive-table center-align">
+            <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Reporte Histórico</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let mecanico of mecanicos">
+              <td>{{mecanico.PrimerNombre}} {{mecanico.PrimerApellido}}</td>
+              <td><i class="material-icons blue-text darken-1" (click)="reporteMecanico(mecanico)">assignment</i></td>
+            </tr>
+            </tbody>
+          </table>
+
+          <br /><br />
+
+        </div>
+      </div>
 
           <div class="row">
             <div class="col s12 m12 l12">
@@ -149,37 +124,12 @@
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td>Toyota Corolla 2017</td>
-                    <td>IBM80I</td>
-                    <td>Rafael Matienzo</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
+                  <tr *ngFor="let vehiculo of vehiculos">
+                    <td>{{vehiculo.Marca}} {{vehiculo.Modelo}} {{vehiculo.Ano}}</td>
+                    <td>{{vehiculo.Placa}}</td>
+                    <td>{{vehiculo.Usuario.PrimerNombre}} {{vehiculo.Usuario.PrimerApellido}}</td>
+                    <td><i class="material-icons blue-text darken-1" (click)="reporteVehiculo(vehiculo)">assignment</i></td>
                   </tr>
-                  <tr>
-                    <td>Chevrolet Aveo 2011</td>
-                    <td>ASD69F</td>
-                    <td>Maximiliano Casale</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Peugeot 206 2007</td>
-                    <td>AGM84Y</td>
-                    <td>John Doe</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Jeep Cherokee 2010</td>
-                    <td>TAN21E</td>
-                    <td>Gabriele Troncone</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-                  <tr>
-                    <td>Chevrolet Aveo 2007</td>
-                    <td>XAE75E</td>
-                    <td>Gabriel De Lellis</td>
-                    <td><i class="material-icons blue-text darken-1">assignment</i></td>
-                  </tr>
-
                 </tbody>
               </table>
 
@@ -187,7 +137,15 @@
 
             </div>
           </div>
-
+          <div class="row center">
+            <div class="input-field col s12 m6 l6">
+              <i class="material-icons prefix">assessment</i>
+              <input id="email" class="validate" required
+                     [(ngModel)]="datosReporte.Modelo" name="modelo">
+              <label for="email">Modelo de Vehículo</label>
+            </div>
+            <a (click)="reporteModelo()" id="download-button" class="btn-large waves-effect waves-light blue darken-1">Generar Reporte Modelo</a>
+          </div>
 
         </div>
       </div>

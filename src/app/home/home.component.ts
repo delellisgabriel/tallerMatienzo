@@ -16,16 +16,7 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(private reporte: ReporteService, private auth: AuthService) {
-    this.funcionAux();
-  }
-
-  async funcionAux() {
-    const usuario = await this.auth.getUser();
-    this.reporte.generarReporte(true, false, '1992-08-15', '2019-01-01', {
-      idUsuario: 13
-    }, undefined, 'Focus', true);
-  }
+  constructor(private reporte: ReporteService, private auth: AuthService) {  }
 
   ngOnInit() {
   }

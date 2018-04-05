@@ -32,7 +32,7 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     document.getElementById("popup").hidden = true;
     this.bringUser();
     this.userSelected = await this.userSelect.getUser();

@@ -80,7 +80,7 @@ cargando: any;
   async ngOnInit() {
     //validamos que haya un usuario logeado
 
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.cargando = true;
     //pedimos los carros activos
     var carros = {

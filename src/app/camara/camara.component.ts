@@ -27,8 +27,8 @@ export class CamaraComponent implements OnInit {
   @Input() width: number;
   @Input() height: number;
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) {
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) {
       this.router.navigate(['/login']);
       this.cargando = true;
     }

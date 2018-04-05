@@ -16,7 +16,7 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
 
   userBuscado = {
     PrimerNombre: '',
-  }
+  };
 
    users = [];
 
@@ -53,8 +53,8 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloUsuarios')
       .then((result) => {
         this.users = result['resultado'];

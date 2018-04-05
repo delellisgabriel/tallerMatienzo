@@ -58,8 +58,8 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     this.user =  await this.auth.getUser();
   }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.bringUser();
     this.getMecanicos();
     this.vehiculo = this.car.getCar();
