@@ -54,8 +54,7 @@ export class ColacitasComponent implements OnInit, AfterViewInit {
   }
 
   public rechazar(cita) {
-    var texto = 'Su cita no pudo ser asignada ya que no tenemos capacidad para recibir mas autos en esas fechas'
-      +         ', le pedimos disculpas y que por favor solicite otra cita para otro rango de fechas.';
+    var texto = '<table><tr><td style="" align="center"><h2 style="text-align: center; background-color: ;">Taller Matienzo - Cita</h2></td></tr><tr><td align="center"><b>Estimado ' + cita.Usuario.PrimerNombre + ' </b>,<br><br>Le informamos que su cita no pudo ser asignada ya que no tenemos capacidad para recibir mas vehículos en las fechas solicitadas, por favor solicite otra cita en otro rango de fechas.<br><br><br><tr><td align="center">Dirección: Distribuidor Universidad Autopista Petare- Guarenas.Urbanización Terrazas del Ávila.</td></tr></table>';
     this.email.enviarEmail(cita['Usuario']['Correo'], 'Su cita no pudo ser asignada', texto).then((res) => {
       console.log(res);
       this.carStatus.updateStatus(cita['Vehiculo']['idVehiculo'], 'Normal');

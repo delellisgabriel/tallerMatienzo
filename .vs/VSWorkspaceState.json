@@ -3,15 +3,17 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\colacitas",
-    "\\src\\app\\database",
-    "\\src\\app\\database\\models",
-    "\\src\\app\\deactivated-car-list",
-    "\\src\\app\\footer",
-    "\\src\\app\\login",
-    "\\src\\app\\side-bar-fav",
-    "\\src\\app\\solicitudcita"
+    "\\src\\app\\parts",
+    "\\src\\app\\parts-manage",
+    "\\src\\app\\perfil",
+    "\\src\\app\\reporte",
+    "\\src\\app\\sign-up",
+    "\\src\\app\\solicitudcita",
+    "\\src\\app\\status-service",
+    "\\src\\app\\user-detail",
+    "\\src\\app\\user-manager",
+    "\\src\\app\\user-select"
   ],
-  "SelectedNode": "\\src\\app\\database\\models\\ModeloVehiculos.ts",
+  "SelectedNode": "\\src\\app\\user-select",
   "PreviewInSolutionExplorer": false
 }
