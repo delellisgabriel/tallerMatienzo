@@ -13,23 +13,48 @@ declare var $: any;
 export class DeactivatedCarListComponent implements OnInit {
 
 
-  listaCarrosDes = []; /*Lista de carros desactivados*/
+  vehiculosDes: any = []; /*Lista de carros desactivados*/
+
+  selected: any = undefined;
 
   loading = true;
 
+  usuarios: any = [];
+
   constructor(private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloVehiculos')
-      .then((result) => {
-        this.listaCarrosDes = result['resultado'];
-        this.loading = false;
-        console.log(this.listaCarrosDes);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then(async (result) => {
+        await this.database.getMe('ModeloUsuarios').then((resp) => {
+          this.usuarios = (resp as any).resultado;
+          const vehiculos = (result as any).resultado;
+          this.loading = false;
+          for (const vehiculo of vehiculos) {
+            if (Number.parseInt((vehiculo as any).Activado) === 0) {
+              this.vehiculosDes.push(vehiculo);
+            }
+          }
+        }).catch((err) => {
+            console.log(err);
+          });
+        }).catch((err) => { console.error(err); });
+  }
+
+  activar(usuario: object) {
+    if (this.selected !== undefined) {
+      const idUsuario = (usuario as any).idUsuario;
+      this.database.changeThis('ModeloVehiculos', {
+        idVehiculo: this.selected
+      }, {
+        Activado: 1,
+        Usuario_idUsuario: idUsuario
+      }).then((resp) => {
+        this.router.navigate(['/dashclient']);
+        console.log(resp);
+      }).catch((err) => { console.error(err); });
+    }
   }
 
   ngAfterViewInit() {

@@ -15,7 +15,7 @@ declare var $: any;
 export class MycarsComponent implements OnInit, AfterViewInit {
 
   carro = {
-    idUsuario: '',
+    Usuario_idUsuario: '',
     Activado: true,
   };
 
@@ -34,16 +34,16 @@ export class MycarsComponent implements OnInit, AfterViewInit {
   }
 
   async bringUser() {
-    
+
   }
 
   async ngOnInit() {
     const temporal = await this.auth.getUser();
-    this.carro.idUsuario = (temporal as any).idUsuario;
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+    this.carro.Usuario_idUsuario = (temporal as any).idUsuario;
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
 
 
-
+    console.log(this.carro);
     this.database.getMe('ModeloVehiculos', this.carro).then((result) => {
       var array = $.map(result["resultado"], function (value, index) {
         return value;

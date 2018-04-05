@@ -13,9 +13,23 @@ declare var $: any;
 })
 export class PerfilComponent implements OnInit, AfterViewInit {
 
-  user = {};
+  user = {
+    idUsuario: '',
+    PrimerNombre: '',
+    SegundoNombre: '',
+    PrimerApellido: '',
+    SegundoApellido: '',
+    Cedula: '',
+    Fecha_Nacimiento: ''
+  };
   userViejo = {
     idUsuario: '',
+    PrimerNombre: '',
+    SegundoNombre: '',
+    PrimerApellido: '',
+    SegundoApellido: '',
+    Cedula: '',
+    Fecha_Nacimiento: ''
   };
 
   constructor(private auth: AuthService, private database: DatabaseService, private router: Router) { }
@@ -27,12 +41,13 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     document.getElementById("popup").hidden = true;
     this.bringUser();
     delete this.user["Vehiculos"];
-    this.userViejo.idUsuario = this.auth.getUser()["idUsuario"];
+    const temporal = await this.auth.getUser();
+    this.userViejo.idUsuario = (temporal as any).idUsuario;
     console.log(this.user, this.userViejo);
   }
 

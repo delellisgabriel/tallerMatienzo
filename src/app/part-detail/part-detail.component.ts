@@ -12,12 +12,12 @@ declare var $: any;
 })
 export class PartDetailComponent implements OnInit {
 
-  repuesto = {};
+  repuesto: any = {};
 
   constructor(private parts: PartsService, private auth: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.repuesto = this.parts.getPart();
   }
 

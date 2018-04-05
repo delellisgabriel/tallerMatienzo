@@ -33,21 +33,22 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
     estatus: 'Normal',
   };
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.bringUser();
 
   }
 
   async bringUser() {
-    this.user.idUsuario = await this.auth.getUser()["idUsuario"];
+    const temporal = await this.auth.getUser();
+    this.user.idUsuario = (temporal as any).idUsuario;
   }
 
   carRegister() {
     this.vehiculo.Usuario_idUsuario = this.user.idUsuario;
     console.log(this.vehiculo);
     this.databaseService.addThis('ModeloVehiculos', this.vehiculo).then((result) => {
-      this.router.navigate(['/mycars', this.user.idUsuario]);
+      this.router.navigate(['/mycars']);
    }).catch((err) => { console.log(err); });
   }
 

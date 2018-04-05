@@ -14,25 +14,28 @@ declare var $: any;
 })
 export class UserDetailComponent implements OnInit, AfterViewInit {
 
-  private userViejo = {
-    idUsuario: '',
-  }
+  userViejo: any = {
 
-  private userRol: any;
+  };
 
-  private userSelected = {};
+  userRol: any;
+
+  userSelected: any = {
+
+  };
 
   constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
 
   async bringUser() {
-    this.userRol = await this.auth.getUser()['Rol'];
+    const temporal = await this.auth.getUser();
+    this.userRol = (temporal as any).Rol;
   }
 
-  ngOnInit() {
-    if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
+  async ngOnInit() {
+    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
     document.getElementById("popup").hidden = true;
     this.bringUser();
-    this.userSelected = this.userSelect.getUser();
+    this.userSelected = await this.userSelect.getUser();
     this.userViejo.idUsuario = this.userSelected['idUsuario'];
     if (this.userSelected["Rol"] === 0) {
       this.userSelected["Rol"] = 'Cliente';
@@ -45,7 +48,7 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
     }
 
     this.userSelected["CantVehiculos"] = this.userSelected["Vehiculos"].length;
-    
+
 
     console.log(this.userViejo);
     console.log(this.userSelected);
