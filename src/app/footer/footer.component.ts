@@ -9,7 +9,7 @@ import { AuthService } from '../authService/auth.service';
 })
 export class FooterComponent implements OnInit {
 
-  userID = '';
+  userID = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -25,16 +25,6 @@ export class FooterComponent implements OnInit {
 
   async ngOnInit() {
     await this.traerUsuario();
-    this.ciclo();
-  }
-
-  async ciclo() {
-    await this.refresh();
-    this.ciclo();
-  }
-
-  async refresh() {
-    return new Promise(resolve => setTimeout(resolve, 800));
   }
 
   ngAfterContentChecked() {

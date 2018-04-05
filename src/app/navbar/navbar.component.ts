@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  userID = '';
+  userID = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
