@@ -42,7 +42,9 @@
             <a style="margin-right: 1px; margin-top: 4px;" routerLink="/signup" id="download-button" class="truncate btn waves-effect waves-light blue darken-1">REGISTRO</a>
             <a style="margin-top: 4px;" routerLink="/login" id="download-button" class="truncate btn waves-effect waves-light blue darken-1">INGRESO</a>
           </li>
-          <li *ngIf="userID !== null"><h1>XDXD hola</h1></li>
+          <li *ngIf="userID">
+            <a style="margin-right: 1px; margin-top: 4px;" routerLink="/" (click)="logout()" id="download-button" class="truncate btn waves-effect waves-light blue darken-1">CERRAR SESIÓN</a>
+          </li>
         </ul>
       </div>
       <!--END Third Col-->

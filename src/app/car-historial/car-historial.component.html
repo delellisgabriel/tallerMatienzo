@@ -21,15 +21,8 @@
 
 
     <!-- table de resultados -->
-<div class="container">
+<div style="min-height: 50vh;"class="container">
   <div class="section">
-    <div class="row">
-      <div class="col hide-on-small-only m3 l3"></div>
-      <div class="col s12 m6 l6 center-align">
-        <button class="btn" (click)="deshabilitar()">Deshabilitar Vehiculo</button>
-      </div>
-      <div class="col hide-on-small-only m3 l3"></div>
-    </div>
 
     <div class="row">
       <div class="col s12 m12 l12">
@@ -51,9 +44,24 @@
             </tr>
           </tbody>
         </table>
-        <br /><br />
+
 
       </div>
     </div>
+
+    <div class="row">
+      <br>
+
+      <div class="col s12 m12 l12">
+        <blockquote>
+          <p class="flow-text text-justify">En caso de haber vendido tu vehículo o por cualquier otro motivo, puedes utilizar el botón deshabilitar para que desaparezca de tu Lista de Vehículos.<br>Ten en cuenta que si deshabilitas el vehículo tendras que contactarnos para poder rehabilitarlo.</p>
+        </blockquote>
+      </div>
+      <div class="col s12 m12 l12 center-align">
+        <button class="btn" (click)="deshabilitar()">Deshabilitar</button>
+      </div>
+    </div>
+
+
   </div>
 </div>

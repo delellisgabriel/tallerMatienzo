@@ -5,7 +5,8 @@ import {QrService} from '../qrService/qr.service';
 import {DatabaseService} from '../database/database.service';
 import {CookieService} from 'ngx-cookie';
 import {ReporteService} from '../reporte/reporte.service';
-import {AuthService} from '../authService/auth.service';
+import { AuthService } from '../authService/auth.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -16,10 +17,14 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor(private reporte: ReporteService, private auth: AuthService) {  }
+  userID = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.userID = this.authService.currentUser["idUsuario"];
   }
+
 
   ngAfterViewInit() {
 
