@@ -14,9 +14,12 @@ export class SideBarFavComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.userID = Number.parseInt(this.authService.currentUser["idUsuario"]);
-    this.userRol = Number.parseInt(this.authService.currentUser["Rol"]);
+  async ngOnInit() {
+    const auxiliar = await this.authService.getUser();
+    if (auxiliar !== null) {
+      this.userID = Number.parseInt((auxiliar as any).idUsuario);
+      this.userRol = Number.parseInt((auxiliar as any).Rol);
+    }
   }
 
 }

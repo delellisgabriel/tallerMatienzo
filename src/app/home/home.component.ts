@@ -17,12 +17,15 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  userID = '';
+  userID = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.userID = this.authService.currentUser["idUsuario"];
+  async ngOnInit() {
+    const temporal = await this.authService.getUser();
+    if (temporal !== null) {
+      this.userID = (temporal as any).idUsuario;
+    }
   }
 
 

@@ -15,7 +15,7 @@ declare var $: any;
 export class GenRepComponent implements OnInit, AfterViewInit {
 
   datosReporte: any = {
-    FechaInicia: undefined,
+    FechaInicial: undefined,
     FechaFinal: undefined,
     Modelo: undefined,
     Excel: false,
@@ -73,19 +73,37 @@ export class GenRepComponent implements OnInit, AfterViewInit {
   }
 
   reporteModelo() {
-    console.log(this.datosReporte.Modelo);
+    if (this.datosReporte.Excel || this.datosReporte.PDF) {
+      this.reportes.generarReporte(this.datosReporte.Excel, this.datosReporte.PDF, this.datosReporte.FechaInicial,
+        this.datosReporte.FechaFinal, undefined, undefined, this.datosReporte.Modelo, false);
+    }
   }
 
   reporteMecanico(mecanico: object) {
-    console.log(mecanico);
+    if (this.datosReporte.Excel || this.datosReporte.PDF) {
+      this.reportes.generarReporte(this.datosReporte.Excel, this.datosReporte.PDF, this.datosReporte.FechaInicial,
+        this.datosReporte.FechaFinal, {
+          idUsuario: (mecanico as any).idUsuario
+        }, undefined, undefined, true);
+    }
   }
 
   reporteVehiculo(vehiculo: object) {
-    console.log(vehiculo);
+    if (this.datosReporte.Excel || this.datosReporte.PDF) {
+      this.reportes.generarReporte(this.datosReporte.Excel, this.datosReporte.PDF, this.datosReporte.FechaInicial,
+        this.datosReporte.FechaFinal, undefined, {
+          idVehiculo: (vehiculo as any).idVehiculo
+        }, undefined, false);
+    }
   }
 
   reporteUsuario(usuario: object) {
-    console.log(usuario);
+    if (this.datosReporte.Excel || this.datosReporte.PDF) {
+      this.reportes.generarReporte(this.datosReporte.Excel, this.datosReporte.PDF, this.datosReporte.FechaInicial,
+        this.datosReporte.FechaFinal, {
+          idUsuario: (usuario as any).idUsuario
+        }, undefined, undefined, false);
+    }
   }
 
   ngAfterViewInit() {

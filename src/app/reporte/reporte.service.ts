@@ -10,6 +10,8 @@ export class ReporteService {
 
   constructor(private db: DatabaseService, private auth: AuthService) { }
 
+  // Falta el manejo de fechas
+
   private filtrarCitas(citas: Array<object>, cliente: object) {
     const citasFinal = [];
     for (const cita of citas) {
@@ -230,9 +232,6 @@ export class ReporteService {
                     const fecha = moment().format('DD/MM/YYYY');
                     const vehiculos = cliente.Vehiculos;
                     const ordenes = this.filtrarOrdenes((resp3 as any).resultado, cliente);
-                    if (ordenes && ordenes.length > 0) {
-                      text += 'Datos de las Órdenes'
-                    }
                     text += 'Reporte de Usuario\n';
                     text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
                     text += 'Fecha: ' + fecha + '\n\n';
@@ -338,9 +337,6 @@ export class ReporteService {
                     const fecha = moment().format('DD/MM/YYYY');
                     const vehiculos = cliente.Vehiculos;
                     const ordenes = this.filtrarOrdenes((resp3 as any).resultado, cliente);
-                    if (ordenes && ordenes.length > 0) {
-                      text += 'Datos de las Órdenes';
-                    }
                     text += 'Reporte de Usuario\n';
                     text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
                     text += 'Fecha: ' + fecha + '\n\n';
@@ -459,10 +455,10 @@ export class ReporteService {
               } else {
                 text += 'No hay órdenes de reparación para el vehículo escogido\n\n';
               }
+              doc.text(text, 10, 10);
+              doc.save();
             }).catch((err) => console.error(err));
           }).catch((err) => console.error(err));
-          doc.text(text, 10, 10);
-          doc.save();
         }
         if (Excel) {
           this.db.getMeOne('ModeloVehiculos', (vehiculo as any).idVehiculo).then((resp) => {
@@ -519,12 +515,13 @@ export class ReporteService {
             const solicitante = await this.auth.getUser();
             let lineas = 0;
             const fecha = moment().format('DD/MM/YYYY');
-            text += 'Reporte de Vehículo\n';
+            text += 'Reporte por Modelo de Vehículo:\n';
             text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
-            text += 'Fecha: ' + fecha + '\n\n';
+            text += 'Fecha: ' + fecha + '\n';
+            text += 'Modelo: ' + modelo + '\n\n';
             if (ordenes && ordenes.length > 0) {
               text += 'Órdenes de Reparación del Vehículo: ' + '\n\n';
-              lineas += 4;
+              lineas += 6;
               for (const orden of ordenes) {
                 if ((lineas + 4) > 43) {
                   doc.text(text, 10, 10);
@@ -572,9 +569,10 @@ export class ReporteService {
             const ordenes = this.filtrarOrdenesModelo((resp as any).resultado, modelo);
             const solicitante = await this.auth.getUser();
             const fecha = moment().format('DD/MM/YYYY');
-            text += 'Reporte de Vehículo\n';
+            text += 'Reporte por Modelo de Vehículo:\n';
             text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';
-            text += 'Fecha: ' + fecha + '\n\n';
+            text += 'Fecha: ' + fecha + '\n';
+            text += 'Modelo: ' + modelo + '\n\n';
             if (ordenes && ordenes.length > 0) {
               text += 'Órdenes de Reparación del Vehículo: ' + '\n\n';
               for (const orden of ordenes) {

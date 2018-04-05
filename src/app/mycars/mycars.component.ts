@@ -15,7 +15,7 @@ declare var $: any;
 export class MycarsComponent implements OnInit, AfterViewInit {
 
   carro = {
-    idUsuario: '',
+    Usuario_idUsuario: '',
     Activado: true,
   };
 
@@ -39,7 +39,7 @@ export class MycarsComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
     const temporal = await this.auth.getUser();
-    this.carro.idUsuario = (temporal as any).idUsuario;
+    this.carro.Usuario_idUsuario = (temporal as any).idUsuario;
     if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
 
 

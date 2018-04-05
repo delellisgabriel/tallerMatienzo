@@ -74,7 +74,7 @@
                   <tr *ngFor="let usuario of usuarios">
                     <td>{{usuario.PrimerNombre}} {{usuario.PrimerApellido}}</td>
                     <td>{{usuario.Rol}}</td>
-                    <td><i class="material-icons blue-text darken-1" (click)="reporteUsuario(usuario)">assignment</i></td>
+                    <td><button class="material-icons blue-text darken-1" (click)="reporteUsuario(usuario)">assignment</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -99,7 +99,7 @@
             <tbody>
             <tr *ngFor="let mecanico of mecanicos">
               <td>{{mecanico.PrimerNombre}} {{mecanico.PrimerApellido}}</td>
-              <td><i class="material-icons blue-text darken-1" (click)="reporteMecanico(mecanico)">assignment</i></td>
+              <td><button class="material-icons blue-text darken-1" (click)="reporteMecanico(mecanico)">assignment</button></td>
             </tr>
             </tbody>
           </table>
@@ -128,7 +128,7 @@
                     <td>{{vehiculo.Marca}} {{vehiculo.Modelo}} {{vehiculo.Ano}}</td>
                     <td>{{vehiculo.Placa}}</td>
                     <td>{{vehiculo.Usuario.PrimerNombre}} {{vehiculo.Usuario.PrimerApellido}}</td>
-                    <td><i class="material-icons blue-text darken-1" (click)="reporteVehiculo(vehiculo)">assignment</i></td>
+                    <td><button class="material-icons blue-text darken-1" (click)="reporteVehiculo(vehiculo)">assignment</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -140,7 +140,7 @@
           <div class="row center">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">assessment</i>
-              <input id="email" class="validate" required
+              <input id="email" class="validate" required type="text"
                      [(ngModel)]="datosReporte.Modelo" name="modelo">
               <label for="email">Modelo de Vehículo</label>
             </div>
