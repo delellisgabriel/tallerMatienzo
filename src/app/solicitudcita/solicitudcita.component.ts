@@ -18,18 +18,12 @@ declare var $: any;
   styleUrls: ['./solicitudcita.component.css']
 })
 export class SolicitudcitaComponent implements OnInit, AfterViewInit {
-  
+
   //vehiculos registrados por el usuario
-  userVehiculos = {};
+  userVehiculos: any = {};
 
   // form para la solicitud de la cita
-  solicitud = {
-    Vehiculos_idVehiculo: 0,
-    idAux: '',
-    Usuarios_idUsuario: '',
-    Motivo: '',
-    FechaTentativaInicial: '',
-    FechaTentativaFinal: '',
+  solicitud: any = {
   };
   //spinner mientras cargamos
 cargando: any;
@@ -37,11 +31,13 @@ cargando: any;
   cars: any;
 
   constructor(private auth: AuthService, private database: DatabaseService, private router: Router, public fb: FormBuilder, private email: EmailService, private carStatus: StatusService) {
-    
+
   }
-     async bringUser() {
-       this.solicitud.Usuarios_idUsuario = await this.auth.getUser()['idUsuario'];
-   }
+
+  async bringUser() {
+    const temporal = await this.auth.getUser();
+    this.solicitud.Usuarios_idUsuario = (temporal as any).idUsuario;
+  }
   //enviar los datos para registrar la cita
   solicitarCita() {
     if (this.solicitud.idAux) {
@@ -50,12 +46,12 @@ cargando: any;
     }
     this.bringUser();
     //POST
-    this.database.addThis('ModeloCitas', this.solicitud).then((result) => {
+    this.database.addThis('ModeloCitas', this.solicitud).then(async (result) => {
       if (result['resultado'] == true) {
         //Cambiamos el status del vehiculo
         this.carStatus.updateStatus(this.solicitud.Vehiculos_idVehiculo, 'Esperando');
         //Enviamos el correo al usuario
-        var user = this.auth.getUser();
+        var user = await this.auth.getUser();
         var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
         this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
           console.log(res);
@@ -80,8 +76,8 @@ cargando: any;
 >>>>>>> origin/Entrega3*/
   }
 
-  
-  ngOnInit() {
+
+  async ngOnInit() {
     //validamos que haya un usuario logeado
 
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
@@ -90,9 +86,10 @@ cargando: any;
     var carros = {
       idUsuario: 0,
       Activado: true,
-    }
+    };
     //get
-    carros.idUsuario = this.auth.getUser()['idUsuario'];
+    const temporal = await this.auth.getUser();
+    carros.idUsuario = temporal.idUsuario;
     console.log(carros);
     this.database.getMe('ModeloVehiculos', carros).then((resp) => {
       console.log(resp['resultado']);

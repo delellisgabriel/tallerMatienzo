@@ -27,14 +27,15 @@ export class UserDetailComponent implements OnInit, AfterViewInit {
   constructor(private userSelect: UserSelectService, private database: DatabaseService, private auth: AuthService, private router: Router) { }
 
   async bringUser() {
-    this.userRol = await this.auth.getUser()['Rol'];
+    const temporal = await this.auth.getUser();
+    this.userRol = (temporal as any).Rol;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
     document.getElementById("popup").hidden = true;
     this.bringUser();
-    this.userSelected = this.userSelect.getUser();
+    this.userSelected = await this.userSelect.getUser();
     this.userViejo.idUsuario = this.userSelected['idUsuario'];
     if (this.userSelected["Rol"] === 0) {
       this.userSelected["Rol"] = 'Cliente';

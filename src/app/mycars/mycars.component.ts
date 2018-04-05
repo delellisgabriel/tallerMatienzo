@@ -34,15 +34,16 @@ export class MycarsComponent implements OnInit, AfterViewInit {
   }
 
   async bringUser() {
-    
+
   }
 
   async ngOnInit() {
-    this.carro.idUsuario = await this.auth.getUser()['idUsuario'];
+    const temporal = await this.auth.getUser();
+    this.carro.idUsuario = (temporal as any).idUsuario;
     if (!this.auth.isLoged()) { this.router.navigate(['/login']); }
 
 
-
+    console.log(this.carro);
     this.database.getMe('ModeloVehiculos', this.carro).then((result) => {
       var array = $.map(result["resultado"], function (value, index) {
         return value;

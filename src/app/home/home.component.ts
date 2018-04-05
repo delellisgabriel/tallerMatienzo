@@ -22,8 +22,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async funcionAux() {
     const usuario = await this.auth.getUser();
-    console.log(usuario);
-    this.reporte.generarReporte(false, true, '1992-08-15', '2019-01-01', undefined, undefined, 'Focus', false);
+    this.reporte.generarReporte(true, false, '1992-08-15', '2019-01-01', {
+      idUsuario: 13
+    }, undefined, 'Focus', true);
   }
 
   ngOnInit() {

@@ -40,7 +40,8 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
   }
 
   async bringUser() {
-    this.user.idUsuario = await this.auth.getUser()["idUsuario"];
+    const temporal = await this.auth.getUser();
+    this.user.idUsuario = (temporal as any).idUsuario;
   }
 
   carRegister() {
