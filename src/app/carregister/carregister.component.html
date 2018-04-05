@@ -1,23 +1,19 @@
 <div id="index-banner" class="parallax-container valign-wrapper">
   <div class="section no-pad-bot">
     <div class="container">
-      <br><br>
-      <h1 class="header center white-text">REGISTRO DE VEHICULO</h1>
-      <div class="row center">
-        <app-side-bar-fav></app-side-bar-fav>
-      </div>
-      <div class="row">
-        <h5 class="header center col s12 light"></h5>
-      </div>
-      <br><br>
+
+      <h1 class="header center white-text hide-on-small-only">REGISTRO DE VEHICULO</h1>
+      <h2 class="header center white-text hide-on-med-and-up">REGISTRO DE VEHICULO</h2>
 
     </div>
   </div>
   <div class="parallax parallaxOscuro"><img src="https://lh3.googleusercontent.com/UOQ1R_UqkwsQJoG8bo7Gcn5pKsro0gX7t8ieBPy8UeOsJzovWpNax4KsNtkE__jM5sbw=h900" alt="Unsplashed background img 1"></div>
 </div>
 
+<app-side-bar-fav></app-side-bar-fav>
 
-<div class="container">
+<div class="hide-on-small-only"><br></div>
+<div style="min-height: 50vh;" class="container">
   <div class="section">
 
     <div class="row">
@@ -34,8 +30,6 @@
               <input id="modelo" type="text" class="validate" required [(ngModel)]="vehiculo.Modelo" name="Modelo">
               <label for="modelo">MODELO</label>
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">date_range</i>
               <input id="serial" type="text" class="validate" required [(ngModel)]="vehiculo.SerialMotor" name="Serial">
@@ -48,8 +42,6 @@
               <input id="placa" type="text" class="validate" required [(ngModel)]="vehiculo.Placa" name="Placa">
 
             </div>
-          </div>
-          <div class="row">
             <div class="input-field col s12 m6 l6">
               <i class="material-icons prefix">date_range</i>
               <input id="color" type="text" class="validate" required [(ngModel)]="vehiculo.Color" name="Color">
@@ -62,8 +54,6 @@
               <input id="ano" type="number" class="validate" required [(ngModel)]="vehiculo.Ano" name="Ano">
 
             </div>
-          </div>
-          <div class="row">
             <div class="file-field input-field col s12 m12 l12">
               <div class="btn waves-effect waves-light blue darken-1">
                 <span>File</span>
