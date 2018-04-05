@@ -48,7 +48,7 @@ export class CarregisterComponent implements OnInit, AfterViewInit {
     this.vehiculo.Usuario_idUsuario = this.user.idUsuario;
     console.log(this.vehiculo);
     this.databaseService.addThis('ModeloVehiculos', this.vehiculo).then((result) => {
-      this.router.navigate(['/mycars', this.user.idUsuario]);
+      this.router.navigate(['/mycars']);
    }).catch((err) => { console.log(err); });
   }
 

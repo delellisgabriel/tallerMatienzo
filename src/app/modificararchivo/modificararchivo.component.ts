@@ -63,6 +63,7 @@ export class ModificararchivoComponent implements OnInit, AfterViewInit {
     this.bringUser();
     this.getMecanicos();
     this.vehiculo = this.car.getCar();
+    console.log(this.vehiculo);
     delete this.vehiculo['Usuario'];
     delete this.vehiculo['Activado'];
     delete this.vehiculo['FotoVehiculo'];

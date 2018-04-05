@@ -17,8 +17,24 @@ export class FooterComponent implements OnInit {
     this.userID = await this.authService.getUser();
   }
 
+  async logout() {
+    await this.authService.logout();
+    this.router.navigate(['/']);
+    await this.traerUsuario();
+  }
+
   async ngOnInit() {
     this.traerUsuario();
+    this.ciclo();
+  }
+
+  async ciclo() {
+    await this.refresh();
+    this.ciclo();
+  }
+
+  async refresh() {
+    return new Promise(resolve => setTimeout(resolve, 2000));
   }
 
   ngAfterContentChecked() {

@@ -39,15 +39,16 @@ cargando: any;
     this.solicitud.Usuarios_idUsuario = (temporal as any).idUsuario;
   }
   //enviar los datos para registrar la cita
-  solicitarCita() {
+  async solicitarCita() {
     if (this.solicitud.idAux) {
       this.solicitud.Vehiculos_idVehiculo = Number.parseInt(this.solicitud.idAux);
       delete this.solicitud.idAux;
     }
-    this.bringUser();
+    await this.bringUser();
     //POST
+    console.log(this.solicitud);
     this.database.addThis('ModeloCitas', this.solicitud).then(async (result) => {
-      if (result['resultado'] == true) {
+      if (result['resultado'] === true) {
         //Cambiamos el status del vehiculo
         this.carStatus.updateStatus(this.solicitud.Vehiculos_idVehiculo, 'Esperando');
         //Enviamos el correo al usuario
@@ -59,10 +60,11 @@ cargando: any;
         //Procede a ver sus autos
         this.router.navigate(['/mycars']);
       } else {
+        console.log(result);
         alert('El vehiculo seleccionado ya tiene una cita pendiente.');
       }
     }).catch((err) => {
-      console.log(err)
+      console.log(err);
     });
 /*<<<<<<< HEAD
 
@@ -84,12 +86,12 @@ cargando: any;
     this.cargando = true;
     //pedimos los carros activos
     var carros = {
-      idUsuario: 0,
+      Usuario_idUsuario: 0,
       Activado: true,
     };
     //get
     const temporal = await this.auth.getUser();
-    carros.idUsuario = temporal.idUsuario;
+    carros.Usuario_idUsuario = temporal.idUsuario;
     console.log(carros);
     this.database.getMe('ModeloVehiculos', carros).then((resp) => {
       console.log(resp['resultado']);
