@@ -54,11 +54,11 @@ export class PartsManageComponent implements OnInit {
   }
 
    async bringUser() {
-     this.user = await this.auth.getUser();
+     this.user = this.auth.getUser();
    }
 
    async ngOnInit() {
-     if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+     if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
      this.formCreate();
   }
 

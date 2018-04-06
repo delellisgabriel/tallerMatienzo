@@ -17,7 +17,7 @@ export class PartDetailComponent implements OnInit {
   constructor(private parts: PartsService, private auth: AuthService, private router: Router) { }
 
   async ngOnInit() {
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.repuesto = this.parts.getPart();
   }
 

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   async ngOnInit() {
-    const temporal = await this.authService.getUser();
+    const temporal = this.authService.getUser();
     if (temporal !== null) {
       this.userID = (temporal as any).idUsuario;
     }

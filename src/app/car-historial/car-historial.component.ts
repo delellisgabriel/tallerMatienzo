@@ -43,7 +43,7 @@ export class CarHistorialComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.vehiculo.idVehiculo = Number(this.carSelect.getCar()['idVehiculo']);
     console.log(this.vehiculo)
     this.database.getMe('ModeloOrdenReparacion', this.vehiculo).then((result) => {

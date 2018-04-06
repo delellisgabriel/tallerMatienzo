@@ -31,12 +31,11 @@ export class GenRepComponent implements OnInit, AfterViewInit {
   constructor(private auth: AuthService, private router: Router, private reportes: ReporteService,
               private db: DatabaseService) { }
 
-  async ngOnInit() {
-    await this.auth.getUser();
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+  ngOnInit() {
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.db.getMe('ModeloUsuarios').then((resp) => {
-      const usuarios = (resp as any).resultado;
-      this.usuarios = usuarios;
+      const usuariox = (resp as any).resultado;
+      this.usuarios = usuariox;
       let cadena = '';
       for (let i = 0; i < this.usuarios.length; i++) {
         const usuario = this.usuarios[i];

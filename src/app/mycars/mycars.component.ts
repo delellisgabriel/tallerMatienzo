@@ -38,9 +38,9 @@ export class MycarsComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    const temporal = await this.auth.getUser();
+    const temporal = this.auth.getUser();
     this.carro.Usuario_idUsuario = (temporal as any).idUsuario;
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
 
 
     console.log(this.carro);

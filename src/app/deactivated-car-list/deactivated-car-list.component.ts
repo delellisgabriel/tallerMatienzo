@@ -24,7 +24,7 @@ export class DeactivatedCarListComponent implements OnInit {
   constructor(private database: DatabaseService, private router: Router, private auth: AuthService) { }
 
   async ngOnInit() {
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloVehiculos')
       .then(async (result) => {
         await this.database.getMe('ModeloUsuarios').then((resp) => {

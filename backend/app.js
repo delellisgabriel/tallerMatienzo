@@ -3,7 +3,6 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const request = require('request');
-const nodemailer = require('nodemailer');
 const cloudinary = require('cloudinary');
 
 const app = express();
@@ -14,17 +13,20 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const port = 3000;
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
+const port = process.env.PORT || 3000;
 const private = 'z9>nV?:"&)~4*d_T[6k{T3wy2;.#Vd*+';
 
 var usuarios = [];
 var d = new Date();
 
 const connection = mysql.createConnection({
-	host: 'kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-	user: 'hoeyizbddk5yfbas',
-	password: 'z11c19ibt769fu51',
-	database: 'ul79atmbxbqwg0en'
+  host: 'kavfu5f7pido12mr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+  user: 'hoeyizbddk5yfbas',
+  password: 'z11c19ibt769fu51',
+  database: 'ul79atmbxbqwg0en'
 });
 
 cloudinary.config({
@@ -40,11 +42,14 @@ app.post('/login', function(req, res) {
   if (private === password) {
     if (usuario) {
       for (var j = 0; j < usuarios.length; j++) {
-        if (usuarios[j].usuario.id === usuario.id) {
-          if ((usuarios[j].tiempo - d.getTime()) < 1800000) {
+        if (usuarios[j].usuario.idUsuario === usuario.id) {
+          if ((d.getTime() - usuarios[j].tiempo) < 1800000) {
             res.send({
               token: usuarios[j].token
             });
+            return;
+          } else {
+            usuarios.splice(j, 1);
             return;
           }
         }
@@ -80,7 +85,7 @@ app.post('/logout', function(req, res) {
           return;
         }
       }
-      res.send({ err: 'Error: Undefined token '});
+      res.send({ err: 'Warning: Undefined token '});
     } else {
       res.send({ err: 'Error: Undefined token' });
     }
@@ -96,7 +101,7 @@ app.post('/checktoken', function(req, res) {
     if (token) {
       for (var i = 0; i < usuarios.length; i++) {
         if (usuarios[i].token === token) {
-          if ((usuarios[i].tiempo - d.getTime()) < 1800000) {
+          if ((d.getTime() - usuarios[i].tiempo) < 1800000) {
             res.send({
               usuario: usuarios[i].usuario
             });
@@ -173,33 +178,18 @@ app.post('/', function(req, res) {
   const remitente = req.body.remitente;
   const password = req.body.password;
   const seguridad = req.body.seguridad;
+  const msg = {
+    to: email,
+    from: remitente,
+    subject: subject,
+    html: cuerpo
+  };
   if (seguridad === private) {
     if (!remitente || !password) {
       res.send('No hay remitente o password');
     }
-    const transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: remitente,
-        pass: password
-      },
-      logger: false,
-      debug: false
-    });
-    const message = {
-      to: '<'+email+'>',
-      subject: subject,
-      html: cuerpo
-    };
-    transporter.sendMail(message, function(error, info) {
-      if (error) {
-        console.log('Error occurred');
-        console.log(error.message);
-        return process.exit(1);
-      } else {
-        res.send({ resp: 'Todo bien' });
-      }
-    });
+    sgMail.send(msg);
+    res.send({ msg: 'Email sent' });
   } else {
     res.send({ err: 'Authentication failed' });
   }
@@ -214,7 +204,7 @@ app.post('/qr', function(req, res) {
     if (operacion === 'crear') {
       request.get(string, function (error, response, body) {
         if (!error) {
-          res.send({resp: string});
+          res.send({ resp: string });
         } else {
           res.send({ err: error });
         }

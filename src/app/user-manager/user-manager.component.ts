@@ -54,7 +54,7 @@ export class UserManagerComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.database.getMe('ModeloUsuarios')
       .then((result) => {
         this.users = result['resultado'];

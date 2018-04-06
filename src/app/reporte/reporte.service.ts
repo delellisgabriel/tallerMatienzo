@@ -109,7 +109,7 @@ export class ReporteService {
               idUsuario: (usuario as any).idUsuario
             }).then((resp) => {
               this.db.getMe('ModeloOrdenReparacion').then(async (resp2) => {
-                const solicitante = await this.auth.getUser();
+                const solicitante = this.auth.getUser();
                 const mecanico = (resp as any).resultado[0];
                 const fecha = moment().format('DD/MM/YYYY');
                 if ((mecanico as any).Rol !== 3) {
@@ -174,7 +174,7 @@ export class ReporteService {
               idUsuario: (usuario as any).idUsuario
             }).then((resp) => {
               this.db.getMe('ModeloOrdenReparacion').then(async (resp2) => {
-                const solicitante = await this.auth.getUser();
+                const solicitante = this.auth.getUser();
                 const mecanico = (resp as any).resultado[0];
                 const fecha = moment().format('DD/MM/YYYY');
                 if ((mecanico as any).Rol !== 3) {
@@ -225,7 +225,7 @@ export class ReporteService {
               this.db.getMe('ModeloCitas').then((resp2) => {
                 this.db.getMe('ModeloOrdenReparacion').then(async (resp3) => {
                   if ((resp as any).resultado.length > 0) {
-                    const solicitante = await this.auth.getUser();
+                    const solicitante = this.auth.getUser();
                     let lineas = 0;
                     const cliente = (resp as any).resultado[0];
                     const citas = this.filtrarCitas((resp2 as any).resultado, cliente);
@@ -331,7 +331,7 @@ export class ReporteService {
               this.db.getMe('ModeloCitas').then((resp2) => {
                 this.db.getMe('ModeloOrdenReparacion').then(async (resp3) => {
                   if ((resp as any).resultado.length > 0) {
-                    const solicitante = await this.auth.getUser();
+                    const solicitante = this.auth.getUser();
                     const cliente = (resp as any).resultado[0];
                     const citas = this.filtrarCitas((resp2 as any).resultado, cliente);
                     const fecha = moment().format('DD/MM/YYYY');
@@ -401,7 +401,7 @@ export class ReporteService {
           this.db.getMeOne('ModeloVehiculos', (vehiculo as any).idVehiculo).then((resp) => {
             const vehicle = (resp as any).resultado;
             this.db.getMe('ModeloOrdenReparacion').then(async (resp2) => {
-              const solicitante = await this.auth.getUser();
+              const solicitante = this.auth.getUser();
               let lineas = 0;
               const ordenes = this.filtrarOrdenesVehiculo((resp2 as any).resultado, vehicle);
               const fecha = moment().format('DD/MM/YYYY');
@@ -464,7 +464,7 @@ export class ReporteService {
           this.db.getMeOne('ModeloVehiculos', (vehiculo as any).idVehiculo).then((resp) => {
             const vehicle = (resp as any).resultado;
             this.db.getMe('ModeloOrdenReparacion').then(async (resp2) => {
-              const solicitante = await this.auth.getUser();
+              const solicitante = this.auth.getUser();
               const ordenes = this.filtrarOrdenesVehiculo((resp2 as any).resultado, vehicle);
               const fecha = moment().format('DD/MM/YYYY');
               text += 'Reporte de Vehículo\n';
@@ -512,7 +512,7 @@ export class ReporteService {
         if (PDF) {
           this.db.getMe('ModeloOrdenReparacion').then(async (resp) => {
             const ordenes = this.filtrarOrdenesModelo((resp as any).resultado, modelo);
-            const solicitante = await this.auth.getUser();
+            const solicitante = this.auth.getUser();
             let lineas = 0;
             const fecha = moment().format('DD/MM/YYYY');
             text += 'Reporte por Modelo de Vehículo:\n';
@@ -567,7 +567,7 @@ export class ReporteService {
         if (Excel) {
           this.db.getMe('ModeloOrdenReparacion').then(async (resp) => {
             const ordenes = this.filtrarOrdenesModelo((resp as any).resultado, modelo);
-            const solicitante = await this.auth.getUser();
+            const solicitante = this.auth.getUser();
             const fecha = moment().format('DD/MM/YYYY');
             text += 'Reporte por Modelo de Vehículo:\n';
             text += 'Solicitado por: ' + (solicitante as any).PrimerNombre + ' ' + (solicitante as any).PrimerApellido + '\n';

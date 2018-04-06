@@ -38,10 +38,20 @@ export class AuthService {
           }).toPromise()
             .then((resp) => {
               if ((resp as any).token) {
+                const aux = (result as any).resultado[0];
+                delete aux.Vehiculos;
+                delete aux.Foto;
+                console.log(aux);
                 if (this.cookies.get('TallerMatienzo') !== (resp as any).token) {
-                  this.cookies.put('TallerMatienzo', (resp as any).token);
+                  this.cookies.put('TallerMatienzo', JSON.stringify({
+                    token: (resp as any).token,
+                    user: aux
+                  }));
                 } else if (!this.cookies.get('TallerMatienzo')) {
-                  this.cookies.put('TallerMatienzo', (resp as any).token);
+                  this.cookies.put('TallerMatienzo', JSON.stringify({
+                    token: (resp as any).token,
+                    user: aux
+                  }));
                 }
               }
             });
@@ -56,27 +66,19 @@ export class AuthService {
     });
   }
 
-  async getUser() {
+  getUser() {
     if (this.currentUser !== null) {
       return this.currentUser;
     } else {
       if (this.cookies.get('TallerMatienzo')) {
-        const token = this.cookies.get('TallerMatienzo');
-        await this.http.post(base + 'checktoken', {
+        const aux = this.cookies.get('TallerMatienzo');
+        const cookie = JSON.parse(aux);
+        const token = (cookie as any).token;
+        this.currentUser = (cookie as any).user;
+        this.http.post(base + 'checktoken', {
           token: token,
           password: this.clave
-        }).toPromise()
-          .then((resp) => {
-            if ((resp as any).err) {
-              console.error((resp as any).err);
-              this.currentUser = null;
-            } else if ((resp as any).usuario) {
-              this.currentUser = (resp as any).usuario;
-            } else {
-              console.error('An unknown error occurred.');
-              this.currentUser = null;
-            }
-          });
+        }).toPromise();
         return this.currentUser;
       } else {
         return null;
@@ -113,8 +115,8 @@ export class AuthService {
     return shajs('sha256').update(password + salt).digest('hex');
   }
 
-  async isLoged() {
-    await this.getUser();
+  isLoged() {
+    this.getUser();
     return (this.currentUser !== null);
   }
 

@@ -35,7 +35,7 @@ cargando: any;
   }
 
   async bringUser() {
-    const temporal = await this.auth.getUser();
+    const temporal = this.auth.getUser();
     this.solicitud.Usuarios_idUsuario = (temporal as any).idUsuario;
   }
   //enviar los datos para registrar la cita
@@ -52,7 +52,7 @@ cargando: any;
         //Cambiamos el status del vehiculo
         this.carStatus.updateStatus(this.solicitud.Vehiculos_idVehiculo, 'Esperando');
         //Enviamos el correo al usuario
-        var user = await this.auth.getUser();
+        var user = this.auth.getUser();
         var texto = 'Su solicitud de cita ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos tu solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
         this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
           console.log(res);
@@ -68,7 +68,7 @@ cargando: any;
     });
 /*<<<<<<< HEAD
 
-    var user = this.auth.getUser();
+    var user = = this.auth.getUser();
     var texto = '<b>Su solicitud de cita</b> ha sido recibida por nuestros gerentes exitosamente. \n Por favor, espere mientras revisamos su solicitud y le asignamos una fecha para recibir su vehiculo. \n Gracias por preferir al TallerMatienzo.';
     this.email.enviarEmail(user['Correo'], 'Cita solicitada', texto).then((res) => {
       console.log(res);
@@ -82,7 +82,7 @@ cargando: any;
   async ngOnInit() {
     //validamos que haya un usuario logeado
 
-    if (!(await this.auth.isLoged())) { this.router.navigate(['/login']); }
+    if (!(this.auth.isLoged())) { this.router.navigate(['/login']); }
     this.cargando = true;
     //pedimos los carros activos
     var carros = {
@@ -90,7 +90,7 @@ cargando: any;
       Activado: true,
     };
     //get
-    const temporal = await this.auth.getUser();
+    const temporal = this.auth.getUser();
     carros.Usuario_idUsuario = temporal.idUsuario;
     console.log(carros);
     this.database.getMe('ModeloVehiculos', carros).then((resp) => {

@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   async traerUsuario() {
-    this.userID = await this.authService.getUser();
+    this.userID = this.authService.getUser();
   }
 
   async ngOnInit() {
